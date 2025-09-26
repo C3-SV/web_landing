@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competitive Coding Club</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col h-screen w-screen bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed text-white">
-    <header class="border border-black flex flex-8 flex justify-between items-center px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#cb6ce6]">
+<body class="flex flex-col h-screen w-screen bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed text-white relative">
+    <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
+    <div class="relative z-10 flex flex-col h-full">
+    <header class="flex flex-8 flex justify-between items-center px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#cb6ce6]">
         <div>
             <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover">
         </div>
@@ -20,15 +23,16 @@
             <a href="#contact" class="text-white text-lg font-extrabold">Contáctanos</a>
         </nav>
     </header>
-    <main class="border border-gray-300 flex flex-1">
-        <section class="border border-gray-400 flex-[4] flex flex-col">
-            <button class="text-white">Ver próximos eventos</button>
-            <button class="text-white">Crear cuenta</button>
+    <main class="flex flex-1">
+        <section class="flex-[4] flex flex-col justify-end items-center pb-16">
+            <button class="text-white text-xl font-bold bg-gradient-to-r from-[#cb6ce6] to-[#004aad] px-6 py-3 rounded-full mb-4 w-64">Ver próximos eventos</button>
+            <button class="text-white text-xl font-bold bg-gradient-to-r from-[#cb6ce6] to-[#004aad] px-6 py-3 rounded-full w-64">Crear cuenta</button>
         </section>
-        <section class="border border-gray-400 flex-[6]">
-            <h1 class="text-white">Competitive Coding Club</h1>
-            <button class="text-white">Compite, Crece, Conecta.</button>
+        <section class="flex-[7] flex flex-col justify-center items-end text-right pr-8">
+            <div class="text-white text-[130px] font-bold">Competitive<br>Coding<br>Club</div>
+            <button class="text-white text-xl font-bold bg-gradient-to-r from-[#cb6ce6] to-[#004aad] px-6 py-3 rounded-full">Compite, Crece, Conecta.</button>
         </section>
     </main>
+    </div>
 </body>
 </html>

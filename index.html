@@ -8,18 +8,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col h-screen w-screen bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed text-white">
-    <header class="border border-black flex flex-8 flex justify-between items-center p-4">
+    <header class="border border-black flex flex-8 flex justify-between items-center px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#cb6ce6]">
         <div>
             <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover">
         </div>
-        <nav>
-            <ul class="flex justify-between">
-                <li><a href="#home" class="text-white">Inicio</a></li>
-                <li><a href="#login" class="text-white">Login</a></li>
-                <li><a href="#about" class="text-white">Sobre el C3</a></li>
-                <li><a href="#events" class="text-white">Eventos</a></li>
-                <li><a href="#contact" class="text-white">Contáctanos</a></li>
-            </ul>
+        <nav class="flex gap-16">
+            <a href="#home" class="text-white text-lg font-extrabold">Inicio</a>
+            <a href="#login" class="text-white text-lg font-extrabold">Login</a>
+            <a href="#about" class="text-white text-lg font-extrabold">Sobre el C3</a>
+            <a href="#events" class="text-white text-lg font-extrabold">Eventos</a>
+            <a href="#contact" class="text-white text-lg font-extrabold">Contáctanos</a>
         </nav>
     </header>
     <main class="border border-gray-300 flex flex-1">

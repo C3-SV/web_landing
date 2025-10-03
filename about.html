@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sobre el C3 — Competitive Coding Club</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-brand-bg text-slate-900 font-codec">
+
+    <!-- NAV -->
+    <header class="flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
+        <div class="px-4 py-2">
+            <a href="index.html" class="inline-flex items-center gap-3">
+                <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover" />
+            </a>
+        </div>
+        <nav class="flex h-full">
+            <a href="index.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
+            <a href="index.html#login"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
+            <a href="about.html" aria-current="page"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre
+                el C3</a>
+            <a href="index.html#events"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
+            <a href="index.html#contact"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
+        </nav>
+    </header>
+
+    <!-- MENU: SECCIONES DEL C3 -->
+    <section class="relative min-h-[450px] flex items-center justify-center text-center">
+
+        <!-- Fondo de imagen y fondo oscuro -->
+        <div class="absolute inset-0 bg-[url('./assets/images/copa-img.png')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-black/55"></div>
+
+        <!-- Botones de menu -->
+        <div class="relative z-10 mx-auto max-w-screen-xl w-full py-8 px-4 text-center lg:py-16 lg:px-12">
+            <h1 class="mb-4 text-4xl font-extrabold text-gray-900 text-white tracking-tighter md:text-5xl lg:text-6xl">
+                CONOCE AL C3
+            </h1>
+            <div class="flex flex-wrap justify-center gap-6 mt-8">
+                <a href="#que-es"
+                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
+                    ¿Qué es?
+                </a>
+                <a href="#historia"
+                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
+                    Historia
+                </a>
+                <a href="#"
+                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
+                    Logros
+                </a>
+                <a href="#"
+                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
+                    Miembros
+                </a>
+                <a href="#"
+                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
+                    Patrocinadores y aliados
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--! QUE ES -->
+    <section id="que-es" class="w-full bg-[#101728] text-white">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+            <!--? BOTON -->
+            <a href="#que-es" class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold
+                        bg-gradient-to-r from-[#5c2b9c] to-[#004aad]
+                        transition-all duration-500 
+                        hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl
+                        mb-8">
+                ¿Qué es?
+            </a>
+
+            <!--? DEFINICIÓN -->
+            <header class="mb-12">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                    Impulsar el talento joven
+                    <span class="block text-3xl sm:text-4xl md:text-5xl font-semibold opacity-80">en tecnología</span>
+                </h2>
+            </header>
+
+            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+                <div class="flex-1 space-y-5 leading-relaxed text-white/90">
+                    <p class="text-lg sm:text-xl font-medium">
+                        El Competitive Coding Club (C3) es un centro de conexión de talento tecnológico, donde los
+                        jóvenes compiten, crecen y se conectan con oportunidades reales en la industria.
+                        <br>
+                        Nació como un espacio para fomentar la programación competitiva, pero hoy evoluciona hacia un
+                        emprendimiento EdTech que combina:
+                    </p>
+                    <ul class="space-y-2 text-base sm:text-lg">
+                        <li>• <span class="font-semibold">Eventos competitivos</span> de alto nivel como la Copa
+                            Salvadoreña de Programación (CSP), hackathons y duelos.</li>
+                        <li>• <span class="font-semibold">Comunidad</span> tech joven, activa y colaborativa.</li>
+                        <li>• <span class="font-semibold">Próximamente, una Plataforma digital </span> que facilitará
+                            inscripciones, gestión de perfiles y retos.</li>
+                    </ul>
+
+                </div>
+                <!-- imagen -->
+                <figure class="flex-1 max-w-[520px] w-full">
+                    <img src="./assets/images/team-cies.jpeg" alt="Equipo C3"
+                        class="w-full h-auto rounded-[2rem] object-cover shadow-2xl" />
+                </figure>
+            </div>
+            <!-- Separador -->
+            <div class="my-12 h-px w-full bg-white/10"></div>
+
+            <!--? MISION Y VISION -->
+            <section id="mision-vision" aria-label="Misión y Visión" class="mb-12">
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <!-- Misión -->
+                    <div class="flex-1">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">MISIÓN</h3>
+                        <p class="text-xl sm:text-2xl font-semibold leading-snug">
+                            Potenciar el ecosistema tecnológico a través de eventos competitivos y una comunidad sólida
+                            que conecta a jóvenes con oportunidades reales
+                        </p>
+                    </div>
+
+                    <!-- Visión -->
+                    <div class="flex-1">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">VISIÓN</h3>
+                        <p class="text-xl sm:text-2xl font-semibold leading-snug">
+                            Ser el referente en competencias tecnológicas en la región, consolidándonos como un puente
+                            reconocido para descubrir y conectar talento
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!--? VALORES -->
+            <section aria-label="Valores" class="mb-12">
+                <h3 class="text-center text-3xl sm:text-4xl font-extrabold mb-6">VALORES</h3>
+
+                <!-- Franja -->
+                <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-[#004aad] via-[#273a8d] to-[#5c2b9c]">
+                    <div class="flex flex-wrap items-center justify-between gap-6 sm:gap-10">
+
+                        <!-- Item valor -->
+                        <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 ring-2 ring-white/20"></div>
+                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Excelencia</span>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 ring-2 ring-white/20"></div>
+                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Colaboración</span>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 ring-2 ring-white/20"></div>
+                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Pasión por competir</span>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 ring-2 ring-white/20"></div>
+                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Iniciativa</span>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 ring-2 ring-white/20"></div>
+                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Honestidad</span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!--? PÚBLICOS -->
+            <section aria-label="Públicos">
+                <h3 class="text-center text-3xl sm:text-4xl font-extrabold mb-10">PÚBLICOS</h3>
+
+                <div class="flex flex-wrap items-start justify-between gap-6 sm:gap-10">
+                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a] ring-2 ring-white/10"></div>
+                        <span class="text-lg font-extrabold text-white/95 text-center">Bachillerato tech</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a] ring-2 ring-white/10"></div>
+                        <span class="text-lg font-extrabold text-white/95 text-center">Universitarios</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a] ring-2 ring-white/10"></div>
+                        <span class="text-lg font-extrabold text-white/95 text-center">Empresas</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
+                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a] ring-2 ring-white/10"></div>
+                        <span class="text-lg font-extrabold text-white/95 text-center">Aliados</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <!--! HISTORIA  -->
+    <section id="historia" class="w-full bg-[#101728] text-white">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <!--? BOTON -->
+            <a href="#historia" class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold
+                        bg-gradient-to-r from-[#5c2b9c] to-[#004aad]
+                        transition-all duration-500 
+                        hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl
+                        mb-8">
+                Historia
+            </a>
+
+            <!--? TITULO -->
+            <header class="mb-8">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                    Historia
+                </h2>
+                <p class="mt-2 text-white/80 max-w-2xl">Etapas clave del C3.</p>
+            </header>
+            <!--? LINEA DE TIEMPO -->
+            <div class="flex flex-col gap-6">
+                <!--? BLOQUE 1: 2024 -->
+                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm
+                        ">
+                    <!--? Encabezado -->
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="inline-flex items-center gap-2">
+                            <h3 class="text-xl sm:text-2xl font-extrabold">2024 — Punto de partida</h3>
+                        </div>
+                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
+                        bg-white/10 text-white/90">Fundación</span>
+                    </div>
+                    <!--? Descripcion  -->
+                    <p class="mt-3 text-white/90">
+                        C3 nace para abrir un espacio de programación competitiva en El Salvador.
+                    </p>
+
+                    <!--? Lista de sucesos / partes  -->
+                    <ul class="mt-4 space-y-3">
+                        <!--? Evento -->
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Sesiones semanales de entrenamiento y formación</p>
+                                    <p class="text-white/80 text-sm">Se consolida la cultura de algoritmos y
+                                        competencias en la universidad.</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Visión de espacio nacional</p>
+                                    <p class="text-white/80 text-sm">Surge la idea de la <span
+                                            class="font-semibold">Copa Salvadoreña de Programación (CSP)</span>.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+
+                <!--? BLOQUE 2: 2025 -->
+                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm
+                        ">
+                    <!--? Encabezado -->
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="inline-flex items-center gap-2">
+                            <h3 class="text-xl sm:text-2xl font-extrabold">2025 — Crecimiento nacional</h3>
+                        </div>
+                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
+                        bg-white/10 text-white/90">CSP</span>
+                    </div>
+                    <!--? Descripcion  -->
+                    <p class="mt-3 text-white/90">
+                        C3 nace para abrir un espacio de programación competitiva en El Salvador.
+                    </p>
+
+                    <!--? Lista de sucesos / partes  -->
+                    <ul class="mt-4 space-y-3">
+                        <!--? Evento -->
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Sesiones semanales de entrenamiento y formación</p>
+                                    <p class="text-white/80 text-sm">Se consolida la cultura de algoritmos y
+                                        competencias en la universidad.</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Visión de espacio nacional</p>
+                                    <p class="text-white/80 text-sm">Surge la idea de la <span
+                                            class="font-semibold">Copa Salvadoreña de Programación (CSP)</span>.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <!--? BLOQUE 3: 2026 -->
+                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm">
+                    <!--? Encabezado -->
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="inline-flex items-center gap-2">
+                            <h3 class="text-xl sm:text-2xl font-extrabold">2026 — El futuro </h3>
+                        </div>
+                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
+                        bg-white/10 text-white/90">Roadmap</span>
+                    </div>
+                    <!--? Descripcion  -->
+                    <p class="mt-3 text-white/90">
+                        C3 nace para abrir un espacio de programación competitiva en El Salvador.
+                    </p>
+
+                    <!--? Lista de sucesos / partes  -->
+                    <ul class="mt-4 space-y-3">
+                        <!--? Evento -->
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Sesiones semanales de entrenamiento y formación</p>
+                                    <p class="text-white/80 text-sm">Se consolida la cultura de algoritmos y
+                                        competencias en la universidad.</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li
+                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-1">
+                                    <p class="font-semibold">Visión de espacio nacional</p>
+                                    <p class="text-white/80 text-sm">Surge la idea de la <span
+                                            class="font-semibold">Copa Salvadoreña de Programación (CSP)</span>.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

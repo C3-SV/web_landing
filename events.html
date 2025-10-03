@@ -14,7 +14,7 @@
     <body class="flex flex-col h-screen">
         <div class="relative z-10 flex flex-col h-full">
             <header
-                class="flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+                class="h-16 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
             >
                 <div class="px-4 py-2">
                     <img
@@ -51,250 +51,688 @@
                     >
                 </nav>
             </header>
-            <main>
-                <div class="bg-[var(--azul-fondo)] py-32 sm:py-16">
+            <main class="flex-1">
+                <section
+                    id="hero"
+                    class="relative w-full h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden text-center"
+                >
+                    <img
+                        src="assets/images/foto-eventos.png"
+                        alt="Eventos"
+                        class="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-black/50"></div>
+                    <div
+                        class="w-full px-24 relative z-10 flex flex-col items-center md:items-start space-y-6"
+                    >
+                        <h1
+                            class="text-white text-[60px] sm:text-[100px] font-extrabold drop-shadow-lg"
+                        >
+                            Eventos
+                        </h1>
+                        <div class="flex flex-row space-x-5">
+                            <a
+                                href="#prox"
+                                class="text-white text-xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full transition-transform duration-500 hover:scale-105"
+                            >
+                                Próximos eventos
+                            </a>
+                            <a
+                                class="text-white text-xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full transition-transform duration-500 hover:scale-105"
+                            >
+                                Eventos pasados
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    id="prox"
+                    class="bg-[var(--azul-fondo)] py-24 sm:py-12"
+                >
                     <div class="mx-auto max-w-7xl px-6 lg:px-8">
                         <div class="mx-auto max-w-3xl text-center">
                             <h2
-                                class="text-5xl font-bold tracking-tight text-balance text-white sm:text-5xl"
+                                class="text-6xl font-bold tracking-tight text-balance text-white sm:text-5xl"
                             >
-                                NUESTROS PRÓXIMOS EVENTOS
+                                Nuestros próximos eventos
                             </h2>
                         </div>
                         <div
-                            class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+                            class="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
                         >
                             <article
-                                class="flex flex-col items-start justify-between"
+                                class="flex flex-col items-start justify-between rounded-2xl"
                             >
                                 <div class="relative w-full">
                                     <img
-                                        src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80"
+                                        src="assets/images/hackathon.jpg"
                                         alt=""
-                                        class="aspect-video w-full rounded-2xl bg-gray-800 object-cover sm:aspect-2/1 lg:aspect-3/2"
+                                        class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
                                     />
                                     <div
                                         class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
                                     ></div>
                                 </div>
                                 <div
-                                    class="flex max-w-xl grow flex-col justify-between"
+                                    class="w-full flex grow flex-col justify-between"
                                 >
                                     <div
                                         class="mt-8 flex items-center gap-x-4 text-xs"
                                     >
                                         <time
-                                            datetime="2020-03-16"
-                                            class="text-gray-400"
-                                            >Mar 16, 2020</time
+                                            datetime="2026-01-30"
+                                            class="text-white"
+                                            >Enero 2026</time
                                         >
-                                        <a
-                                            href="#"
-                                            class="relative z-10 rounded-full bg-gray-800/60 px-3 py-1.5 font-medium text-gray-300 hover:bg-gray-800"
-                                            >Marketing</a
-                                        >
-                                    </div>
-                                    <div class="group relative grow">
-                                        <h3
-                                            class="mt-3 text-lg/6 font-semibold text-white group-hover:text-gray-300"
-                                        >
-                                            <a href="#">
-                                                <span
-                                                    class="absolute inset-0"
-                                                ></span>
-                                                Boost your conversion rate
-                                            </a>
-                                        </h3>
                                         <p
-                                            class="mt-5 line-clamp-3 text-sm/6 text-gray-400"
+                                            class="relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-md text-white font-semibold hover:bg-gray-800"
                                         >
-                                            Illo sint voluptas. Error voluptates
-                                            culpa eligendi. Hic vel totam vitae
-                                            illo. Non aliquid explicabo
-                                            necessitatibus unde. Sed
-                                            exercitationem placeat consectetur
-                                            nulla deserunt vel. Iusto corrupti
-                                            dicta.
+                                            Programación
                                         </p>
                                     </div>
-                                    <div
-                                        class="relative mt-8 flex items-center gap-x-4 justify-self-end"
-                                    >
-                                        <img
-                                            src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                            class="size-10 rounded-full bg-gray-800"
-                                        />
-                                        <div class="text-sm/6">
-                                            <p class="font-semibold text-white">
-                                                <a href="#">
-                                                    <span
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                    Michael Foster
-                                                </a>
-                                            </p>
-                                            <p class="text-gray-400">
-                                                Co-Founder / CTO
-                                            </p>
-                                        </div>
+                                    <div class="w-full flex flex-col">
+                                        <h3
+                                            class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        >
+                                            Hackathon 2026
+                                        </h3>
+                                        <p
+                                            class="mt-2 line-clamp-6 text-sm text-white text-justify"
+                                        >
+                                            Parrafo de plei
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                        </p>
+                                        <button
+                                            class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                        >
+                                            Inscribirme
+                                        </button>
                                     </div>
                                 </div>
                             </article>
                             <article
-                                class="flex flex-col items-start justify-between"
+                                class="flex flex-col items-start justify-between rounded-2xl"
                             >
                                 <div class="relative w-full">
                                     <img
-                                        src="https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80"
+                                        src="assets/images/hackathon.jpg"
                                         alt=""
-                                        class="aspect-video w-full rounded-2xl bg-gray-800 object-cover sm:aspect-2/1 lg:aspect-3/2"
+                                        class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
                                     />
                                     <div
                                         class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
                                     ></div>
                                 </div>
                                 <div
-                                    class="flex max-w-xl grow flex-col justify-between"
+                                    class="w-full flex grow flex-col justify-between"
                                 >
                                     <div
                                         class="mt-8 flex items-center gap-x-4 text-xs"
                                     >
                                         <time
-                                            datetime="2020-03-10"
-                                            class="text-gray-400"
-                                            >Mar 10, 2020</time
+                                            datetime="2026-01-30"
+                                            class="text-white"
+                                            >Enero 2026</time
                                         >
-                                        <a
-                                            href="#"
-                                            class="relative z-10 rounded-full bg-gray-800/60 px-3 py-1.5 font-medium text-gray-300 hover:bg-gray-800"
-                                            >Sales</a
-                                        >
-                                    </div>
-                                    <div class="group relative grow">
-                                        <h3
-                                            class="mt-3 text-lg/6 font-semibold text-white group-hover:text-gray-300"
-                                        >
-                                            <a href="#">
-                                                <span
-                                                    class="absolute inset-0"
-                                                ></span>
-                                                How to use search engine
-                                                optimization to drive sales
-                                            </a>
-                                        </h3>
                                         <p
-                                            class="mt-5 line-clamp-3 text-sm/6 text-gray-400"
+                                            class="relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-md text-white font-semibold hover:bg-gray-800"
                                         >
-                                            Optio cum necessitatibus dolor
-                                            voluptatum provident commodi et. Qui
-                                            aperiam fugiat nemo cumque.
+                                            Programación
                                         </p>
                                     </div>
-                                    <div
-                                        class="relative mt-8 flex items-center gap-x-4 justify-self-end"
-                                    >
-                                        <img
-                                            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                            class="size-10 rounded-full bg-gray-800"
-                                        />
-                                        <div class="text-sm/6">
-                                            <p class="font-semibold text-white">
-                                                <a href="#">
-                                                    <span
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                    Lindsay Walton
-                                                </a>
-                                            </p>
-                                            <p class="text-gray-400">
-                                                Front-end Developer
-                                            </p>
-                                        </div>
+                                    <div class="w-full flex flex-col">
+                                        <h3
+                                            class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        >
+                                            Hackathon 2026
+                                        </h3>
+                                        <p
+                                            class="mt-2 line-clamp-6 text-sm text-white text-justify"
+                                        >
+                                            Parrafo de plei
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                        </p>
+                                        <button
+                                            class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                        >
+                                            Inscribirme
+                                        </button>
                                     </div>
                                 </div>
                             </article>
                             <article
-                                class="flex flex-col items-start justify-between"
+                                class="flex flex-col items-start justify-between rounded-2xl"
                             >
                                 <div class="relative w-full">
                                     <img
-                                        src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80"
+                                        src="assets/images/hackathon.jpg"
                                         alt=""
-                                        class="aspect-video w-full rounded-2xl bg-gray-800 object-cover sm:aspect-2/1 lg:aspect-3/2"
+                                        class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
                                     />
                                     <div
                                         class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
                                     ></div>
                                 </div>
                                 <div
-                                    class="flex max-w-xl grow flex-col justify-between"
+                                    class="w-full flex grow flex-col justify-between"
                                 >
                                     <div
                                         class="mt-8 flex items-center gap-x-4 text-xs"
                                     >
                                         <time
-                                            datetime="2020-02-12"
-                                            class="text-gray-400"
-                                            >Feb 12, 2020</time
+                                            datetime="2026-01-30"
+                                            class="text-white"
+                                            >Enero 2026</time
                                         >
-                                        <a
-                                            href="#"
-                                            class="relative z-10 rounded-full bg-gray-800/60 px-3 py-1.5 font-medium text-gray-300 hover:bg-gray-800"
-                                            >Business</a
-                                        >
-                                    </div>
-                                    <div class="group relative grow">
-                                        <h3
-                                            class="mt-3 text-lg/6 font-semibold text-white group-hover:text-gray-300"
-                                        >
-                                            <a href="#">
-                                                <span
-                                                    class="absolute inset-0"
-                                                ></span>
-                                                Improve your customer experience
-                                            </a>
-                                        </h3>
                                         <p
-                                            class="mt-5 line-clamp-3 text-sm/6 text-gray-400"
+                                            class="relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-md text-white font-semibold hover:bg-gray-800"
                                         >
-                                            Cupiditate maiores ullam eveniet
-                                            adipisci in doloribus nulla minus.
-                                            Voluptas iusto libero adipisci rem
-                                            et corporis. Nostrud sint anim sunt
-                                            aliqua. Nulla eu labore irure
-                                            incididunt velit cillum quis magna
-                                            dolore.
+                                            Programación
                                         </p>
                                     </div>
-                                    <div
-                                        class="relative mt-8 flex items-center gap-x-4 justify-self-end"
-                                    >
-                                        <img
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                            class="size-10 rounded-full bg-gray-800"
-                                        />
-                                        <div class="text-sm/6">
-                                            <p class="font-semibold text-white">
-                                                <a href="#">
-                                                    <span
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                    Tom Cook
-                                                </a>
-                                            </p>
-                                            <p class="text-gray-400">
-                                                Director of Product
-                                            </p>
-                                        </div>
+                                    <div class="w-full flex flex-col">
+                                        <h3
+                                            class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        >
+                                            Hackathon 2026
+                                        </h3>
+                                        <p
+                                            class="mt-2 line-clamp-6 text-sm text-white text-justify"
+                                        >
+                                            Parrafo de plei
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                        </p>
+                                        <button
+                                            class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                        >
+                                            Inscribirme
+                                        </button>
                                     </div>
                                 </div>
                             </article>
                         </div>
                     </div>
-                </div>
+                </section>
+                <section class="bg-[var(--azul-fondo)] py-24 sm:py-12">
+                    <div class="mx-auto max-w-3xl text-center">
+                        <h2
+                            class="text-6xl font-bold tracking-tight text-balance text-white sm:text-5xl"
+                        >
+                            Eventos anteriores
+                        </h2>
+                    </div>
+                    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                        <form
+                            id="buscador_eventos"
+                            action=""
+                            method="POST"
+                            class="flex flex-row mt-20 flex-row justify-between items-end space-x-5"
+                        >
+                            <div class="grow md:max-w-[50%]">
+                                <label
+                                    for="barra_busqueda"
+                                    class="block text-xl font-semibold text-white ml-2"
+                                    >Buscar eventos</label
+                                >
+                                <div class="mt-2 flex">
+                                    <div
+                                        class="-mr-px grid grow grid-cols-1 focus-within:relative"
+                                    >
+                                        <input
+                                            id="barra_busqueda"
+                                            type="text"
+                                            name="barra_busqueda"
+                                            class="col-start-1 row-start-1 block w-full rounded-l-2xl bg-[var(--azul-fondo)] py-1.5 pr-3 pl-4 text-md text-white border border-gray-700"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="flex shrink-0 items-center rounded-r-2xl bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-2 transition-transform duration-500 hover:scale-105"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="-ml-0.5 size-5"
+                                            stroke="#fff"
+                                        >
+                                            <path
+                                                d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
+                                            />
+                                            <path d="M21 21l-6 -6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                class="flex shrink-0 items-center rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-2 transform transition-transform duration-500 hover:scale-105"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    class="-ml-0.5 size-5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
+                                    />
+                                    <path d="M16 3v4" />
+                                    <path d="M8 3v4" />
+                                    <path d="M4 11h16" />
+                                    <path d="M11 15h1" />
+                                    <path d="M12 15v3" />
+                                </svg>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    class="-ml-0.5 size-5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M3 9l4 -4l4 4m-4 -4v14" />
+                                    <path d="M21 15l-4 4l-4 -4m4 4v-14" />
+                                </svg>
+                            </button>
+                        </form>
+                        <div
+                            class="mx-auto mt-12 grid auto-rows-fr grid-cols-1 gap-8 sm:mt-20 md:grid-cols-2 lg:grid-cols-3 lg:mx-0 lg:max-w-none"
+                        >
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_copa.png"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Copa Salvadoreña de Programación 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        La Copa Salvadoreña de Programación
+                                        (CSP) 2025 buscó que estudiantes
+                                        salvadoreños demostraran sus habilidades
+                                        en programación competitiva y fomentaran
+                                        una comunidad de interés científico y
+                                        tecnológico.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_duelo.JPG"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Duelo de Programación C3 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        El Duelo de Programación, organizado por
+                                        el Competitive Coding Club (C3) durante
+                                        la Semana de Software en la ESEN, tiene
+                                        como propósito descubrir talento en
+                                        programación competitiva.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_copa.png"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Copa Salvadoreña de Programación 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        La Copa Salvadoreña de Programación
+                                        (CSP) 2025 buscó que estudiantes
+                                        salvadoreños demostraran sus habilidades
+                                        en programación competitiva y fomentaran
+                                        una comunidad de interés científico y
+                                        tecnológico.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_duelo.JPG"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Duelo de Programación C3 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        El Duelo de Programación, organizado por
+                                        el Competitive Coding Club (C3) durante
+                                        la Semana de Software en la ESEN, tiene
+                                        como propósito descubrir talento en
+                                        programación competitiva.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_copa.png"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Copa Salvadoreña de Programación 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        La Copa Salvadoreña de Programación
+                                        (CSP) 2025 buscó que estudiantes
+                                        salvadoreños demostraran sus habilidades
+                                        en programación competitiva y fomentaran
+                                        una comunidad de interés científico y
+                                        tecnológico.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article
+                                class="bg-[var(--azul-fondo)] border border-gray-700 rounded-lg shadow-sm"
+                            >
+                                <img
+                                    class="rounded-t-lg min-h-[250px] object-cover"
+                                    src="assets/images/img_duelo.JPG"
+                                    alt=""
+                                />
+                                <div class="p-5">
+                                    <h5
+                                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff]"
+                                    >
+                                        Duelo de Programación C3 2025
+                                    </h5>
+                                    <p class="mb-3 font-normal text-white">
+                                        El Duelo de Programación, organizado por
+                                        el Competitive Coding Club (C3) durante
+                                        la Semana de Software en la ESEN, tiene
+                                        como propósito descubrir talento en
+                                        programación competitiva.
+                                    </p>
+                                    <div
+                                        class="w-full flex justify-end items-center"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="inline-flex items-center px-3 py-2 text-md font-semibold text-center text-white rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-transform duration-500 hover:scale-105"
+                                        >
+                                            Conocer más
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                stroke-width="2"
+                                                class="ml-1 size-5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <path
+                                                    d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <nav
+                            aria-label="paginacion"
+                            class="w-full flex justify-center mt-10"
+                        >
+                            <ul
+                                class="flex items-center -space-x-px h-10 text-base"
+                            >
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-s-lg"
+                                    >
+                                        <span class="sr-only">volver</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="#fff"
+                                            stroke="#fff"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="size-6"
+                                        >
+                                            <path d="M14 6l-6 6l6 6v-12" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-[var(--azul-fondo)] border border-gray-700 hover:bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] hover:text-white hover:font-semibold transition-transform duration-500 hover:scale-105"
+                                        >1</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-[var(--azul-fondo)] border border-gray-700 hover:bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] hover:text-white hover:font-semibold transition-transform duration-500 hover:scale-105"
+                                        >2</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        aria-current="page"
+                                        class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-white font-semibold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] border border-gray-700 transition-transform duration-500 hover:scale-105"
+                                        >3</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-[var(--azul-fondo)] border border-gray-700 hover:bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] hover:text-white hover:font-semibold transition-transform duration-500 hover:scale-105"
+                                        >4</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-[var(--azul-fondo)] border border-gray-700 hover:bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] hover:text-white hover:font-semibold transition-transform duration-500 hover:scale-105"
+                                        >5</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-r-lg"
+                                    >
+                                        <span class="sr-only">siguiente</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="#fff"
+                                            stroke="#fff"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="size-6"
+                                        >
+                                            <path d="M10 18l6 -6l-6 -6v12" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
             </main>
         </div>
     </body>

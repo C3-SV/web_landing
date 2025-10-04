@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Perfil — C3</title>
+  <link rel="stylesheet" href="css/style.css"/>
+   <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#0c1220] text-white text-slate-900 font-codec">
+  <!--? NAVBAR - version con sesion iniciada  -->
+       <header class="flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
+        <div class="px-4 py-2">
+            <a href="index.html" class="inline-flex items-center gap-3">
+                <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover" />
+            </a>
+        </div>
+        <nav class="md:flex h-full">
+            <a href="index.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
+            <a href="about.html" aria-current="page"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre el C3</a>
+            <a href="index.html#events"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
+            <a href="contactanos_pag.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
+            <a href="index.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Cerrar sesión</a>
+        </nav>
+    </header>
+
+  <main id="root" class="mx-auto max-w-7xl px-4 py-8 space-y-10">
+    <!--? Mi perfil  -->
+    <section id="profile-view" class="space-y-10">
+      <!--? Titulo -->
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Mi perfil</h1>
+      <!--? Perfil y resumen -->
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!--? Solo tarjeta del Perfil -->
+        <section class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6">
+          <header class="flex items-center gap-4">
+            <div class="relative">
+              <img id="profile-picture" src="./assets/images/team-cies.jpeg" alt="Foto de perfil"
+                   class="h-24 w-24 rounded-full object-cover ring-2 ring-white/20" />
+              <label for="prorfile-picture-input"
+                     class="absolute -bottom-1 -right-1 inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#5c2b9c] hover:opacity-90 cursor-pointer"
+                     title="Cambiar foto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 2a1 1 0 0 1 .8.4l.9 1.2h1.3A1.5 1.5 0 0 1 15 5v7a1.5 1.5 0 0 1-1.5 1.5H2.5A1.5 1.5 0 0 1 1 12V5A1.5 1.5 0 0 1 2.5 3.5h1.3l.9-1.2a1 1 0 0 1 .8-.4zM8 6.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6m5-1.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1"/></svg>
+              </label>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold">Christopher Marroquín</h2>
+              <p class="text-white/70">@chrism2309</p>
+            </div>
+          </header>
+
+          <!--? Campos del perfil -->
+          <div class="mt-6 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Nombre</label>
+              <div class="flex-1 flex items-center gap-3" data-field="nombre">
+                <span class="field-view">Christopher</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="text" value="Christopher" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Apellido</label>
+              <div class="flex-1 flex items-center gap-3" data-field="apellido">
+                <span class="field-view">Marroquín</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="text" value="Marroquín" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Correo</label>
+              <div class="flex-1 flex items-center gap-3" data-field="correo">
+                <span class="field-view">chris@c3.dev</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="email" value="chris@c3.dev" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Usuario</label>
+              <div class="flex-1 flex items-center gap-3" data-field="usuario">
+                <span class="field-view">@chrism2309</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="text" value="@chrism2309" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Contraseña</label>
+              <div class="flex-1 flex items-center gap-3" data-field="password">
+                <span class="field-view">••••••••</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="password" value="password123" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+     
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label class="w-48 text-white/80">Fecha de nacimiento</label>
+              <div class="flex-1 flex items-center gap-3" data-field="dob">
+                <span class="field-view">23-09-2005</span>
+                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                       type="date" value="23-09-2005" />
+                <div class="ml-auto flex gap-2">
+                  <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">Editar</button>
+     
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!--? Resumen del participante -->
+        <aside class="w-full lg:w-80 shrink-0 space-y-4">
+          <div class="bg-gradient-to-r from-[#004aad] to-[#5c2b9c] rounded-2xl p-[1px]">
+            <div class="bg-[#0c1220] rounded-2xl p-5">
+              <h3 class="font-extrabold text-lg mb-2">Resumen</h3>
+              <ul class="space-y-2 text-white/90">
+                <li>Problemas resueltos: <span class="font-bold">16</span></li>
+                <li>Puntaje total: <span class="font-bold">1,280</span></li>
+                <li>Ranking local: <span class="font-bold">#7</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h4 class="font-bold mb-2">Insignias</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Finalista CSP2025</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Miembro OG</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!--? Eventos Pasados -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-extrabold">Eventos pasados</h2>
+
+        <!--? CSP 2025 -->
+        <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold">CSP 2025 — Copa Salvadoreña de Programación</h3>
+              <p class="text-white/80">Sede ESEN · 07/07/2025</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-[#004aad] text-sm font-bold">Finalista</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-sm">4/6 problemas</span>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Top 10</span>
+            </div>
+          </div>
+
+          <!--? Desempeño -->
+          <div class="mt-4 overflow-x-auto">
+            <table class="min-w-[480px] w-full text-left text-sm">
+              <thead class="text-white/70">
+                <tr>
+                  <th class="py-2">Problema</th>
+                  <th class="py-2">Resultado</th>
+                  <th class="py-2">Tiempo</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/10">
+                <tr><td class="py-2">A - Fotografiando Autovengadores</td><td class="py-2">Aceptado</td><td class="py-2">00:18</td></tr>
+                <tr><td class="py-2">B - Autovengadores Vs Darthinho: Round I</td><td class="py-2">Aceptado</td><td class="py-2">01:04</td></tr>
+                <tr><td class="py-2">C - Entrando al Cuarto de Mordor</td><td class="py-2">Aceptado</td><td class="py-2">01:47</td></tr>
+                <tr><td class="py-2">D - Decodificando el Lenguaje de Og-Die</td><td class="py-2">Wrong Answer</td><td class="py-2">-</td></tr>
+                <tr><td class="py-2">E - Autovengadores: Programación del Infinito (Vol. 2)</td><td class="py-2">Aceptado</td><td class="py-2">02:39</td></tr>
+                <tr><td class="py-2">F - Autovengadores: Fin de la Compilación (Vol. 2)</td><td class="py-2">Wrong Answer </td><td class="py-2">-</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!--? Eventos Futuros -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-extrabold">Eventos futuros</h2>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-bold">Hackathon C3 — 2026</h3>
+            <p class="text-white/80">San Salvador · 15/03/2026</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full bg-emerald-600/80 text-sm font-bold">Inscrito</span>
+            <a href="#" class="px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm">Ver detalles</a>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

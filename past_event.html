@@ -12,325 +12,530 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="flex flex-col h-screen">
-        <div class="relative z-10 flex flex-col h-full">
-            <header
-                class="h-16 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+        <header
+            class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+        >
+            <div class="px-4 py-2">
+                <img
+                    src="./assets/images/logo-c3.jpeg"
+                    alt="C3 Logo"
+                    class="h-14 w-14 rounded-full object-cover"
+                />
+            </div>
+
+            <!-- Hamburger button -->
+            <button
+                id="menu-toggle"
+                class="md:hidden px-4 py-2 text-white focus:outline-none"
             >
-                <div class="px-4 py-2">
-                    <img
-                        src="./assets/images/logo-c3.jpeg"
-                        alt="C3 Logo"
-                        class="h-14 w-14 rounded-full object-cover"
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
                     />
+                </svg>
+            </button>
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex h-full">
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Eventos</a
+                >
+                <a
+                    href="contactanos_pag.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Login</a
+                >
+            </nav>
+
+            <!-- Mobile nav -->
+            <nav
+                id="mobile-menu"
+                class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col"
+            >
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Eventos</a
+                >
+                <a
+                    href="contactanos_pag.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Login</a
+                >
+            </nav>
+        </header>
+
+        <script>
+            // Toggle mobile menu
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+                mobileMenu.classList.toggle("flex");
+            });
+        </script>
+        <main class="flex-1 bg-[var(--azul-fondo)] mt-16">
+            <section class="py-14">
+                <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                    <h1
+                        class="text-5xl font-semibold tracking-tight text-pretty text-white text-center mb-10 mt-20 lg:mt-0"
+                    >
+                        Copa Salvadoreña de Programación (CSP) - 2025
+                    </h1>
+                    <div
+                        class="mx-auto flex max-w-2xl flex-col items-end justify-between gap-16 lg:mx-0 lg:max-w-none lg:flex-row lg:items-center"
+                    >
+                        <div class="w-full lg:max-w-lg lg:flex-auto">
+                            <img
+                                src="assets/images/copa-img.png"
+                                alt=""
+                                class="aspect-6/5 w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-white/10 lg:aspect-auto lg:h-[70vh]"
+                            />
+                        </div>
+                        <div class="w-full lg:max-w-xl lg:flex-auto">
+                            <ul class="-my-8 divide-y divide-gray-800">
+                                <li class="py-8">
+                                    <dl class="relative flex flex-wrap gap-x-3">
+                                        <dd
+                                            class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
+                                        >
+                                            <h2>
+                                                Resumen del evento
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="absolute inset-0"
+                                                ></span>
+                                            </h2>
+                                        </dd>
+                                        <dd
+                                            class="mt-2 w-full flex-none text-md text-white"
+                                        >
+                                            La Copa Salvadoreña de Programación
+                                            (CSP) 2025 se desarrolló con el
+                                            objetivo de permitir a los
+                                            estudiantes salvadoreños demostrar
+                                            sus habilidades en la programación
+                                            competitiva, así como conocer y
+                                            construir una comunidad de personas
+                                            con intereses similares en ámbitos
+                                            científicos.
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="py-8">
+                                    <dl class="relative flex flex-wrap gap-x-3">
+                                        <dd
+                                            class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
+                                        >
+                                            <h2>
+                                                Datos generales
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="absolute inset-0"
+                                                ></span>
+                                            </h2>
+                                        </dd>
+                                        <dd
+                                            class="mt-2 w-full flex-none text-base/7 text-gray-400"
+                                        >
+                                            <div
+                                                class="grid grid-cols-2 gap-4 items-start"
+                                            >
+                                                <p
+                                                    class="text-md text-white col-span-2 lg:col-span-1 text-center lg:text-left"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="#fff"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="inline-block size-6 align-middle mr-1"
+                                                    >
+                                                        <path
+                                                            d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
+                                                        />
+                                                        <path
+                                                            d="M12 10l0 3l2 0"
+                                                        />
+                                                        <path
+                                                            d="M7 4l-2.75 2"
+                                                        />
+                                                        <path
+                                                            d="M17 4l2.75 2"
+                                                        />
+                                                    </svg>
+                                                    <span class="font-semibold">
+                                                        Duración:</span
+                                                    >
+                                                    4 horas por fase
+                                                </p>
+                                                <p
+                                                    class="text-md text-white col-span-2 lg:col-span-1 text-center lg:text-left"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="#fff"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="inline-block size-6 align-middle mr-1"
+                                                    >
+                                                        <path
+                                                            d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"
+                                                        />
+                                                        <path
+                                                            d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
+                                                        />
+                                                    </svg>
+                                                    <span class="font-semibold"
+                                                        >Lugar:</span
+                                                    >
+                                                    ESEN
+                                                </p>
+                                                <p
+                                                    class="text-left text-md text-white col-span-2 text-center lg:text-left"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="#fff"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="inline-block size-6 align-middle mr-1"
+                                                    >
+                                                        <path
+                                                            d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
+                                                        />
+                                                        <path d="M16 3v4" />
+                                                        <path d="M8 3v4" />
+                                                        <path d="M4 11h16" />
+                                                        <path d="M7 14h.013" />
+                                                        <path
+                                                            d="M10.01 14h.005"
+                                                        />
+                                                        <path
+                                                            d="M13.01 14h.005"
+                                                        />
+                                                        <path
+                                                            d="M16.015 14h.005"
+                                                        />
+                                                        <path
+                                                            d="M13.015 17h.005"
+                                                        />
+                                                        <path
+                                                            d="M7.01 17h.005"
+                                                        />
+                                                        <path
+                                                            d="M10.01 17h.005"
+                                                        />
+                                                    </svg>
+                                                    <span class="font-semibold"
+                                                        >Fechas:</span
+                                                    >
+                                                    17 de mayo, 24 de mayo y 7
+                                                    de junio de 2025
+                                                </p>
+                                                <p
+                                                    class="text-left text-md text-white col-span-2 text-center lg:text-left"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="#fff"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="inline-block size-6 align-middle mr-1"
+                                                    >
+                                                        <path
+                                                            d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+                                                        />
+                                                        <path
+                                                            d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"
+                                                        />
+                                                        <path
+                                                            d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+                                                        />
+                                                        <path
+                                                            d="M17 10h2a2 2 0 0 1 2 2v1"
+                                                        />
+                                                        <path
+                                                            d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+                                                        />
+                                                        <path
+                                                            d="M3 13v-1a2 2 0 0 1 2 -2h2"
+                                                        />
+                                                    </svg>
+                                                    <span class="font-semibold">
+                                                        Participantes:</span
+                                                    >
+                                                    Colegios y Universidades
+                                                    nacionales
+                                                </p>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="py-8">
+                                    <dl class="relative flex flex-wrap gap-x-3">
+                                        <dd
+                                            class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
+                                        >
+                                            <h2>
+                                                Categorías
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="absolute inset-0"
+                                                ></span>
+                                            </h2>
+                                        </dd>
+                                        <dd
+                                            class="mt-2 w-full flex flex-wrap gap-2 gap-y-4"
+                                        >
+                                            <p
+                                                class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
+                                            >
+                                                Programación competitiva
+                                            </p>
+                                            <p
+                                                class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
+                                            >
+                                                Trabajo en equipo
+                                            </p>
+                                            <p
+                                                class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
+                                            >
+                                                Resolución de problemas
+                                            </p>
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <nav class="flex h-full">
-                    <a
-                        href="index.html"
-                        class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                        >Inicio</a
+            </section>
+            <section class="py-14 max-w-7xl mx-auto px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                >
+                    Estructura general del evento
+                </h2>
+                <div
+                    class="flex flex-row flex-wrap gap-2 gap-y-12 items-stretch justify-between"
+                >
+                    <article
+                        class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
                     >
-                    <a
-                        href="login.html"
-                        class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                        >Login</a
-                    >
-                    <a
-                        href="about.html"
-                        class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                        >Sobre el C3</a
-                    >
-                    <a
-                        href="events.html"
-                        class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                        >Eventos</a
-                    >
-                    <a
-                        href="contactanos_pag.html"
-                        class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                        >Contáctanos</a
-                    >
-                </nav>
-            </header>
-            <main class="flex-1 bg-[var(--azul-fondo)]">
-                <section class="py-14">
-                    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                        <h1
-                            class="text-5xl font-semibold tracking-tight text-pretty text-white text-center mb-10 mt-20 lg:mt-0"
+                        <h3
+                            class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
                         >
-                            Copa Salvadoreña de Programación (CSP) - 2025
-                        </h1>
-                        <div
-                            class="mx-auto flex max-w-2xl flex-col items-end justify-between gap-16 lg:mx-0 lg:max-w-none lg:flex-row lg:items-center"
-                        >
-                            <div class="w-full lg:max-w-lg lg:flex-auto">
-                                <img
-                                    src="assets/images/copa-img.png"
-                                    alt=""
-                                    class="aspect-6/5 w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-white/10 lg:aspect-auto lg:h-[70vh]"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12"
+                            >
+                                <path
+                                    d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10z"
                                 />
-                            </div>
-                            <div class="w-full lg:max-w-xl lg:flex-auto">
-                                <ul class="-my-8 divide-y divide-gray-800">
-                                    <li class="py-8">
-                                        <dl
-                                            class="relative flex flex-wrap gap-x-3"
-                                        >
-                                            <dd
-                                                class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
-                                            >
-                                                <h2>
-                                                    Resumen del evento
-                                                    <span
-                                                        aria-hidden="true"
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                </h2>
-                                            </dd>
-                                            <dd
-                                                class="mt-2 w-full flex-none text-md text-white"
-                                            >
-                                                La Copa Salvadoreña de
-                                                Programación (CSP) 2025 se
-                                                desarrolló con el objetivo de
-                                                permitir a los estudiantes
-                                                salvadoreños demostrar sus
-                                                habilidades en la programación
-                                                competitiva, así como conocer y
-                                                construir una comunidad de
-                                                personas con intereses similares
-                                                en ámbitos científicos.
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li class="py-8">
-                                        <dl
-                                            class="relative flex flex-wrap gap-x-3"
-                                        >
-                                            <dd
-                                                class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
-                                            >
-                                                <h2>
-                                                    Datos generales
-                                                    <span
-                                                        aria-hidden="true"
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                </h2>
-                                            </dd>
-                                            <dd
-                                                class="mt-2 w-full flex-none text-base/7 text-gray-400"
-                                            >
-                                                <div
-                                                    class="grid grid-cols-2 gap-4 items-start"
-                                                >
-                                                    <p
-                                                        class="text-md text-white col-span-2 lg:col-span-1 text-center lg:text-left"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#fff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="inline-block size-6 align-middle mr-1"
-                                                        >
-                                                            <path
-                                                                d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
-                                                            />
-                                                            <path
-                                                                d="M12 10l0 3l2 0"
-                                                            />
-                                                            <path
-                                                                d="M7 4l-2.75 2"
-                                                            />
-                                                            <path
-                                                                d="M17 4l2.75 2"
-                                                            />
-                                                        </svg>
-                                                        <span
-                                                            class="font-semibold"
-                                                        >
-                                                            Duración:</span
-                                                        >
-                                                        4 horas por fase
-                                                    </p>
-                                                    <p
-                                                        class="text-md text-white col-span-2 lg:col-span-1 text-center lg:text-left"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#fff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="inline-block size-6 align-middle mr-1"
-                                                        >
-                                                            <path
-                                                                d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"
-                                                            />
-                                                            <path
-                                                                d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
-                                                            />
-                                                        </svg>
-                                                        <span
-                                                            class="font-semibold"
-                                                            >Lugar:</span
-                                                        >
-                                                        ESEN
-                                                    </p>
-                                                    <p
-                                                        class="text-left text-md text-white col-span-2 text-center lg:text-left"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#fff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="inline-block size-6 align-middle mr-1"
-                                                        >
-                                                            <path
-                                                                d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
-                                                            />
-                                                            <path d="M16 3v4" />
-                                                            <path d="M8 3v4" />
-                                                            <path
-                                                                d="M4 11h16"
-                                                            />
-                                                            <path
-                                                                d="M7 14h.013"
-                                                            />
-                                                            <path
-                                                                d="M10.01 14h.005"
-                                                            />
-                                                            <path
-                                                                d="M13.01 14h.005"
-                                                            />
-                                                            <path
-                                                                d="M16.015 14h.005"
-                                                            />
-                                                            <path
-                                                                d="M13.015 17h.005"
-                                                            />
-                                                            <path
-                                                                d="M7.01 17h.005"
-                                                            />
-                                                            <path
-                                                                d="M10.01 17h.005"
-                                                            />
-                                                        </svg>
-                                                        <span
-                                                            class="font-semibold"
-                                                            >Fechas:</span
-                                                        >
-                                                        17 de mayo, 24 de mayo y
-                                                        7 de junio de 2025
-                                                    </p>
-                                                    <p
-                                                        class="text-left text-md text-white col-span-2 text-center lg:text-left"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#fff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="inline-block size-6 align-middle mr-1"
-                                                        >
-                                                            <path
-                                                                d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
-                                                            />
-                                                            <path
-                                                                d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"
-                                                            />
-                                                            <path
-                                                                d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
-                                                            />
-                                                            <path
-                                                                d="M17 10h2a2 2 0 0 1 2 2v1"
-                                                            />
-                                                            <path
-                                                                d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
-                                                            />
-                                                            <path
-                                                                d="M3 13v-1a2 2 0 0 1 2 -2h2"
-                                                            />
-                                                        </svg>
-                                                        <span
-                                                            class="font-semibold"
-                                                        >
-                                                            Participantes:</span
-                                                        >
-                                                        Colegios y Universidades
-                                                        nacionales
-                                                    </p>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li class="py-8">
-                                        <dl
-                                            class="relative flex flex-wrap gap-x-3"
-                                        >
-                                            <dd
-                                                class="w-full flex-none text-2xl font-extrabold tracking-tight text-white text-center lg:text-left"
-                                            >
-                                                <h2>
-                                                    Categorías
-                                                    <span
-                                                        aria-hidden="true"
-                                                        class="absolute inset-0"
-                                                    ></span>
-                                                </h2>
-                                            </dd>
-                                            <dd
-                                                class="mt-2 w-full flex flex-wrap gap-2 gap-y-4"
-                                            >
-                                                <p
-                                                    class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
-                                                >
-                                                    Programación competitiva
-                                                </p>
-                                                <p
-                                                    class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
-                                                >
-                                                    Trabajo en equipo
-                                                </p>
-                                                <p
-                                                    class="grow relative z-10 rounded-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-1.5 text-lg text-white text-center font-semibold w-[48%]"
-                                                >
-                                                    Resolución de problemas
-                                                </p>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                </ul>
-                            </div>
+                                <path d="M7 20h10" />
+                                <path d="M9 16v4" />
+                                <path d="M15 16v4" />
+                            </svg>
+                            Fase Virtual (clasificatoria)
+                        </h3>
+                        <div class="flex flex-col">
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
+                                    />
+                                    <path d="M16 3v4" />
+                                    <path d="M8 3v4" />
+                                    <path d="M4 11h16" />
+                                    <path d="M7 14h.013" />
+                                    <path d="M10.01 14h.005" />
+                                    <path d="M13.01 14h.005" />
+                                    <path d="M16.015 14h.005" />
+                                    <path d="M13.015 17h.005" />
+                                    <path d="M7.01 17h.005" />
+                                    <path d="M10.01 17h.005" />
+                                </svg>
+                                <span class="font-semibold">Fecha:</span> 17 de
+                                mayo de 2025
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
+                                    />
+                                    <path d="M12 10l0 3l2 0" />
+                                    <path d="M7 4l-2.75 2" />
+                                    <path d="M17 4l2.75 2" />
+                                </svg>
+                                <span class="font-semibold">Duración:</span>
+                                4 horas
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                                    />
+                                    <path
+                                        d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                                    />
+                                    <path d="M9 12h6" />
+                                    <path d="M9 16h6" />
+                                </svg>
+                                <span class="font-semibold">Formato:</span>
+                                Resolución de 6 problemas en OmegaUp
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                                    />
+                                    <path d="M12 7a5 5 0 1 0 5 5" />
+                                    <path d="M13 3.055a9 9 0 1 0 7.941 7.945" />
+                                    <path d="M15 6v3h3l3 -3h-3v-3z" />
+                                    <path d="M15 9l-3 3" />
+                                </svg>
+                                <span class="font-semibold">Objetivo:</span>
+                                Clasificar a los mejores equipos para la final
+                                en la ESEN
+                            </p>
                         </div>
-                    </div>
-                </section>
-                <section class="py-14 max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2
-                        class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                    </article>
+                    <article
+                        class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
                     >
-                        Estructura general del evento
-                    </h2>
-                    <div
-                        class="flex flex-row flex-wrap gap-2 gap-y-12 items-stretch justify-between"
-                    >
-                        <article
-                            class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
+                        <h3
+                            class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
                         >
-                            <h3
-                                class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12"
+                            >
+                                <path d="M3 21l18 0" />
+                                <path d="M9 8l1 0" />
+                                <path d="M9 12l1 0" />
+                                <path d="M9 16l1 0" />
+                                <path d="M14 8l1 0" />
+                                <path d="M14 12l1 0" />
+                                <path d="M14 16l1 0" />
+                                <path
+                                    d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"
+                                />
+                            </svg>
+                            Fase Presencial (final)
+                        </h3>
+                        <div class="flex flex-col">
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -340,130 +545,28 @@
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    class="size-12"
+                                    class="inline-block size-6 align-middle mr-1"
                                 >
                                     <path
-                                        d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10z"
+                                        d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
                                     />
-                                    <path d="M7 20h10" />
-                                    <path d="M9 16v4" />
-                                    <path d="M15 16v4" />
+                                    <path d="M16 3v4" />
+                                    <path d="M8 3v4" />
+                                    <path d="M4 11h16" />
+                                    <path d="M7 14h.013" />
+                                    <path d="M10.01 14h.005" />
+                                    <path d="M13.01 14h.005" />
+                                    <path d="M16.015 14h.005" />
+                                    <path d="M13.015 17h.005" />
+                                    <path d="M7.01 17h.005" />
+                                    <path d="M10.01 17h.005" />
                                 </svg>
-                                Fase Virtual (clasificatoria)
-                            </h3>
-                            <div class="flex flex-col">
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
-                                        />
-                                        <path d="M16 3v4" />
-                                        <path d="M8 3v4" />
-                                        <path d="M4 11h16" />
-                                        <path d="M7 14h.013" />
-                                        <path d="M10.01 14h.005" />
-                                        <path d="M13.01 14h.005" />
-                                        <path d="M16.015 14h.005" />
-                                        <path d="M13.015 17h.005" />
-                                        <path d="M7.01 17h.005" />
-                                        <path d="M10.01 17h.005" />
-                                    </svg>
-                                    <span class="font-semibold">Fecha:</span> 17
-                                    de mayo de 2025
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
-                                        />
-                                        <path d="M12 10l0 3l2 0" />
-                                        <path d="M7 4l-2.75 2" />
-                                        <path d="M17 4l2.75 2" />
-                                    </svg>
-                                    <span class="font-semibold">Duración:</span>
-                                    4 horas
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
-                                        />
-                                        <path
-                                            d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
-                                        />
-                                        <path d="M9 12h6" />
-                                        <path d="M9 16h6" />
-                                    </svg>
-                                    <span class="font-semibold">Formato:</span>
-                                    Resolución de 6 problemas en OmegaUp
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
-                                        />
-                                        <path d="M12 7a5 5 0 1 0 5 5" />
-                                        <path
-                                            d="M13 3.055a9 9 0 1 0 7.941 7.945"
-                                        />
-                                        <path d="M15 6v3h3l3 -3h-3v-3z" />
-                                        <path d="M15 9l-3 3" />
-                                    </svg>
-                                    <span class="font-semibold">Objetivo:</span>
-                                    Clasificar a los mejores equipos para la
-                                    final en la ESEN
-                                </p>
-                            </div>
-                        </article>
-                        <article
-                            class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
-                        >
-                            <h3
-                                class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                                <span class="font-semibold">Fecha:</span> 24 de
+                                mayo (colegios) y 7 de junio (universidades) de
+                                2025
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -473,137 +576,20 @@
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    class="size-12"
+                                    class="inline-block size-6 align-middle mr-1"
                                 >
-                                    <path d="M3 21l18 0" />
-                                    <path d="M9 8l1 0" />
-                                    <path d="M9 12l1 0" />
-                                    <path d="M9 16l1 0" />
-                                    <path d="M14 8l1 0" />
-                                    <path d="M14 12l1 0" />
-                                    <path d="M14 16l1 0" />
                                     <path
-                                        d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"
+                                        d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
                                     />
+                                    <path d="M12 10l0 3l2 0" />
+                                    <path d="M7 4l-2.75 2" />
+                                    <path d="M17 4l2.75 2" />
                                 </svg>
-                                Fase Presencial (final)
-                            </h3>
-                            <div class="flex flex-col">
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
-                                        />
-                                        <path d="M16 3v4" />
-                                        <path d="M8 3v4" />
-                                        <path d="M4 11h16" />
-                                        <path d="M7 14h.013" />
-                                        <path d="M10.01 14h.005" />
-                                        <path d="M13.01 14h.005" />
-                                        <path d="M16.015 14h.005" />
-                                        <path d="M13.015 17h.005" />
-                                        <path d="M7.01 17h.005" />
-                                        <path d="M10.01 17h.005" />
-                                    </svg>
-                                    <span class="font-semibold">Fecha:</span> 24
-                                    de mayo (colegios) y 7 de junio
-                                    (universidades) de 2025
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"
-                                        />
-                                        <path d="M12 10l0 3l2 0" />
-                                        <path d="M7 4l-2.75 2" />
-                                        <path d="M17 4l2.75 2" />
-                                    </svg>
-                                    <span class="font-semibold">Duración:</span>
-                                    4 horas
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"
-                                        />
-                                        <path
-                                            d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
-                                        />
-                                    </svg>
-                                    <span class="font-semibold">Lugar:</span>
-                                    Campus de la ESEN, La Libertad
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path d="M8 21l8 0" />
-                                        <path d="M12 17l0 4" />
-                                        <path d="M7 4l10 0" />
-                                        <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
-                                        <path
-                                            d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
-                                        />
-                                        <path
-                                            d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
-                                        />
-                                    </svg>
-                                    <span class="font-semibold"
-                                        >Premiación:</span
-                                    >
-                                    Premio económico, trofeo y diploma para los
-                                    3 primeros lugares. Reconocimiento a todos
-                                    los participantes.
-                                </p>
-                            </div>
-                        </article>
-                        <article
-                            class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
-                        >
-                            <h3
-                                class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                                <span class="font-semibold">Duración:</span>
+                                4 horas
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -613,113 +599,20 @@
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    class="size-12"
+                                    class="inline-block size-6 align-middle mr-1"
                                 >
-                                    <path d="M15 12.9a5 5 0 1 0 -3.902 -3.9" />
                                     <path
-                                        d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515z"
+                                        d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"
+                                    />
+                                    <path
+                                        d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
                                     />
                                 </svg>
-                                Charlas y actividades
-                            </h3>
-                            <div class="flex flex-col">
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 aling-text-start mr-1"
-                                    >
-                                        <path d="M8 9h8" />
-                                        <path d="M8 13h6" />
-                                        <path
-                                            d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z"
-                                        />
-                                    </svg>
-                                    Charlas formativas con invitados de la
-                                    industria tecnológica
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M6 9a6 6 0 1 0 12 0a6 6 0 0 0 -12 0"
-                                        />
-                                        <path
-                                            d="M12 3c1.333 .333 2 2.333 2 6s-.667 5.667 -2 6"
-                                        />
-                                        <path
-                                            d="M12 3c-1.333 .333 -2 2.333 -2 6s.667 5.667 2 6"
-                                        />
-                                        <path d="M6 9h12" />
-                                        <path d="M3 20h7" />
-                                        <path d="M14 20h7" />
-                                        <path
-                                            d="M10 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
-                                        />
-                                        <path d="M12 15v3" />
-                                    </svg>
-                                    Espacios de networking con aliados
-                                    educativos, startups y plataformas
-                                    tecnológicas
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path
-                                            d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"
-                                        />
-                                        <path
-                                            d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"
-                                        />
-                                        <path
-                                            d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"
-                                        />
-                                        <path
-                                            d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"
-                                        />
-                                        <path
-                                            d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"
-                                        />
-                                        <path
-                                            d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"
-                                        />
-                                    </svg>
-                                    Talleres de preparación
-                                </p>
-                            </div>
-                        </article>
-                        <article
-                            class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
-                        >
-                            <h3
-                                class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                                <span class="font-semibold">Lugar:</span>
+                                Campus de la ESEN, La Libertad
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -729,379 +622,513 @@
                                     stroke-width="2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    class="size-12"
+                                    class="inline-block size-6 align-middle mr-1"
                                 >
+                                    <path d="M8 21l8 0" />
+                                    <path d="M12 17l0 4" />
+                                    <path d="M7 4l10 0" />
+                                    <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
                                     <path
-                                        d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"
+                                        d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
                                     />
-                                    <path d="M3.6 9h16.8" />
-                                    <path d="M3.6 15h16.8" />
-                                    <path d="M11.5 3a17 17 0 0 0 0 18" />
-                                    <path d="M12.5 3a17 17 0 0 1 0 18" />
+                                    <path
+                                        d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
+                                    />
                                 </svg>
-                                Proyección Regional e Internacional
-                            </h3>
-                            <div class="flex flex-col">
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 aling-text-start mr-1"
-                                    >
-                                        <path
-                                            d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z"
-                                        />
-                                        <path d="M19 16h-12a2 2 0 0 0 -2 2" />
-                                        <path d="M9 8h6" />
-                                    </svg>
-                                    Aporta preparación para Olimpiadas
-                                    Internacionales de Informática (IOI)
-                                </p>
-                                <p
-                                    class="text-md text-white mb-3 text-center lg:text-left"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="inline-block size-6 align-middle mr-1"
-                                    >
-                                        <path d="M3 17l6 -6l4 4l8 -8" />
-                                        <path d="M14 7l7 0l0 7" />
-                                    </svg>
-                                    Busca posicionar a El Salvador como hub
-                                    regional de programación competitiva
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-                </section>
-                <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2
-                        class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
-                    >
-                        Estadísticas del evento
-                    </h2>
-                    <div class="mx-auto w-full">
-                        <div class="mx-auto">
-                            <dl
-                                class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl border border-gray-700 text-center sm:grid-cols-2 lg:grid-cols-4"
-                            >
-                                <div class="flex flex-col bg-white/5 p-8">
-                                    <dt
-                                        class="text-lg font-semibold text-white"
-                                    >
-                                        Participantes
-                                    </dt>
-                                    <dd
-                                        class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="#61b3ff"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="size-12"
-                                        >
-                                            <path
-                                                d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
-                                            />
-                                            <path
-                                                d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
-                                            />
-                                        </svg>
-                                        130+
-                                    </dd>
-                                </div>
-                                <div class="flex flex-col bg-white/5 p-8">
-                                    <dt
-                                        class="text-lg font-semibold text-white"
-                                    >
-                                        Instituciones
-                                    </dt>
-                                    <dd
-                                        class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="#61b3ff"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="size-12"
-                                        >
-                                            <path d="M3 21l18 0" />
-                                            <path d="M9 8l1 0" />
-                                            <path d="M9 12l1 0" />
-                                            <path d="M9 16l1 0" />
-                                            <path d="M14 8l1 0" />
-                                            <path d="M14 12l1 0" />
-                                            <path d="M14 16l1 0" />
-                                            <path
-                                                d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"
-                                            />
-                                        </svg>
-                                        30
-                                    </dd>
-                                </div>
-                                <div class="flex flex-col bg-white/5 p-8">
-                                    <dt
-                                        class="text-lg font-semibold text-white"
-                                    >
-                                        Patrocinadores
-                                    </dt>
-                                    <dd
-                                        class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="#61b3ff"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="size-12"
-                                        >
-                                            <path
-                                                d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
-                                            />
-                                            <path
-                                                d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"
-                                            />
-                                            <path d="M12 12l0 .01" />
-                                            <path d="M3 13a20 20 0 0 0 18 0" />
-                                        </svg>
-                                        10
-                                    </dd>
-                                </div>
-                                <div class="flex flex-col bg-white/5 p-8">
-                                    <dt
-                                        class="text-lg font-semibold text-white"
-                                    >
-                                        Envíos de problemas
-                                    </dt>
-                                    <dd
-                                        class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="#61b3ff"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="size-12"
-                                        >
-                                            <path d="M10 14l11 -11" />
-                                            <path
-                                                d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
-                                            />
-                                        </svg>
-                                        300+
-                                    </dd>
-                                </div>
-                            </dl>
+                                <span class="font-semibold">Premiación:</span>
+                                Premio económico, trofeo y diploma para los 3
+                                primeros lugares. Reconocimiento a todos los
+                                participantes.
+                            </p>
                         </div>
-                    </div>
-                </section>
-                <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2
-                        class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                    </article>
+                    <article
+                        class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
                     >
-                        Galería de fotos
-                    </h2>
+                        <h3
+                            class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12"
+                            >
+                                <path d="M15 12.9a5 5 0 1 0 -3.902 -3.9" />
+                                <path
+                                    d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515z"
+                                />
+                            </svg>
+                            Charlas y actividades
+                        </h3>
+                        <div class="flex flex-col">
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 aling-text-start mr-1"
+                                >
+                                    <path d="M8 9h8" />
+                                    <path d="M8 13h6" />
+                                    <path
+                                        d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z"
+                                    />
+                                </svg>
+                                Charlas formativas con invitados de la industria
+                                tecnológica
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M6 9a6 6 0 1 0 12 0a6 6 0 0 0 -12 0"
+                                    />
+                                    <path
+                                        d="M12 3c1.333 .333 2 2.333 2 6s-.667 5.667 -2 6"
+                                    />
+                                    <path
+                                        d="M12 3c-1.333 .333 -2 2.333 -2 6s.667 5.667 2 6"
+                                    />
+                                    <path d="M6 9h12" />
+                                    <path d="M3 20h7" />
+                                    <path d="M14 20h7" />
+                                    <path
+                                        d="M10 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+                                    />
+                                    <path d="M12 15v3" />
+                                </svg>
+                                Espacios de networking con aliados educativos,
+                                startups y plataformas tecnológicas
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path
+                                        d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"
+                                    />
+                                    <path
+                                        d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"
+                                    />
+                                    <path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5" />
+                                    <path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0" />
+                                    <path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5" />
+                                    <path
+                                        d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"
+                                    />
+                                </svg>
+                                Talleres de preparación
+                            </p>
+                        </div>
+                    </article>
+                    <article
+                        class="w-full lg:w-[48%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm min-h-[300px] flex flex-col justify-center"
+                    >
+                        <h3
+                            class="mb-10 text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12"
+                            >
+                                <path
+                                    d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"
+                                />
+                                <path d="M3.6 9h16.8" />
+                                <path d="M3.6 15h16.8" />
+                                <path d="M11.5 3a17 17 0 0 0 0 18" />
+                                <path d="M12.5 3a17 17 0 0 1 0 18" />
+                            </svg>
+                            Proyección Regional e Internacional
+                        </h3>
+                        <div class="flex flex-col">
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 aling-text-start mr-1"
+                                >
+                                    <path
+                                        d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z"
+                                    />
+                                    <path d="M19 16h-12a2 2 0 0 0 -2 2" />
+                                    <path d="M9 8h6" />
+                                </svg>
+                                Aporta preparación para Olimpiadas
+                                Internacionales de Informática (IOI)
+                            </p>
+                            <p
+                                class="text-md text-white mb-3 text-center lg:text-left"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#fff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="inline-block size-6 align-middle mr-1"
+                                >
+                                    <path d="M3 17l6 -6l4 4l8 -8" />
+                                    <path d="M14 7l7 0l0 7" />
+                                </svg>
+                                Busca posicionar a El Salvador como hub regional
+                                de programación competitiva
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                >
+                    Estadísticas del evento
+                </h2>
+                <div class="mx-auto w-full">
+                    <div class="mx-auto">
+                        <dl
+                            class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl border border-gray-700 text-center sm:grid-cols-2 lg:grid-cols-4"
+                        >
+                            <div class="flex flex-col bg-white/5 p-8">
+                                <dt class="text-lg font-semibold text-white">
+                                    Participantes
+                                </dt>
+                                <dd
+                                    class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#61b3ff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="size-12"
+                                    >
+                                        <path
+                                            d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
+                                        />
+                                        <path
+                                            d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+                                        />
+                                    </svg>
+                                    130+
+                                </dd>
+                            </div>
+                            <div class="flex flex-col bg-white/5 p-8">
+                                <dt class="text-lg font-semibold text-white">
+                                    Instituciones
+                                </dt>
+                                <dd
+                                    class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#61b3ff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="size-12"
+                                    >
+                                        <path d="M3 21l18 0" />
+                                        <path d="M9 8l1 0" />
+                                        <path d="M9 12l1 0" />
+                                        <path d="M9 16l1 0" />
+                                        <path d="M14 8l1 0" />
+                                        <path d="M14 12l1 0" />
+                                        <path d="M14 16l1 0" />
+                                        <path
+                                            d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"
+                                        />
+                                    </svg>
+                                    30
+                                </dd>
+                            </div>
+                            <div class="flex flex-col bg-white/5 p-8">
+                                <dt class="text-lg font-semibold text-white">
+                                    Patrocinadores
+                                </dt>
+                                <dd
+                                    class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#61b3ff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="size-12"
+                                    >
+                                        <path
+                                            d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+                                        />
+                                        <path
+                                            d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"
+                                        />
+                                        <path d="M12 12l0 .01" />
+                                        <path d="M3 13a20 20 0 0 0 18 0" />
+                                    </svg>
+                                    10
+                                </dd>
+                            </div>
+                            <div class="flex flex-col bg-white/5 p-8">
+                                <dt class="text-lg font-semibold text-white">
+                                    Envíos de problemas
+                                </dt>
+                                <dd
+                                    class="order-first text-4xl font-semibold tracking-tight text-[#61b3ff] flex justify-center items-center gap-1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#61b3ff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="size-12"
+                                    >
+                                        <path d="M10 14l11 -11" />
+                                        <path
+                                            d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
+                                        />
+                                    </svg>
+                                    300+
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+            <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                >
+                    Galería de fotos
+                </h2>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="grid gap-4">
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_1.png"
-                                    alt="galeria_1"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_2.png"
-                                    alt="galeria_2"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_3.png"
-                                    alt="galeria_3"
-                                />
-                            </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid gap-4">
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_1.png"
+                                alt="galeria_1"
+                            />
                         </div>
-                        <div class="grid gap-4">
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_4.png"
-                                    alt="galeria_4"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_5.png"
-                                    alt="galeria_5"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_6.png"
-                                    alt="galeria_6"
-                                />
-                            </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_2.png"
+                                alt="galeria_2"
+                            />
                         </div>
-                        <div class="grid gap-4">
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_7.png"
-                                    alt="galeria_7"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_8.png"
-                                    alt="galeria_8"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_9.png"
-                                    alt="galeria_9"
-                                />
-                            </div>
-                        </div>
-                        <div class="grid gap-4">
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_10.png"
-                                    alt="galeria_10"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_11.png"
-                                    alt="galeria_11"
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    class="h-full w-full rounded-lg object-cover"
-                                    src="assets/images/galeria_12.png"
-                                    alt="galeria_12"
-                                />
-                            </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_3.png"
+                                alt="galeria_3"
+                            />
                         </div>
                     </div>
-                </section>
-                <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2
-                        class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
-                    >
-                        Premiación
-                    </h2>
-                    <img
-                        src="assets/images/premiacion.jpg"
-                        alt="premiacion_1"
-                        class="w-full rounded-lg object-cover"
-                    />
-                </section>
-                <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2
-                        class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
-                    >
-                        Enlaces de interés
-                    </h2>
-                    <div
-                        class="flex flex-row flex-wrap justify-between items-center gap-y-8"
-                    >
-                        <a
-                            href="https://drive.google.com/drive/u/0/folders/1dV4et3EdOHD0cB9dVwwgT-2Lh-RwJsBP"
-                            target="_blank"
-                            class="w-full lg:w-[48%] block p-6 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-lg shadow-sm transition-transform duration-500 hover:scale-105"
-                        >
-                            <h5
-                                class="text-2xl font-bold text-white text-center flex items-center justify-center"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="#fff"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="size-12 mr-2"
-                                >
-                                    <path
-                                        d="M5 19l2.757 -7.351a1 1 0 0 1 .936 -.649h12.307a1 1 0 0 1 .986 1.164l-.996 5.211a2 2 0 0 1 -1.964 1.625h-14.026a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v2"
-                                    />
-                                </svg>
-
-                                Drive con fotos del evento
-                            </h5>
-                        </a>
-                        <a
-                            href="assets/docs/Editorial-Universidades-CSP2025.pdf"
-                            download
-                            class="w-full lg:w-[48%] p-6 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-lg shadow-sm transition-transform duration-500 hover:scale-105"
-                        >
-                            <h5
-                                class="text-2xl font-bold text-white text-center flex items-center justify-center"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="#fff"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="size-12 mr-2"
-                                >
-                                    <path
-                                        d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"
-                                    />
-                                    <path d="M7 11l5 5l5 -5" />
-                                    <path d="M12 4l0 12" />
-                                </svg>
-
-                                Editorial de ejercicios
-                            </h5>
-                        </a>
+                    <div class="grid gap-4">
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_4.png"
+                                alt="galeria_4"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_5.png"
+                                alt="galeria_5"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_6.png"
+                                alt="galeria_6"
+                            />
+                        </div>
                     </div>
-                </section>
-            </main>
-        </div>
+                    <div class="grid gap-4">
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_7.png"
+                                alt="galeria_7"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_8.png"
+                                alt="galeria_8"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_9.png"
+                                alt="galeria_9"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_10.png"
+                                alt="galeria_10"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_11.png"
+                                alt="galeria_11"
+                            />
+                        </div>
+                        <div>
+                            <img
+                                class="h-full w-full rounded-lg object-cover"
+                                src="assets/images/galeria_12.png"
+                                alt="galeria_12"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                >
+                    Premiación
+                </h2>
+                <img
+                    src="assets/images/premiacion.jpg"
+                    alt="premiacion_1"
+                    class="w-full rounded-lg object-cover"
+                />
+            </section>
+            <section class="py-12 max-w-7xl mx-auto px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty text-white text-center mb-24"
+                >
+                    Enlaces de interés
+                </h2>
+                <div
+                    class="flex flex-row flex-wrap justify-between items-center gap-y-8"
+                >
+                    <a
+                        href="https://drive.google.com/drive/u/0/folders/1dV4et3EdOHD0cB9dVwwgT-2Lh-RwJsBP"
+                        target="_blank"
+                        class="w-full lg:w-[48%] block p-6 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-lg shadow-sm transition-transform duration-500 hover:scale-105"
+                    >
+                        <h5
+                            class="text-2xl font-bold text-white text-center flex items-center justify-center"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12 mr-2"
+                            >
+                                <path
+                                    d="M5 19l2.757 -7.351a1 1 0 0 1 .936 -.649h12.307a1 1 0 0 1 .986 1.164l-.996 5.211a2 2 0 0 1 -1.964 1.625h-14.026a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v2"
+                                />
+                            </svg>
+
+                            Drive con fotos del evento
+                        </h5>
+                    </a>
+                    <a
+                        href="assets/docs/Editorial-Universidades-CSP2025.pdf"
+                        download
+                        class="w-full lg:w-[48%] p-6 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-lg shadow-sm transition-transform duration-500 hover:scale-105"
+                    >
+                        <h5
+                            class="text-2xl font-bold text-white text-center flex items-center justify-center"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#fff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="size-12 mr-2"
+                            >
+                                <path
+                                    d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"
+                                />
+                                <path d="M7 11l5 5l5 -5" />
+                                <path d="M12 4l0 12" />
+                            </svg>
+
+                            Editorial de ejercicios
+                        </h5>
+                    </a>
+                </div>
+            </section>
+        </main>
     </body>
 </html>

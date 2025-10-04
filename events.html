@@ -11,7 +11,7 @@
         />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="flex flex-col h-screen">
+    <body class="flex flex-col min-h-screen">
         <header
             class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
         >
@@ -115,7 +115,7 @@
                 mobileMenu.classList.toggle("flex");
             });
         </script>
-        <main class="flex-1 mt-16">
+        <main class="flex-1 mt-16 bg-[var(--azul-fondo)]">
             <section
                 id="hero"
                 class="relative w-full h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden text-center"
@@ -125,7 +125,7 @@
                     alt="Eventos"
                     class="absolute inset-0 w-full h-full object-cover"
                 />
-                <div class="absolute inset-0 bg-black/50"></div>
+                <div class="absolute inset-0 bg-black/70"></div>
                 <div
                     class="w-full px-24 relative z-10 flex flex-col items-center md:items-start space-y-6"
                 >
@@ -142,6 +142,7 @@
                             Próximos eventos
                         </a>
                         <a
+                            href="#past"
                             class="text-white text-xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full transition-transform duration-500 hover:scale-105"
                         >
                             Eventos pasados
@@ -149,7 +150,10 @@
                     </div>
                 </div>
             </section>
-            <section id="prox" class="bg-[var(--azul-fondo)] py-24 sm:py-12">
+            <section
+                id="prox"
+                class="bg-[var(--azul-fondo)] mt-12 py-24 sm:py-12 scroll-mt-16"
+            >
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">
                     <div class="mx-auto max-w-3xl text-center">
                         <h2
@@ -168,7 +172,7 @@
                                 <img
                                     src="assets/images/hackathon.jpg"
                                     alt=""
-                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
+                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[99/100]"
                                 />
                                 <div
                                     class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
@@ -178,7 +182,7 @@
                                 class="w-full px-5 pb-5 flex grow flex-col justify-between"
                             >
                                 <div
-                                    class="mt-8 flex items-center gap-x-4 text-xs"
+                                    class="mt-4 flex items-center gap-x-4 text-xs"
                                 >
                                     <time
                                         datetime="2026-01-30"
@@ -193,7 +197,7 @@
                                 </div>
                                 <div class="w-full flex flex-col">
                                     <h3
-                                        class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        class="mt-4 text-2xl font-semibold text-[#61b3ff]"
                                     >
                                         Hackathon 2026
                                     </h3>
@@ -209,11 +213,12 @@
                                         compartiendo actualizaciones en
                                         los próximos meses.
                                     </p>
-                                    <button
-                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                    <a
+                                        href="future_event.html"
+                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center text-center"
                                     >
                                         Inscribirme
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </article>
@@ -224,7 +229,7 @@
                                 <img
                                     src="assets/images/hackathon.jpg"
                                     alt=""
-                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
+                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[99/100]"
                                 />
                                 <div
                                     class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
@@ -234,7 +239,7 @@
                                 class="w-full px-5 pb-5 flex grow flex-col justify-between"
                             >
                                 <div
-                                    class="mt-8 flex items-center gap-x-4 text-xs"
+                                    class="mt-4 flex items-center gap-x-4 text-xs"
                                 >
                                     <time
                                         datetime="2026-01-30"
@@ -249,7 +254,7 @@
                                 </div>
                                 <div class="w-full flex flex-col">
                                     <h3
-                                        class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        class="mt-4 text-2xl font-semibold text-[#61b3ff]"
                                     >
                                         Hackathon 2026
                                     </h3>
@@ -265,11 +270,12 @@
                                         compartiendo actualizaciones en
                                         los próximos meses.
                                     </p>
-                                    <button
-                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                    <a
+                                        href="future_event.html"
+                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center text-center"
                                     >
                                         Inscribirme
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </article>
@@ -280,7 +286,7 @@
                                 <img
                                     src="assets/images/hackathon.jpg"
                                     alt=""
-                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[5/6]"
+                                    class="aspect-[2/1] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[99/100]"
                                 />
                                 <div
                                     class="absolute inset-0 rounded-2xl inset-ring inset-ring-white/10"
@@ -290,7 +296,7 @@
                                 class="w-full px-5 pb-5 flex grow flex-col justify-between"
                             >
                                 <div
-                                    class="mt-8 flex items-center gap-x-4 text-xs"
+                                    class="mt-4 flex items-center gap-x-4 text-xs"
                                 >
                                     <time
                                         datetime="2026-01-30"
@@ -305,7 +311,7 @@
                                 </div>
                                 <div class="w-full flex flex-col">
                                     <h3
-                                        class="mt-3 text-2xl font-semibold text-[#61b3ff]"
+                                        class="mt-4 text-2xl font-semibold text-[#61b3ff]"
                                     >
                                         Hackathon 2026
                                     </h3>
@@ -321,18 +327,22 @@
                                         compartiendo actualizaciones en
                                         los próximos meses.
                                     </p>
-                                    <button
-                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center"
+                                    <a
+                                        href="future_event.html"
+                                        class="mt-5 text-white text-md font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] py-2 rounded-full w-36 transition-transform duration-500 hover:scale-105 self-center text-center"
                                     >
                                         Inscribirme
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     </div>
                 </div>
             </section>
-            <section class="bg-[var(--azul-fondo)] py-24 sm:py-12">
+            <section
+                id="past"
+                class="bg-[var(--azul-fondo)] py-24 sm:py-12 mb-24 scroll-mt-16"
+            >
                 <div class="mx-auto max-w-3xl text-center">
                     <h2
                         class="text-6xl font-bold tracking-tight text-balance text-white sm:text-5xl"
@@ -361,12 +371,12 @@
                                         id="barra_busqueda"
                                         type="text"
                                         name="barra_busqueda"
-                                        class="col-start-1 row-start-1 block w-full rounded-l-2xl bg-[var(--azul-fondo)] py-1.5 pr-3 pl-4 text-md text-white border border-gray-700"
+                                        class="col-start-1 row-start-1 block w-full rounded-l-xl bg-[var(--azul-fondo)] py-1.5 pr-3 pl-4 text-md text-white border border-gray-700"
                                     />
                                 </div>
                                 <button
                                     type="button"
-                                    class="flex shrink-0 items-center rounded-r-2xl bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-2 transition-transform duration-500 hover:scale-105"
+                                    class="flex shrink-0 items-center rounded-r-xl bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-3 py-2 transition-transform duration-500 hover:scale-105"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -798,5 +808,16 @@
                 </div>
             </section>
         </main>
+        <!-- Footer -->
+        <footer
+            class="relative text-white h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4 flex-shrink-0"
+        >
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <p
+                class="z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center"
+            >
+                © 2025 Competitive Coding Club. Todos los derechos reservados.
+            </p>
+        </footer>
     </body>
 </html>

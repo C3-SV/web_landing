@@ -1,601 +1,1169 @@
 <!DOCTYPE html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sobre el C3 — Competitive Coding Club</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="assets/images/logo-c3.jpeg"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sobre el C3 — Competitive Coding Club</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="min-h-screen flex flex-col bg-brand-bg text-slate-900 font-codec">
-
-    <!-- NAV -->
-<header class="flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
-        <div class="px-4 py-2">
-            <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover">
-        </div>
-        <nav class="flex h-full">
-            <a href="index.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
-            <a href="login.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
-            <a href="about.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre el C3</a>
-            <a href="events.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
-            <a href="contactanos_pag.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
-        </nav>
-</header>
-
-    <!--? MENU: SECCIONES DEL C3 -->
-    <section class="relative min-h-[450px] flex items-center justify-center text-center">
-
-        <div class="absolute inset-0 bg-[url('./assets/images/copa-img.png')] bg-cover bg-center"></div>
-        <div class="absolute inset-0 bg-black/50"></div>
-
-        <!-- PARTES DEL MENU -->
-        <div class="relative z-10 mx-auto max-w-screen-xl w-full py-8 px-4 text-center lg:py-16 lg:px-12">
-            <h1 class="mb-4 text-4xl font-extrabold text-gray-900 text-white tracking-tighter md:text-5xl lg:text-6xl">
-                ACERCA DEL C3
-            </h1>
-            <div class="flex flex-wrap justify-center gap-6 mt-8">
-                <a href="#que-es"
-                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
-                    ¿Qué es?
-                </a>
-                <a href="#historia"
-                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
-                    Historia
-                </a>
-                <a href="#"
-                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
-                    Logros
-                </a>
-                <a href="#"
-                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
-                    Miembros
-                </a>
-                <a href="#"
-                    class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#5c2b9c] to-[#004aad] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl">
-                    Patrocinadores y aliados
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!--! QUE ES -->
-    <section id="que-es" class="w-full bg-[#101728] text-white">
-        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-
-            <!--? BOTON -->
-            <a href="#que-es" class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold
-                        bg-gradient-to-r from-[#5c2b9c] to-[#004aad]
-                        transition-all duration-500 
-                        hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl
-                        mb-8">
-                ¿Qué es?
-            </a>
-
-            <!--? DEFINICIÓN -->
-            <header class="mb-12">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-                    Impulsar el talento joven
-                    <span class="block text-3xl sm:text-4xl md:text-5xl font-semibold opacity-80">en tecnología</span>
-                </h2>
-            </header>
-
-            <div class="flex flex-col md:flex-row md:items-center lg:items-start gap-6 md:gap-8 lg:gap-12">
-                <div class="flex-1 space-y-5 leading-relaxed text-white/90">
-                    <p class="text-lg sm:text-xl font-medium">
-                        El Competitive Coding Club (C3) es un centro de conexión de talento tecnológico, donde los
-                        jóvenes compiten, crecen y se conectan con oportunidades reales en la industria.
-                        <br>
-                        Nació como un espacio para fomentar la programación competitiva, pero hoy evoluciona hacia un
-                        emprendimiento EdTech que combina:
-                    </p>
-                    <ul class="space-y-2 text-lg sm:text-lg">
-                        <li>• <span class="font-semibold">Eventos competitivos</span> de alto nivel como la Copa
-                            Salvadoreña de Programación (CSP), hackathons y duelos.</li>
-                        <li>• <span class="font-semibold">Comunidad</span> tech joven, activa y colaborativa.</li>
-                        <li>• <span class="font-semibold">Próximamente, una Plataforma digital </span> que facilitará
-                            inscripciones, gestión de perfiles y retos.</li>
-                    </ul>
-                </div>
-                <!--? Imagen CIES -->
-                <figure
-                    class="flex-1 max-w-full mx-auto self-center md:self-auto md:max-w-[420px] lg:max-w-[520px] self-start">
-                    <img src="./assets/images/team-cies.jpeg" alt="Equipo C3"
-                        class="w-full max-h-[520px] h-auto rounded-[2rem] object-cover shadow-2xl" />
-                </figure>
+    <body
+        class="min-h-screen flex flex-col bg-brand-bg text-slate-900 font-codec"
+    >
+        <header
+            class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+        >
+            <div class="px-4 py-2">
+                <img
+                    src="./assets/images/logo-c3.jpeg"
+                    alt="C3 Logo"
+                    class="h-14 w-14 rounded-full object-cover"
+                />
             </div>
 
-            <div class="my-12 h-px w-full bg-white/15"></div>
+            <!-- Hamburger button -->
+            <button
+                id="menu-toggle"
+                class="md:hidden px-4 py-2 text-white focus:outline-none"
+            >
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    />
+                </svg>
+            </button>
 
-            <!--? MISION Y VISION -->
-            <section id="mision-vision" aria-label="Misión y Visión" class="mb-12">
-                <div class="flex flex-col lg:flex-row gap-10">
-                    <div class="flex-1">
-                        <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">MISIÓN</h3>
-                        <p class="text-xl sm:text-2xl font-semibold">
-                            Potenciar el ecosistema tecnológico a través de eventos competitivos y una comunidad sólida
-                            que conecta a jóvenes con oportunidades reales
-                        </p>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">VISIÓN</h3>
-                        <p class="text-xl sm:text-2xl font-semibold">
-                            Ser el referente en competencias tecnológicas en la región, consolidándonos como un puente
-                            reconocido para descubrir y conectar talento
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex h-full">
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Eventos</a
+                >
+                <a
+                    href="contact.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Login</a
+                >
+            </nav>
 
-            <!--? VALORES -->
-            <section aria-label="Valores" class="mb-12">
-                <h3 class="text-center text-3xl sm:text-4xl font-extrabold mb-6">VALORES</h3>
+            <!-- Mobile nav -->
+            <nav
+                id="mobile-menu"
+                class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col"
+            >
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Eventos</a
+                >
+                <a
+                    href="contact.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Login</a
+                >
+            </nav>
+        </header>
 
-                <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-[#004aad] via-[#273a8d] to-[#5c2b9c]">
-                    <div class="flex flex-wrap justify-center md:justify-between gap-10">
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-trophy" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1q.01.775.056 1.469c.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.5.5 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667q.045-.694.056-1.469z" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Excelencia</span>
-                        </div>
+        <script>
+            // Toggle mobile menu
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
 
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-people" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Colaboración</span>
-                        </div>
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+                mobileMenu.classList.toggle("flex");
+            });
+        </script>
 
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-lightning-charge" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Pasión por competir</span>
-                        </div>
+        <!--? MENU: SECCIONES DEL C3 -->
+        <section
+            class="relative min-h-[450px] flex items-center justify-center text-center"
+        >
+            <div
+                class="absolute inset-0 bg-[url('./assets/images/copa-img.png')] bg-cover bg-center"
+            ></div>
+            <div class="absolute inset-0 bg-black/50"></div>
 
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-rocket-takeoff" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.752 6.193c.599.6 1.73.437 2.528-.362s.96-1.932.362-2.531c-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532" />
-                                    <path
-                                        d="M15.811 3.312c-.363 1.534-1.334 3.626-3.64 6.218l-.24 2.408a2.56 2.56 0 0 1-.732 1.526L8.817 15.85a.51.51 0 0 1-.867-.434l.27-1.899c.04-.28-.013-.593-.131-.956a9 9 0 0 0-.249-.657l-.082-.202c-.815-.197-1.578-.662-2.191-1.277-.614-.615-1.079-1.379-1.275-2.195l-.203-.083a10 10 0 0 0-.655-.248c-.363-.119-.675-.172-.955-.132l-1.896.27A.51.51 0 0 1 .15 7.17l2.382-2.386c.41-.41.947-.67 1.524-.734h.006l2.4-.238C9.005 1.55 11.087.582 12.623.208c.89-.217 1.59-.232 2.08-.188.244.023.435.06.57.093q.1.026.16.045c.184.06.279.13.351.295l.029.073a3.5 3.5 0 0 1 .157.721c.055.485.051 1.178-.159 2.065m-4.828 7.475.04-.04-.107 1.081a1.54 1.54 0 0 1-.44.913l-1.298 1.3.054-.38c.072-.506-.034-.993-.172-1.418a9 9 0 0 0-.164-.45c.738-.065 1.462-.38 2.087-1.006M5.205 5c-.625.626-.94 1.351-1.004 2.09a9 9 0 0 0-.45-.164c-.424-.138-.91-.244-1.416-.172l-.38.054 1.3-1.3c.245-.246.566-.401.91-.44l1.08-.107zm9.406-3.961c-.38-.034-.967-.027-1.746.163-1.558.38-3.917 1.496-6.937 4.521-.62.62-.799 1.34-.687 2.051.107.676.483 1.362 1.048 1.928.564.565 1.25.941 1.924 1.049.71.112 1.429-.067 2.048-.688 3.079-3.083 4.192-5.444 4.556-6.987.183-.771.18-1.345.138-1.713a3 3 0 0 0-.045-.283 3 3 0 0 0-.3-.041Z" />
-                                    <path
-                                        d="M7.009 12.139a7.6 7.6 0 0 1-1.804-1.352A7.6 7.6 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Iniciativa</span>
-                        </div>
-
-
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-book-half" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Aprendizaje Continuo</span>
-                        </div>
-
-
-                        <div class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0">
-                            <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                    class="bi bi-shield" viewBox="0 0 16 16">
-                                    <path
-                                        d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
-                                </svg>
-                            </div>
-                            <span class="text-lg sm:text-xl font-extrabold tracking-wide">Honestidad</span>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <!--? PÚBLICOS -->
-            <section aria-label="Públicos">
-                
-                <h3 class="text-center text-3xl sm:text-4xl font-extrabold mb-10">PÚBLICOS</h3>
-
-                <div class="flex flex-wrap justify-center items-center md:justify-between gap-8 mx-auto">
-                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
-                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                class="bi bi-mortarboard" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z" />
-                                <path
-                                    d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-extrabold text-white/95 text-center">Bachillerato tech</span>
-                    </div>
-
-                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
-                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                class="bi bi-laptop" viewBox="0 0 16 16">
-                                <path
-                                    d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-extrabold text-white/95 text-center">Universitarios</span>
-                    </div>
-
-                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
-                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                class="bi bi-briefcase" viewBox="0 0 16 16">
-                                <path
-                                    d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-extrabold text-white/95 text-center">Empresas</span>
-                    </div>
-
-                    <div class="flex flex-col items-center gap-3 min-w-[140px]">
-                        <div class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" fill="currentColor"
-                                class="bi bi-globe-americas" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-extrabold text-white/95 text-center">Aliados</span>
-                    </div>
-                </div>
-            </section>
-
-                <!--! STATS SECTION -->
-        <div class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col items-center justify-center pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-    
-            <!-- Stats container -->
-            <div class="relative z-10 w-full h-auto sm:h-[40%] bg-gradient-to-r from-[#5c2b9c] to-[#004aad] flex flex-col sm:flex-row items-center justify-around px-4 sm:px-8 py-6 sm:py-0 mb-4 sm:mb-8 gap-4 sm:gap-0 text-white">
-                <div class="text-center">
-                    <p class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2">130</p>
-                    <p class="text-base sm:text-lg md:text-xl font-semibold">estudiantes</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2">30</p>
-                    <p class="text-base sm:text-lg md:text-xl font-semibold">instituciones</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2">10</p>
-                    <p class="text-base sm:text-lg md:text-xl font-semibold">patrocinadores</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2">300</p>
-                    <p class="text-base sm:text-lg md:text-xl font-semibold">envíos de problemas</p>
-                </div>
-            </div>
-        </div>
-    
-        <!--! TEAM SECTION -->
-        <section class="w-full bg-[#101728] text-white py-12 sm:py-16 md:py-20">
-            <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-12 sm:mb-16">
-                    UN EQUIPO EN EL QUE PUEDES CONFIAR
-                </h2>
-    
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Member 1 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/1.png" alt="Christopher Marroquín" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Christopher Marroquín</h3>
-                        <p class="text-white/90 text-sm sm:text-base">CEO</p>
-                    </div>
-    
-                    <!-- Member 2 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/2.png" alt="Roberto Polanco" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Roberto Polanco</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Líder de contenido, experiencia en IOI 2024</p>
-                    </div>
-    
-                    <!-- Member 3 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/3.png" alt="Oscar Pleités" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Oscar Pleités</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Miembro de contenido, escritor de problemas</p>
-                    </div>
-    
-                    <!-- Member 4 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/4.png" alt="Roberto Morán" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Roberto Morán</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Tecnología, desarrollo de la plataforma</p>
-                    </div>
-    
-                    <!-- Member 5 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/5.png" alt="Rodrigo López" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Rodrigo López</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Logística y finanzas</p>
-                    </div>
-    
-                    <!-- Member 6 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/6.png" alt="Maria Aparicio" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Maria Aparicio</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Operaciones</p>
-                    </div>
-    
-                    <!-- Member 7 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/7.png" alt="Diego Arévalo" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Diego Arévalo</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Full-stack developer</p>
-                    </div>
-    
-                    <!-- Member 8 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/8.png" alt="Javier Galdámez" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Javier Galdámez</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Comunidad</p>
-                    </div>
-    
-                    <!-- Member 9 -->
-                    <div class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center">
-                        <img src="./assets/images/9.png" alt="Fiorella Guzmán" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-2">Fiorella Guzmán</h3>
-                        <p class="text-white/90 text-sm sm:text-base">Marketing</p>
-                    </div>
+            <!-- PARTES DEL MENU -->
+            <div
+                class="relative z-10 mx-auto max-w-screen-xl w-full py-8 px-4 text-center lg:py-16 lg:px-12"
+            >
+                <h1
+                    class="mb-4 text-4xl font-extrabold text-white tracking-tighter md:text-5xl lg:text-6xl"
+                >
+                    ACERCA DEL C3
+                </h1>
+                <div class="flex flex-wrap justify-center gap-6 mt-8">
+                    <a
+                        href="#que-es"
+                        class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl"
+                    >
+                        ¿Qué es?
+                    </a>
+                    <a
+                        href="#historia"
+                        class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl"
+                    >
+                        Historia
+                    </a>
+                    <a
+                        href="#"
+                        class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl"
+                    >
+                        Logros
+                    </a>
+                    <a
+                        href="#"
+                        class="transition-all duration-500 text-white text-xl font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 py-3 rounded-full hover:scale-105 shadow-lg hover:shadow-2xl"
+                    >
+                        Miembros
+                    </a>
                 </div>
             </div>
         </section>
 
-        </div>
-    </section>
+        <!--! QUE ES -->
+        <section id="que-es" class="w-full bg-[#101728] text-white">
+            <div
+                class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
+            >
+                <!--? BOTON -->
+                <a
+                    href="#que-es"
+                    class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl mb-8"
+                >
+                    ¿Qué es?
+                </a>
 
-    <!--! HISTORIA  -->
-    <section id="historia" class="w-full bg-[#101728] text-white">
-        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-            <!--? BOTON -->
-            <a href="#" class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold
-                        bg-gradient-to-r from-[#5c2b9c] to-[#004aad]
-                        transition-all duration-500 
-                        hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl
-                        mb-8">
-                Historia
-            </a>
+                <!--? DEFINICIÓN -->
+                <header class="mb-12">
+                    <h2
+                        class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
+                    >
+                        Impulsar el talento joven
+                        <span
+                            class="block text-3xl sm:text-4xl md:text-5xl font-semibold opacity-80"
+                            >en tecnología</span
+                        >
+                    </h2>
+                </header>
 
-            <!--? TITULO -->
-            <header class="mb-8">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-                    Historia
-                </h2>
-                <p class="mt-2 text-white/80 max-w-2xl">Etapas clave del C3.</p>
-            </header>
-
-            <!--? LINEA DE TIEMPO -->
-            <div class="flex flex-col gap-8">
-
-                <!--? BLOQUE 1: 2024 -->
-                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm">
-                    <!--? Encabezado -->
-                    <div class="flex flex-wrap items-center justify-between gap-3">
-                        <div class="inline-flex items-center gap-2">
-                            <h3 class="text-xl sm:text-2xl font-extrabold">2024 — Punto de partida</h3>
-                        </div>
-                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
-                        bg-white/10 text-white/90">Fundación</span>
+                <div
+                    class="flex flex-col md:flex-row md:items-center lg:items-start gap-6 md:gap-8 lg:gap-12"
+                >
+                    <div class="flex-1 space-y-5 leading-relaxed text-white/90">
+                        <p class="text-lg sm:text-xl font-medium">
+                            El Competitive Coding Club (C3) es un centro de
+                            conexión de talento tecnológico, donde los jóvenes
+                            compiten, crecen y se conectan con oportunidades
+                            reales en la industria.
+                            <br />
+                            Nació como un espacio para fomentar la programación
+                            competitiva, pero hoy evoluciona hacia un
+                            emprendimiento EdTech que combina:
+                        </p>
+                        <ul class="space-y-2 text-lg sm:text-lg">
+                            <li>
+                                •
+                                <span class="font-semibold"
+                                    >Eventos competitivos</span
+                                >
+                                de alto nivel como la Copa Salvadoreña de
+                                Programación (CSP), hackathons y duelos.
+                            </li>
+                            <li>
+                                •
+                                <span class="font-semibold">Comunidad</span>
+                                tech joven, activa y colaborativa.
+                            </li>
+                            <li>
+                                •
+                                <span class="font-semibold"
+                                    >Próximamente, una Plataforma digital
+                                </span>
+                                que facilitará inscripciones, gestión de
+                                perfiles y retos.
+                            </li>
+                        </ul>
                     </div>
-                    <!--? Descripcion  -->
-                    <p class="mt-3 text-white/90">
-                        C3 surge para abrir un espacio de programación competitiva en El Salvador, iniciando en la
-                        universidad.
-                    </p>
+                    <!--? Imagen CIES -->
+                    <figure
+                        class="flex-1 max-w-full mx-auto self-center md:self-auto md:max-w-[420px] lg:max-w-[520px] self-start"
+                    >
+                        <img
+                            src="./assets/images/team-cies.jpeg"
+                            alt="Equipo C3"
+                            class="w-full max-h-[520px] h-auto rounded-[2rem] object-cover shadow-2xl"
+                        />
+                    </figure>
+                </div>
 
-                    <!--? Lista de sucesos / partes  -->
-                    <ul class="mt-4 space-y-3">
-                        <!--? Evento 1 - fundadores -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Equipo inicial de cuatro miembros</p>
-                                    <p class="text-white/80 text-sm">
-                                        Fundado por cuatro miembros: Diego, Pleites, Polanco y
-                                        Christopher. Los tres últimos, con experiencia en programación competitiva y
-                                        participación en Olimpiadas Internacionales de Informática.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <!--? Evento 2 - sesiones de entrenamiento -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Sesiones semanales de entrenamiento y formación</p>
-                                    <p class="text-white/80 text-sm">
-                                        Se impulsa la cultura de algoritmos y competencias en la universidad. Generando
-                                        interes y participación en la comunidad.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <!--? Evento 3 - vision nacional -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Visión de espacio nacional</p>
-                                    <p class="text-white/80 text-sm">
-                                        El enfoque creció: no solo crear cultura competitiva en la universidad, sino
-                                        también abrir un espacio nacional. De esta visión nació la idea de la Copa
-                                        Salvadoreña de Programación (CSP).
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </article>
+                <div class="my-12 h-px w-full bg-white/15"></div>
 
-
-                <!--? BLOQUE 2: 2025 -->
-                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm">
-                    <!--? Encabezado -->
-                    <div class="flex flex-wrap items-center justify-between gap-3">
-                        <div class="inline-flex items-center gap-2">
-                            <h3 class="text-xl sm:text-2xl font-extrabold">2025 — Crecimiento nacional</h3>
+                <!--? MISION Y VISION -->
+                <section
+                    id="mision-vision"
+                    aria-label="Misión y Visión"
+                    class="mb-12"
+                >
+                    <div class="flex flex-col lg:flex-row gap-10">
+                        <div class="flex-1">
+                            <h3
+                                class="text-3xl sm:text-4xl font-extrabold mb-4"
+                            >
+                                MISIÓN
+                            </h3>
+                            <p class="text-xl sm:text-2xl font-semibold">
+                                Potenciar el ecosistema tecnológico a través de
+                                eventos competitivos y una comunidad sólida que
+                                conecta a jóvenes con oportunidades reales
+                            </p>
                         </div>
-                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
-                        bg-white/10 text-white/90">CSP</span>
-                    </div>
-                    <!--? Descripcion  -->
-                    <p class="mt-3 text-white/90">
-                        Arranca la organización de la primera <span class="font-semibold">Copa Salvadoreña de
-                            Programación (CSP)</span> con apoyo universitario.
-                        Se estructura el equipo, se define el formato competitivo y se valida el modelo a nivel país.
-                    </p>
-
-                    <!--? Lista de sucesos / partes  -->
-                    <ul class="mt-4 space-y-3">
-                        <!--? Evento 1 - direccion  -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Dirección y contenido técnico</p>
-                                    <p class="text-white/80 text-sm"> <span class="font-semibold">Christopher</span>
-                                        lidera la coordinación general y producción del evento.
-                                        <span class="font-semibold">Pleites</span> y <span
-                                            class="font-semibold">Polanco</span> se encargan de contenido,
-                                        escritura de problemas y testing. <span class="font-semibold">Diego</span>
-                                        aporta soporte técnico.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <!--? Evento 2 - nuevos miembros  -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Equipo ampliado</p>
-                                    <p class="text-white/80 text-sm">
-                                        Se incorporan nuevos roles clave: <span class="font-semibold">Rober</span>
-                                        (técnico),
-                                        <span class="font-semibold">Javi</span> (comunidad), <span
-                                            class="font-semibold">Celeste</span> (operaciones),
-                                        <span class="font-semibold">Rodrigo</span> (logística) y <span
-                                            class="font-semibold">Fiorella</span> (marketing).
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <!--? Evento 3 - formato  -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Formato competitivo</p>
-                                    <p class="text-white/80 text-sm">
-                                        Clasificatorias y fase final presencial con problemas algorítmicos de distintas
-                                        dificultades,
-                                        tiempo cronometrado y tablero en vivo. Enfoque en precisión, estrategia y
-                                        trabajo bajo presión.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <!--? Evento 4 - alcance  -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Alcance e impacto</p>
-                                    <p class="text-white/80 text-sm">
-                                        Participación de <span class="font-semibold">+130</span> estudiantes de
-                                        <span class="font-semibold">+30</span> universidades/centros; más de
-                                        <span class="font-semibold">400</span> soluciones evaluadas.
-                                        La CSP se posiciona como <span class="font-semibold">hito nacional para
-                                            competencias de programación</span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </article>
-
-                <!--? BLOQUE 3: 2026 -->
-                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm">
-                    <!--? Encabezado -->
-                    <div class="flex flex-wrap items-center justify-between gap-3">
-                        <div class="inline-flex items-center gap-2">
-                            <h3 class="text-xl sm:text-2xl font-extrabold">2026 — El futuro </h3>
+                        <div class="flex-1">
+                            <h3
+                                class="text-3xl sm:text-4xl font-extrabold mb-4"
+                            >
+                                VISIÓN
+                            </h3>
+                            <p class="text-xl sm:text-2xl font-semibold">
+                                Ser el referente en competencias tecnológicas en
+                                la región, consolidándonos como un puente
+                                reconocido para descubrir y conectar talento
+                            </p>
                         </div>
-                        <span class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
-                        bg-white/10 text-white/90">Roadmap</span>
                     </div>
-                    <!--? Descripcion  -->
-                    <p class="mt-3 text-white/90">
-                        Escalar impacto con nuevos formatos y producto digital.
-                    </p>
+                </section>
 
-                    <!--? Lista de sucesos / partes  -->
-                    <ul class="mt-4 space-y-3">
-                        <!--? Evento 1 -- hackathon -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Hackathon C3 y eventos de comunidad</p>
-                                    <p class="text-white/80 text-sm">Expansión del calendario competitivo y de
-                                        networking.</p>
+                <!--? VALORES -->
+                <section aria-label="Valores" class="mb-12">
+                    <h3
+                        class="text-center text-3xl sm:text-4xl font-extrabold mb-6"
+                    >
+                        VALORES
+                    </h3>
+
+                    <div
+                        class="rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8]"
+                    >
+                        <div
+                            class="flex flex-wrap justify-center md:justify-between gap-10"
+                        >
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-trophy"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1q.01.775.056 1.469c.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.5.5 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667q.045-.694.056-1.469z"
+                                        />
+                                    </svg>
                                 </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Excelencia</span
+                                >
                             </div>
-                        </li>
-                        <!--? Evento 2 -- plataforma digital -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Plataforma digital</p>
-                                    <p class="text-white/80 text-sm">Perfiles, retos y certificaciones orientadas a
-                                        industria.</p>
+
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-people"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"
+                                        />
+                                    </svg>
                                 </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Colaboración</span
+                                >
                             </div>
-                        </li>
-                        <!--? Evento 3 -- Escalamiento -->
-                        <li
-                            class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-1">
-                                    <p class="font-semibold">Escalamiento regional</p>
-                                    <p class="text-white/80 text-sm">Conectar talento centroamericano con empresas
-                                        tecnológicas.</p>
+
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-lightning-charge"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z"
+                                        />
+                                    </svg>
                                 </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Pasión por competir</span
+                                >
                             </div>
-                        </li>
-                    </ul>
-                </article>
+
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-rocket-takeoff"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M9.752 6.193c.599.6 1.73.437 2.528-.362s.96-1.932.362-2.531c-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532"
+                                        />
+                                        <path
+                                            d="M15.811 3.312c-.363 1.534-1.334 3.626-3.64 6.218l-.24 2.408a2.56 2.56 0 0 1-.732 1.526L8.817 15.85a.51.51 0 0 1-.867-.434l.27-1.899c.04-.28-.013-.593-.131-.956a9 9 0 0 0-.249-.657l-.082-.202c-.815-.197-1.578-.662-2.191-1.277-.614-.615-1.079-1.379-1.275-2.195l-.203-.083a10 10 0 0 0-.655-.248c-.363-.119-.675-.172-.955-.132l-1.896.27A.51.51 0 0 1 .15 7.17l2.382-2.386c.41-.41.947-.67 1.524-.734h.006l2.4-.238C9.005 1.55 11.087.582 12.623.208c.89-.217 1.59-.232 2.08-.188.244.023.435.06.57.093q.1.026.16.045c.184.06.279.13.351.295l.029.073a3.5 3.5 0 0 1 .157.721c.055.485.051 1.178-.159 2.065m-4.828 7.475.04-.04-.107 1.081a1.54 1.54 0 0 1-.44.913l-1.298 1.3.054-.38c.072-.506-.034-.993-.172-1.418a9 9 0 0 0-.164-.45c.738-.065 1.462-.38 2.087-1.006M5.205 5c-.625.626-.94 1.351-1.004 2.09a9 9 0 0 0-.45-.164c-.424-.138-.91-.244-1.416-.172l-.38.054 1.3-1.3c.245-.246.566-.401.91-.44l1.08-.107zm9.406-3.961c-.38-.034-.967-.027-1.746.163-1.558.38-3.917 1.496-6.937 4.521-.62.62-.799 1.34-.687 2.051.107.676.483 1.362 1.048 1.928.564.565 1.25.941 1.924 1.049.71.112 1.429-.067 2.048-.688 3.079-3.083 4.192-5.444 4.556-6.987.183-.771.18-1.345.138-1.713a3 3 0 0 0-.045-.283 3 3 0 0 0-.3-.041Z"
+                                        />
+                                        <path
+                                            d="M7.009 12.139a7.6 7.6 0 0 1-1.804-1.352A7.6 7.6 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z"
+                                        />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Iniciativa</span
+                                >
+                            </div>
+
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-book-half"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"
+                                        />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Aprendizaje Continuo</span
+                                >
+                            </div>
+
+                            <div
+                                class="flex flex-col items-center text-center basis-full sm:basis-4/5 md:basis-1/4 grow-0"
+                            >
+                                <div
+                                    class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="55%"
+                                        height="55%"
+                                        fill="currentColor"
+                                        class="bi bi-shield"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"
+                                        />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="text-lg sm:text-xl font-extrabold tracking-wide"
+                                    >Honestidad</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--? PÚBLICOS -->
+                <section aria-label="Públicos">
+                    <h3
+                        class="text-center text-3xl sm:text-4xl font-extrabold mb-10"
+                    >
+                        PÚBLICOS
+                    </h3>
+
+                    <div
+                        class="flex flex-wrap justify-center items-center md:justify-between gap-8 mx-auto"
+                    >
+                        <div
+                            class="flex flex-col items-center gap-3 min-w-[140px]"
+                        >
+                            <div
+                                class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="55%"
+                                    height="55%"
+                                    fill="currentColor"
+                                    class="bi bi-mortarboard"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"
+                                    />
+                                    <path
+                                        d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"
+                                    />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-lg font-extrabold text-white/95 text-center"
+                                >Bachillerato tech</span
+                            >
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center gap-3 min-w-[140px]"
+                        >
+                            <div
+                                class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="55%"
+                                    height="55%"
+                                    fill="currentColor"
+                                    class="bi bi-laptop"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5"
+                                    />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-lg font-extrabold text-white/95 text-center"
+                                >Universitarios</span
+                            >
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center gap-3 min-w-[140px]"
+                        >
+                            <div
+                                class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="55%"
+                                    height="55%"
+                                    fill="currentColor"
+                                    class="bi bi-briefcase"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"
+                                    />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-lg font-extrabold text-white/95 text-center"
+                                >Empresas</span
+                            >
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center gap-3 min-w-[140px]"
+                        >
+                            <div
+                                class="h-20 w-20 rounded-full bg-[#1a1a4a]/70 flex items-center justify-center"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="55%"
+                                    height="55%"
+                                    fill="currentColor"
+                                    class="bi bi-globe-americas"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"
+                                    />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-lg font-extrabold text-white/95 text-center"
+                                >Aliados</span
+                            >
+                        </div>
+                    </div>
+                </section>
+
+                <!--! STATS SECTION -->
+                <div
+                    class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col items-center justify-center pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 mt-24"
+                >
+                    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+                    <!-- Stats container -->
+                    <div
+                        class="relative z-10 w-full h-auto sm:h-[40%] bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] flex flex-col sm:flex-row items-center justify-around px-4 sm:px-8 py-6 sm:py-0 mb-4 sm:mb-8 gap-4 sm:gap-0 text-white"
+                    >
+                        <div class="text-center">
+                            <p
+                                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2"
+                            >
+                                130
+                            </p>
+                            <p
+                                class="text-base sm:text-lg md:text-xl font-semibold"
+                            >
+                                estudiantes
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p
+                                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2"
+                            >
+                                30
+                            </p>
+                            <p
+                                class="text-base sm:text-lg md:text-xl font-semibold"
+                            >
+                                instituciones
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p
+                                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2"
+                            >
+                                10
+                            </p>
+                            <p
+                                class="text-base sm:text-lg md:text-xl font-semibold"
+                            >
+                                patrocinadores
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p
+                                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2"
+                            >
+                                300
+                            </p>
+                            <p
+                                class="text-base sm:text-lg md:text-xl font-semibold"
+                            >
+                                envíos de problemas
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--! TEAM SECTION -->
+                <section
+                    class="w-full bg-[#101728] text-white py-12 sm:pt-16 md:pt-20"
+                >
+                    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-12 sm:mb-16"
+                        >
+                            UN EQUIPO EN EL QUE PUEDES CONFIAR
+                        </h2>
+
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+                        >
+                            <!-- Member 1 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/1.png"
+                                    alt="Christopher Marroquín"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Christopher Marroquín
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    CEO
+                                </p>
+                            </div>
+
+                            <!-- Member 2 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/2.png"
+                                    alt="Roberto Polanco"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Roberto Polanco
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Líder de contenido, experiencia en IOI 2024
+                                </p>
+                            </div>
+
+                            <!-- Member 3 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/3.png"
+                                    alt="Oscar Pleités"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Oscar Pleités
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Miembro de contenido, escritor de problemas
+                                </p>
+                            </div>
+
+                            <!-- Member 4 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/4.png"
+                                    alt="Roberto Morán"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Roberto Morán
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Tecnología, desarrollo de la plataforma
+                                </p>
+                            </div>
+
+                            <!-- Member 5 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/5.png"
+                                    alt="Rodrigo López"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Rodrigo López
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Logística y finanzas
+                                </p>
+                            </div>
+
+                            <!-- Member 6 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/6.png"
+                                    alt="Maria Aparicio"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Maria Aparicio
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Operaciones
+                                </p>
+                            </div>
+
+                            <!-- Member 7 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/7.png"
+                                    alt="Diego Arévalo"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Diego Arévalo
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Full-stack developer
+                                </p>
+                            </div>
+
+                            <!-- Member 8 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/8.png"
+                                    alt="Javier Galdámez"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Javier Galdámez
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Comunidad
+                                </p>
+                            </div>
+
+                            <!-- Member 9 -->
+                            <div
+                                class="bg-[#464577] rounded-2xl p-6 flex flex-col items-center text-center"
+                            >
+                                <img
+                                    src="./assets/images/9.png"
+                                    alt="Fiorella Guzmán"
+                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-4"
+                                />
+                                <h3 class="text-xl sm:text-2xl font-bold mb-2">
+                                    Fiorella Guzmán
+                                </h3>
+                                <p class="text-white/90 text-sm sm:text-base">
+                                    Marketing
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
 
+        <!--! HISTORIA  -->
+        <section id="historia" class="w-full bg-[#101728] text-white">
+            <div
+                class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16"
+            >
+                <!--? BOTON -->
+                <a
+                    href="#"
+                    class="inline-flex w-max items-center gap-2 rounded-full px-6 py-3 text-base font-extrabold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 shadow-lg hover:shadow-2xl mb-8"
+                >
+                    Historia
+                </a>
+
+                <!--? TITULO -->
+                <header class="mb-8">
+                    <h2
+                        class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
+                    >
+                        Historia
+                    </h2>
+                    <p class="mt-2 text-white/80 max-w-2xl">
+                        Etapas clave del C3.
+                    </p>
+                </header>
+
+                <!--? LINEA DE TIEMPO -->
+                <div class="flex flex-col gap-8">
+                    <!--? BLOQUE 1: 2024 -->
+                    <article
+                        class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm"
+                    >
+                        <!--? Encabezado -->
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                        >
+                            <div class="inline-flex items-center gap-2">
+                                <h3 class="text-xl sm:text-2xl font-extrabold">
+                                    2024 — Punto de partida
+                                </h3>
+                            </div>
+                            <span
+                                class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide bg-white/10 text-white/90"
+                                >Fundación</span
+                            >
+                        </div>
+                        <!--? Descripcion  -->
+                        <p class="mt-3 text-white/90">
+                            C3 surge para abrir un espacio de programación
+                            competitiva en El Salvador, iniciando en la
+                            universidad.
+                        </p>
+
+                        <!--? Lista de sucesos / partes  -->
+                        <ul class="mt-4 space-y-3">
+                            <!--? Evento 1 - fundadores -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Equipo inicial de cuatro miembros
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Fundado por cuatro miembros: Diego,
+                                            Pleites, Polanco y Christopher. Los
+                                            tres últimos, con experiencia en
+                                            programación competitiva y
+                                            participación en Olimpiadas
+                                            Internacionales de Informática.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 2 - sesiones de entrenamiento -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Sesiones semanales de entrenamiento
+                                            y formación
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Se impulsa la cultura de algoritmos
+                                            y competencias en la universidad.
+                                            Generando interes y participación en
+                                            la comunidad.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 3 - vision nacional -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Visión de espacio nacional
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            El enfoque creció: no solo crear
+                                            cultura competitiva en la
+                                            universidad, sino también abrir un
+                                            espacio nacional. De esta visión
+                                            nació la idea de la Copa Salvadoreña
+                                            de Programación (CSP).
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!--? BLOQUE 2: 2025 -->
+                    <article
+                        class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm"
+                    >
+                        <!--? Encabezado -->
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                        >
+                            <div class="inline-flex items-center gap-2">
+                                <h3 class="text-xl sm:text-2xl font-extrabold">
+                                    2025 — Crecimiento nacional
+                                </h3>
+                            </div>
+                            <span
+                                class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide bg-white/10 text-white/90"
+                                >CSP</span
+                            >
+                        </div>
+                        <!--? Descripcion  -->
+                        <p class="mt-3 text-white/90">
+                            Arranca la organización de la primera
+                            <span class="font-semibold"
+                                >Copa Salvadoreña de Programación (CSP)</span
+                            >
+                            con apoyo universitario. Se estructura el equipo, se
+                            define el formato competitivo y se valida el modelo
+                            a nivel país.
+                        </p>
+
+                        <!--? Lista de sucesos / partes  -->
+                        <ul class="mt-4 space-y-3">
+                            <!--? Evento 1 - direccion  -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Dirección y contenido técnico
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            <span class="font-semibold"
+                                                >Christopher</span
+                                            >
+                                            lidera la coordinación general y
+                                            producción del evento.
+                                            <span class="font-semibold"
+                                                >Pleites</span
+                                            >
+                                            y
+                                            <span class="font-semibold"
+                                                >Polanco</span
+                                            >
+                                            se encargan de contenido, escritura
+                                            de problemas y testing.
+                                            <span class="font-semibold"
+                                                >Diego</span
+                                            >
+                                            aporta soporte técnico.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 2 - nuevos miembros  -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Equipo ampliado
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Se incorporan nuevos roles clave:
+                                            <span class="font-semibold"
+                                                >Rober</span
+                                            >
+                                            (técnico),
+                                            <span class="font-semibold"
+                                                >Javi</span
+                                            >
+                                            (comunidad),
+                                            <span class="font-semibold"
+                                                >Celeste</span
+                                            >
+                                            (operaciones),
+                                            <span class="font-semibold"
+                                                >Rodrigo</span
+                                            >
+                                            (logística) y
+                                            <span class="font-semibold"
+                                                >Fiorella</span
+                                            >
+                                            (marketing).
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 3 - formato  -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Formato competitivo
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Clasificatorias y fase final
+                                            presencial con problemas
+                                            algorítmicos de distintas
+                                            dificultades, tiempo cronometrado y
+                                            tablero en vivo. Enfoque en
+                                            precisión, estrategia y trabajo bajo
+                                            presión.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 4 - alcance  -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Alcance e impacto
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Participación de
+                                            <span class="font-semibold"
+                                                >+130</span
+                                            >
+                                            estudiantes de
+                                            <span class="font-semibold"
+                                                >+30</span
+                                            >
+                                            universidades/centros; más de
+                                            <span class="font-semibold"
+                                                >400</span
+                                            >
+                                            soluciones evaluadas. La CSP se
+                                            posiciona como
+                                            <span class="font-semibold"
+                                                >hito nacional para competencias
+                                                de programación</span
+                                            >.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!--? BLOQUE 3: 2026 -->
+                    <article
+                        class="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur-sm"
+                    >
+                        <!--? Encabezado -->
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                        >
+                            <div class="inline-flex items-center gap-2">
+                                <h3 class="text-xl sm:text-2xl font-extrabold">
+                                    2026 — El futuro
+                                </h3>
+                            </div>
+                            <span
+                                class="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide bg-white/10 text-white/90"
+                                >Roadmap</span
+                            >
+                        </div>
+                        <!--? Descripcion  -->
+                        <p class="mt-3 text-white/90">
+                            Escalar impacto con nuevos formatos y producto
+                            digital.
+                        </p>
+
+                        <!--? Lista de sucesos / partes  -->
+                        <ul class="mt-4 space-y-3">
+                            <!--? Evento 1 -- hackathon -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Hackathon C3 y eventos de comunidad
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Expansión del calendario competitivo
+                                            y de networking.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 2 -- plataforma digital -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Plataforma digital
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Perfiles, retos y certificaciones
+                                            orientadas a industria.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--? Evento 3 -- Escalamiento -->
+                            <li
+                                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition-colors"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">
+                                            Escalamiento regional
+                                        </p>
+                                        <p class="text-white/80 text-sm">
+                                            Conectar talento centroamericano con
+                                            empresas tecnológicas.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer
+            class="relative text-white h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4 flex-shrink-0"
+        >
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <p
+                class="z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center"
+            >
+                © 2025 Competitive Coding Club. Todos los derechos reservados.
+            </p>
+        </footer>
+    </body>
 </html>

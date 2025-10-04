@@ -15,12 +15,9 @@
     <body
         class="text-white overflow-x-hidden"
     >
-        <div class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-
-            <header
-                class="relative z-10 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
-            >
+        <header
+            class="fixed top-0 left-0 right-0 z-50 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+        >
                 <div class="px-4 py-2">
                     <img
                         src="./assets/images/logo-c3.jpeg"
@@ -55,7 +52,10 @@
                         >Contáctanos</a
                     >
                 </nav>
-            </header>
+        </header>
+
+        <div class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
 
             <main class="relative z-10 flex flex-1">
                 <section

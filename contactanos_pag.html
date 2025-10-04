@@ -1,100 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-<header class="flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
-        <div class="px-4 py-2">
-            <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <header
+            class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+        >
+            <div class="px-4 py-2">
+                <img
+                    src="./assets/images/logo-c3.jpeg"
+                    alt="C3 Logo"
+                    class="h-14 w-14 rounded-full object-cover"
+                />
+            </div>
+
+            <!-- Hamburger button -->
+            <button
+                id="menu-toggle"
+                class="md:hidden px-4 py-2 text-white focus:outline-none"
+            >
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    />
+                </svg>
+            </button>
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex h-full">
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Eventos</a
+                >
+                <a
+                    href="contactanos_pag.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
+                    >Login</a
+                >
+            </nav>
+
+            <!-- Mobile nav -->
+            <nav
+                id="mobile-menu"
+                class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col"
+            >
+                <a
+                    href="index.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Inicio</a
+                >
+                <a
+                    href="about.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Sobre el C3</a
+                >
+                <a
+                    href="events.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Eventos</a
+                >
+                <a
+                    href="contactanos_pag.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Contáctanos</a
+                >
+                <a
+                    href="login.html"
+                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                    >Login</a
+                >
+            </nav>
+        </header>
+
+        <script>
+            // Toggle mobile menu
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+                mobileMenu.classList.toggle("flex");
+            });
+        </script>
+
+        <div
+            class="min-h-screen bg-[#0c1220] text-white grid grid-cols-1 md:grid-cols-[3fr_1fr]"
+        >
+            <!-- Columna formulario -->
+            <div class="flex flex-col items-center justify-center p-6">
+                <!-- Título -->
+                <h1
+                    class="text-2xl md:text-3xl font-extrabold mb-6 text-center"
+                >
+                    FORMULARIO DE CONTACTO
+                </h1>
+
+                <!-- Card del formulario -->
+                <div
+                    class="bg-gradient-to-r from-blue-700 to-purple-700 p-[20px] rounded-3xl shadow-lg w-full max-w-lg"
+                >
+                    <div class="bg-white rounded-2xl p-6 md:p-8 text-black">
+                        <!-- Nombre -->
+                        <div class="mb-4">
+                            <label
+                                for="name"
+                                class="block font-semibold text-gray-700 mb-1"
+                                >Nombre:</label
+                            >
+                            <input
+                                type="text"
+                                id="name"
+                                class="w-full rounded-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            />
+                        </div>
+
+                        <!-- Correo -->
+                        <div class="mb-4">
+                            <label
+                                for="email"
+                                class="block font-semibold text-gray-700 mb-1"
+                                >Correo electrónico:</label
+                            >
+                            <input
+                                type="email"
+                                id="email"
+                                class="w-full rounded-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            />
+                        </div>
+
+                        <!-- Mensaje -->
+                        <div class="mb-4">
+                            <label
+                                for="message"
+                                class="block font-semibold text-gray-700 mb-1"
+                                >Mensaje:</label
+                            >
+                            <textarea
+                                id="message"
+                                rows="3"
+                                class="w-full rounded-md px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            ></textarea>
+                        </div>
+
+                        <!-- Radios -->
+                        <div
+                            class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6"
+                        >
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    type="radio"
+                                    name="rol"
+                                    value="participante"
+                                    class="text-purple-600 focus:ring-purple-500"
+                                />
+                                <span>Participante</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    type="radio"
+                                    name="rol"
+                                    value="patrocinador"
+                                    class="text-purple-600 focus:ring-purple-500"
+                                />
+                                <span>Patrocinador</span>
+                            </label>
+                        </div>
+
+                        <!-- Botón -->
+                        <button
+                            class="w-full bg-gradient-to-r from-blue-700 to-purple-700 text-white font-semibold py-2 rounded-full hover:opacity-90 transition"
+                        >
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna lateral redes -->
+            <div
+                class="bg-gradient-to-b from-purple-800 to-blue-700 flex flex-row md:flex-col items-center justify-center space-x-8 md:space-x-0 md:space-y-10 p-4"
+            >
+                <!-- Instagram -->
+                <a
+                    href="https://www.instagram.com/c3.elsalvador?igsh=MTBoY2N3NGZ2b3c0aw%3D%3D&utm_source=qr"
+                    target="_blank"
+                    class="hover:opacity-80"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        class="w-5 h-5 md:w-16 md:h-16"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.75-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"
+                        />
+                    </svg>
+                </a>
+                <!-- LinkedIn -->
+                <a
+                    href="https://www.linkedin.com/company/competitive-coding-club-c3/"
+                    target="_blank"
+                    class="hover:opacity-80"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        class="w-5 h-5 md:w-16 md:h-16"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            d="M20.447 20.452h-3.554v-5.568c0-1.328-.027-3.039-1.852-3.039-1.853 0-2.136 1.446-2.136 2.939v5.668h-3.554V9h3.413v1.561h.049c.477-.9 1.637-1.852 3.369-1.852 3.598 0 4.263 2.368 4.263 5.448v6.295zM5.337 7.433c-1.144 0-2.067-.926-2.067-2.067a2.07 2.07 0 1 1 2.067 2.067zM3.56 20.452h3.554V9H3.56v11.452z"
+                        />
+                    </svg>
+                </a>
+            </div>
         </div>
-        <nav class="flex h-full">
-            <a href="index.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
-            <a href="login.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
-            <a href="about.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre el C3</a>
-            <a href="#events" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
-            <a href="contactanos_pag.html" class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
-        </nav>
-</header>
-
-<div class="min-h-screen bg-[#0c1220] text-white grid grid-cols-1 md:grid-cols-[3fr_1fr]">
-  <!-- Columna formulario -->
-  <div class="flex flex-col items-center justify-center p-6">
-    <!-- Título -->
-    <h1 class="text-2xl md:text-3xl font-extrabold mb-6 text-center">FORMULARIO DE CONTACTO</h1>
-
-    <!-- Card del formulario -->
-    <div class="bg-gradient-to-r from-blue-700 to-purple-700 p-[20px] rounded-3xl shadow-lg w-full max-w-lg">
-      <div class="bg-white rounded-2xl p-6 md:p-8 text-black">
-        
-        <!-- Nombre -->
-        <div class="mb-4">
-          <label for="name" class="block font-semibold text-gray-700 mb-1">Nombre:</label>
-          <input type="text" id="name" class="w-full rounded-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-        </div>
-        
-        <!-- Correo -->
-        <div class="mb-4">
-          <label for="email" class="block font-semibold text-gray-700 mb-1">Correo electrónico:</label>
-          <input type="email" id="email" class="w-full rounded-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-        </div>
-        
-        <!-- Mensaje -->
-        <div class="mb-4">
-          <label for="message" class="block font-semibold text-gray-700 mb-1">Mensaje:</label>
-          <textarea id="message" rows="3" class="w-full rounded-md px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-        </div>
-        
-        <!-- Radios -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="rol" value="participante" class="text-purple-600 focus:ring-purple-500" />
-            <span>Participante</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="rol" value="patrocinador" class="text-purple-600 focus:ring-purple-500" />
-            <span>Patrocinador</span>
-          </label>
-        </div>
-        
-        <!-- Botón -->
-        <button class="w-full bg-gradient-to-r from-blue-700 to-purple-700 text-white font-semibold py-2 rounded-full hover:opacity-90 transition">
-          Enviar
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Columna lateral redes -->
-  <div class="bg-gradient-to-b from-purple-800 to-blue-700 flex flex-row md:flex-col items-center justify-center space-x-8 md:space-x-0 md:space-y-10 p-4">
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/tu_pagina" target="_blank" class="hover:opacity-80">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 md:w-16 md:h-16" viewBox="0 0 24 24">
-        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.75-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/>
-      </svg>
-    </a>
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/tu_pagina" target="_blank" class="hover:opacity-80">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 md:w-16 md:h-16" viewBox="0 0 24 24">
-        <path d="M20.447 20.452h-3.554v-5.568c0-1.328-.027-3.039-1.852-3.039-1.853 0-2.136 1.446-2.136 2.939v5.668h-3.554V9h3.413v1.561h.049c.477-.9 1.637-1.852 3.369-1.852 3.598 0 4.263 2.368 4.263 5.448v6.295zM5.337 7.433c-1.144 0-2.067-.926-2.067-2.067a2.07 2.07 0 1 1 2.067 2.067zM3.56 20.452h3.554V9H3.56v11.452z"/>
-      </svg>
-    </a>
-    <!-- Discord -->
-    <a href="https://discord.gg/tuserver" target="_blank" class="hover:opacity-80">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 md:w-16 md:h-16" viewBox="0 0 24 24">
-        <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515..."/>
-      </svg>
-    </a>
-  </div>
-</div>
-
-
-
-
-
-</body>
+        <!-- Footer -->
+        <footer
+            class="relative h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4"
+        >
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <p
+                class="relative z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center"
+            >
+                © 2025 Competitive Coding Club. Todos los derechos reservados.
+            </p>
+        </footer>
+    </body>
 </html>

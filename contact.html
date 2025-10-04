@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Contáctanos</title>
         <link rel="stylesheet" href="css/style.css" />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
@@ -57,7 +57,7 @@
                     >Eventos</a
                 >
                 <a
-                    href="contactanos_pag.html"
+                    href="contact.html"
                     class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
                     >Contáctanos</a
                 >
@@ -89,7 +89,7 @@
                     >Eventos</a
                 >
                 <a
-                    href="contactanos_pag.html"
+                    href="contact.html"
                     class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
                     >Contáctanos</a
                 >
@@ -125,8 +125,10 @@
                 </h1>
 
                 <!-- Card del formulario -->
-                <div
-                    class="bg-gradient-to-r from-blue-700 to-purple-700 p-[20px] rounded-3xl shadow-lg w-full max-w-lg"
+                <form
+                    action="#"
+                    method="POST"
+                    class="bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] p-[20px] rounded-3xl shadow-lg w-full max-w-lg"
                 >
                     <div class="bg-white rounded-2xl p-6 md:p-8 text-black">
                         <!-- Nombre -->
@@ -140,6 +142,7 @@
                                 type="text"
                                 id="name"
                                 class="w-full rounded-lg px-4 py-2 border border-gray-300 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                required
                             />
                         </div>
 
@@ -153,6 +156,7 @@
                             <input
                                 type="email"
                                 id="email"
+                                required
                                 class="w-full rounded-lg px-4 py-2 border border-gray-300 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
                             />
                         </div>
@@ -167,6 +171,7 @@
                             <textarea
                                 id="message"
                                 rows="3"
+                                required
                                 class="w-full rounded-md px-4 py-2 border border-gray-300 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
                             ></textarea>
                         </div>
@@ -186,6 +191,7 @@
                             </label>
                             <label class="flex items-center space-x-2">
                                 <input
+                                    required
                                     type="radio"
                                     name="rol"
                                     value="patrocinador"
@@ -197,17 +203,18 @@
 
                         <!-- Botón -->
                         <button
-                            class="w-full bg-gradient-to-r from-[#5c2b9c] to-[#004aad] text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                            class="w-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                            type="submit"
                         >
                             Enviar
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Columna lateral redes -->
             <div
-                class="bg-gradient-to-b from-purple-800 to-blue-700 flex flex-row md:flex-col items-center justify-center space-x-8 md:space-x-0 md:space-y-10 p-4"
+                class="bg-gradient-to-b from-[#408cd3] to-[#3f3dc8] flex flex-row md:flex-col items-center justify-center space-x-8 md:space-x-0 md:space-y-10 p-4"
             >
                 <!-- Instagram -->
                 <a
@@ -247,7 +254,7 @@
         </div>
         <!-- Footer -->
         <footer
-            class="relative h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4"
+            class="text-white relative h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4"
         >
             <div class="absolute inset-0 bg-black opacity-60"></div>
             <p

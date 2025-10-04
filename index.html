@@ -13,12 +13,13 @@
     </head>
 
     <body
-        class="flex flex-col h-screen w-screen bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed text-white relative"
+        class="text-white overflow-x-hidden"
     >
-        <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
-        <div class="relative z-10 flex flex-col h-full">
+        <div class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+
             <header
-                class="flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+                class="relative z-10 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
             >
                 <div class="px-4 py-2">
                     <img
@@ -55,7 +56,8 @@
                     >
                 </nav>
             </header>
-            <main class="flex flex-1">
+
+            <main class="relative z-10 flex flex-1">
                 <section
                     class="flex-[4] flex flex-col justify-end items-center pb-16"
                 >
@@ -83,6 +85,14 @@
                     </button>
                 </section>
             </main>
+        </div>
+
+        <!-- Second section - 100vh -->
+        <div class="h-screen w-full bg-[#101728] flex items-center justify-center">
+            <div class="text-center">
+                <h2 class="text-4xl font-extrabold mb-4">Second Section</h2>
+                <p class="text-xl text-white/80">Content goes here</p>
+            </div>
         </div>
     </body>
 </html>

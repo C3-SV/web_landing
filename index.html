@@ -16,7 +16,7 @@
         class="text-white overflow-x-hidden"
     >
         <header
-            class="fixed top-0 left-0 right-0 z-50 flex flex-8 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
+            class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
         >
                 <div class="px-4 py-2">
                     <img
@@ -25,7 +25,16 @@
                         class="h-14 w-14 rounded-full object-cover"
                     />
                 </div>
-                <nav class="flex h-full">
+
+                <!-- Hamburger button -->
+                <button id="menu-toggle" class="md:hidden px-4 py-2 text-white focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <!-- Desktop nav -->
+                <nav class="hidden md:flex h-full">
                     <a
                         href="index.html"
                         class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
@@ -52,7 +61,47 @@
                         >Contáctanos</a
                     >
                 </nav>
+
+                <!-- Mobile nav -->
+                <nav id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col">
+                    <a
+                        href="index.html"
+                        class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                        >Inicio</a
+                    >
+                    <a
+                        href="login.html"
+                        class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                        >Login</a
+                    >
+                    <a
+                        href="about.html"
+                        class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                        >Sobre el C3</a
+                    >
+                    <a
+                        href="events.html"
+                        class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                        >Eventos</a
+                    >
+                    <a
+                        href="contactanos_pag.html"
+                        class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
+                        >Contáctanos</a
+                    >
+                </nav>
         </header>
+
+        <script>
+            // Toggle mobile menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        </script>
 
         <div class="relative h-screen w-full bg-[url('./assets/images/picture-landing.webp')] bg-cover bg-center bg-no-repeat bg-fixed flex flex-col">
             <div class="absolute inset-0 bg-black opacity-50"></div>

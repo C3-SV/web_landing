@@ -1,463 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Competitive Coding Club</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            type="image/x-icon"
-            href="assets/images/logo-c3.jpeg"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="flex flex-col h-screen">
-        <header
-            class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]"
-        >
-            <div class="px-4 py-2">
-                <img
-                    src="./assets/images/logo-c3.jpeg"
-                    alt="C3 Logo"
-                    class="h-14 w-14 rounded-full object-cover"
-                />
-            </div>
 
-            <!-- Hamburger button -->
-            <button
-                id="menu-toggle"
-                class="md:hidden px-4 py-2 text-white focus:outline-none"
-            >
-                <svg
-                    class="w-8 h-8"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                    />
-                </svg>
-            </button>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Competitive Coding Club</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/images/logo-c3.jpeg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-            <nav class="hidden md:flex h-full">
-                <a
-                    href="index.html"
-                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                    >Inicio</a
-                >
-                <a
-                    href="about.html"
-                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                    >Sobre el C3</a
-                >
-                <a
-                    href="events.html"
-                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                    >Eventos</a
-                >
-                <a
-                    href="contact.html"
-                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                    >Contáctanos</a
-                >
-                <a
-                    href="login.html"
-                    class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30"
-                    >Login</a
-                >
-            </nav>
+<body class="flex flex-col h-screen">
+    <header
+        class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
+        <div class="px-4 py-2">
+            <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover" />
+        </div>
 
-            <nav
-                id="mobile-menu"
-                class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col"
-            >
-                <a
-                    href="index.html"
-                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
-                    >Inicio</a
-                >
-                <a
-                    href="about.html"
-                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
-                    >Sobre el C3</a
-                >
-                <a
-                    href="events.html"
-                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
-                    >Eventos</a
-                >
-                <a
-                    href="contact.html"
-                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
-                    >Contáctanos</a
-                >
-                <a
-                    href="login.html"
-                    class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10"
-                    >Login</a
-                >
-            </nav>
-        </header>
+        <!-- Hamburger button -->
+        <button id="menu-toggle" class="md:hidden px-4 py-2 text-white focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
 
-        <script>
-            // Toggle mobile menu
-            const menuToggle = document.getElementById("menu-toggle");
-            const mobileMenu = document.getElementById("mobile-menu");
+        <nav class="hidden md:flex h-full">
+            <a href="index.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
+            <a href="about.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre
+                el C3</a>
+            <a href="events.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
+            <a href="contact.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
+            <a href="login.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
+        </nav>
 
-            menuToggle.addEventListener("click", () => {
-                mobileMenu.classList.toggle("hidden");
-                mobileMenu.classList.toggle("flex");
-            });
-        </script>
-        <main class="flex-1 mt-16 bg-[var(--azul-fondo)]">
-            <section
-                id="hero"
-                class="relative w-full h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden text-center"
-            >
-                <img
-                    src="assets/images/hackathon.jpg"
-                    alt="Eventos"
-                    class="absolute inset-0 w-full h-full object-cover"
-                />
-                <div class="absolute inset-0 bg-black/70"></div>
-                <div
-                    class="w-full px-24 relative z-10 flex flex-col items-center md:items-start"
-                >
-                    <h3 class="text-white text-2xl -mb-6 font-semibold">
-                        Participa en la
-                    </h3>
-                    <h1
-                        class="text-[#61b3ff] -ml-2 text-[60px] sm:text-[100px] line-height-0 font-extrabold drop-shadow-lg my-0"
-                    >
-                        Hackathon
-                    </h1>
-                    <h3 class="text-white text-2xl font-semibold -mt-4">
-                        Edición 2026
-                    </h3>
-                    <div class="flex flex-row space-x-5 mt-12">
-                        <a
-                            target="_blank"
-                            href="https://docs.google.com/forms/u/0"
-                            class="text-white text-2xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-8 py-4 rounded-full transition-transform duration-500 hover:scale-105 self-end"
-                        >
-                            Inscribirme
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <section class="overflow-hidden bg-gray-900 pt-24 sm:pt-32">
-                <div class="mx-auto max-w-7xl md:px-6 lg:px-8">
-                    <div
-                        class="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start"
-                    >
-                        <div class="px-6 lg:px-0 lg:pt-4 lg:pr-4">
-                            <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
-                                <h2
-                                    class="mt-2 text-6xl font-semibold tracking-tight text-pretty text-white sm:text-5xl"
-                                >
-                                    ¿De qué trata?
-                                </h2>
-                                <p class="mt-6 text-lg text-white">
-                                    El C3 se enorgullece de anunciar una
-                                    colaboración con Kako Valladares, con el
-                                    objetivo de llevar a cabo una Hackaton a
-                                    nivel nacional el próximo 2026. Este evento
-                                    aún está en fases previas de planificación,
-                                    sin embargo, estaremos compartiendo
-                                    actualizaciones en los próximos meses.
-                                </p>
-                                <h3
-                                    class="mt-10 text-3xl font-semibold text-white"
-                                >
-                                    ¿Por qué participar?
-                                </h3>
-                                <dl
-                                    class="mt-10 max-w-xl space-y-8 text-base/7 text-gray-400 lg:max-w-none"
-                                >
-                                    <div class="relative pl-9 text-lg">
-                                        <dt
-                                            class="inline font-semibold text-[#61b3ff]"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="#61b3ff"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="absolute top-1 left-1 size-6"
-                                            >
-                                                <path
-                                                    d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"
-                                                />
-                                                <path
-                                                    d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"
-                                                />
-                                                <path
-                                                    d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"
-                                                />
-                                                <path
-                                                    d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"
-                                                />
-                                                <path
-                                                    d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"
-                                                />
-                                                <path
-                                                    d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"
-                                                />
-                                            </svg>
-                                            Aprende haciendo:
-                                        </dt>
-                                        <dd class="inline text-white">
-                                            pon a prueba tus conocimientos y
-                                            adquiere nuevas habilidades técnicas
-                                            y creativas en un entorno real.
-                                        </dd>
-                                    </div>
-                                    <div class="relative pl-9 text-lg">
-                                        <dt
-                                            class="inline font-semibold text-[#61b3ff]"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="#61b3ff"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="absolute top-1 left-1 size-6"
-                                            >
-                                                <path
-                                                    d="M6 9a6 6 0 1 0 12 0a6 6 0 0 0 -12 0"
-                                                />
-                                                <path
-                                                    d="M12 3c1.333 .333 2 2.333 2 6s-.667 5.667 -2 6"
-                                                />
-                                                <path
-                                                    d="M12 3c-1.333 .333 -2 2.333 -2 6s.667 5.667 2 6"
-                                                />
-                                                <path d="M6 9h12" />
-                                                <path d="M3 20h7" />
-                                                <path d="M14 20h7" />
-                                                <path
-                                                    d="M10 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
-                                                />
-                                                <path d="M12 15v3" />
-                                            </svg>
-                                            Conecta con personas increíbles:
-                                        </dt>
-                                        <dd class="inline text-white">
-                                            conoce a otros estudiantes,
-                                            profesionales y mentores que pueden
-                                            convertirse en futuros colegas o
-                                            aliados.
-                                        </dd>
-                                    </div>
-                                    <div class="relative pl-9 text-lg">
-                                        <dt
-                                            class="inline font-semibold text-[#61b3ff]"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="#61b3ff"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="absolute top-1 left-1 size-6"
-                                            >
-                                                <path
-                                                    d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z"
-                                                />
-                                            </svg>
-                                            Crea e innova:
-                                        </dt>
-                                        <dd class="inline text-white">
-                                            transforma tus ideas en proyectos
-                                            concretos que pueden tener impacto y
-                                            abrirte nuevas oportunidades.
-                                        </dd>
-                                    </div>
-                                </dl>
-                            </div>
-                        </div>
-                        <div
-                            class="sm:px-6 lg:px-0 h-full flex items-end justify-center"
-                        >
-                            <div
-                                class="relative isolate overflow-hidden bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 pt-8 sm:mx-auto sm:max-w-2xl sm:rounded-3xl sm:pt-16 sm:pr-0 sm:pl-16 lg:mx-0 lg:max-w-none"
-                            >
-                                <div
-                                    aria-hidden="true"
-                                    class="absolute -inset-y-px -left-3 -z-10 w-full origin-bottom-left skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-white ring-inset"
-                                ></div>
-                                <div
-                                    class="mx-auto max-w-2xl sm:mx-0 sm:max-w-none"
-                                >
-                                    <img
-                                        src="assets/images/hackathon.jpg"
-                                        alt="img-event"
-                                        class="-mb-12 w-full h-auto min-h-[80vh] rounded-tl-xl bg-gray-950 ring-1 ring-white/10 object-cover"
-                                    />
-                                </div>
-                                <div
-                                    aria-hidden="true"
-                                    class="pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset sm:rounded-3xl"
-                                ></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="pt-24 sm:pt-32 max-w-7xl mx-auto">
-                <h3
-                    class="text-6xl font-bold tracking-tight text-white sm:text-5xl text-center mb-12"
-                >
-                    Detalles del evento
+        <nav id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col">
+            <a href="index.html"
+                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Inicio</a>
+            <a href="about.html"
+                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Sobre
+                el C3</a>
+            <a href="events.html"
+                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Eventos</a>
+            <a href="contact.html"
+                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Contáctanos</a>
+            <a href="login.html"
+                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Login</a>
+        </nav>
+    </header>
+
+    <script>
+        // Toggle mobile menu
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            mobileMenu.classList.toggle("flex");
+        });
+    </script>
+
+    <main class="flex-1 mt-16 bg-[var(--azul-fondo)]">
+        <section id="hero"
+            class="relative w-full h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden text-center">
+            <!--! IMAGEN DE FONDO -->
+            <img id="eventHeroImg" src="assets/images/hackathon.jpg" alt="Eventos"
+                class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/70"></div>
+
+            <!--? SECCION DE eventHero -->
+            <div class="w-full px-24 relative z-10 flex flex-col items-center md:items-start">
+                <h3 id = "eventHeroPrefix" class="text-white text-2xl -mb-6 font-semibold">
+                    Participa en la
                 </h3>
-                <div
-                    class="flex flex-row flex-wrap justify-between items-stretch gap-x-4 gap-y-8 px-8 lg:px-36"
-                >
-                    <article
-                        class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm"
-                    >
-                        <h5
-                            class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#61b3ff"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="size-8 mr-1"
-                            >
-                                <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                <path
-                                    d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
-                                />
-                            </svg>
-                            Ubicación
-                        </h5>
-                        <p
-                            class="font-normal text-white text-center lg:text-left"
-                        >
-                            ESEN, La Libertad, El Salvador
-                        </p>
-                    </article>
-                    <article
-                        class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm"
-                    >
-                        <h5
-                            class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#61b3ff"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="size-8 mr-1"
-                            >
-                                <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                <path
-                                    d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
-                                />
-                            </svg>
-                            Modalidad
-                        </h5>
-                        <p
-                            class="font-normal text-white text-center lg:text-left"
-                        >
-                            Equipos de 5 personas compiten presencialmente en un
-                            maratón de 24 horas, desarrollando soluciones
-                            innovadoras a desafíos reales.
-                        </p>
-                    </article>
-                    <article
-                        class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm"
-                    >
-                        <h5
-                            class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#61b3ff"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="size-8 mr-1"
-                            >
-                                <path d="M8 21l8 0" />
-                                <path d="M12 17l0 4" />
-                                <path d="M7 4l10 0" />
-                                <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
-                                <path
-                                    d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
-                                />
-                                <path
-                                    d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"
-                                />
-                            </svg>
-                            Premios
-                        </h5>
-                        <p
-                            class="font-normal text-white text-center lg:text-left"
-                        >
-                            $5000 en premios para los tres equipos ganadores,
-                            además de oportunidades de mentoría y networking con
-                            expertos de la industria.
-                        </p>
-                    </article>
+                <!--! ESTE ES EL TITULO BREVE DEL HERO  -->
+                <h1 id="eventHeroTitle"
+                    class="text-[#61b3ff] -ml-2 text-[60px] sm:text-[100px] line-height-0 font-extrabold drop-shadow-lg my-0">
+                    Hackathon
+                </h1>
+                <h3 id="eventHeroSubtitle" class="text-white text-2xl font-semibold -mt-4">
+                    Edición 2026
+                </h3>
+                <div class="flex flex-row space-x-5 mt-12">
+                    <a id="eventHeroLink" target="_blank" href="https://docs.google.com/forms/u/0"
+                        class="text-white text-2xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-8 py-4 rounded-full transition-transform duration-500 hover:scale-105 self-end">
+                        Inscribirme
+                    </a>
                 </div>
-            </section>
-            <section class="py-24 sm:py-32 mx-auto max-w-7xl text-center px-8">
-                <h2
-                    class="text-4xl font-bold tracking-tight text-balance text-white sm:text-5xl"
-                >
-                    ¡No te pierdas esta oportunidad única!
-                </h2>
-                <p class="mt-6 text-lg leading-8 text-gray-300">
-                    Inscríbete ahora y sé parte de una experiencia
-                    transformadora que potenciará tu carrera y te conectará con
-                    una comunidad apasionada por la tecnología y la innovación.
-                </p>
-                <a
-                    href="https://docs.google.com/forms/u/0"
-                    target="_blank"
-                    class="inline-block mt-12 text-white text-2xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-8 py-4 rounded-full transition-transform duration-500 hover:scale-105"
-                >
-                    Inscribirme
-                </a>
-            </section>
-        </main>
-        <footer
-            class="relative text-white h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4 flex-shrink-0"
-        >
-            <div class="absolute inset-0 bg-black opacity-60"></div>
-            <p
-                class="z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center"
-            >
-                © 2025 Competitive Coding Club. Todos los derechos reservados.
+            </div>
+        </section>
+
+        <!-- DESCRIPCION DEL EVENTO - PARTE 1 -->
+        <section class="overflow-hidden bg-gray-900 pt-24 sm:pt-32">
+            <div class="mx-auto max-w-7xl md:px-6 lg:px-8">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
+                    <div class="px-6 lg:px-0 lg:pt-4 lg:pr-4">
+                        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
+                            <h2 class="mt-2 text-6xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
+                                ¿De qué trata?
+                            </h2>
+                            <p id="eventDescriptionText" class="mt-6 text-lg text-white">
+                                El C3 se enorgullece de anunciar una
+                                colaboración con Kako Valladares, con el
+                                objetivo de llevar a cabo una Hackaton a
+                                nivel nacional el próximo 2026. Este evento
+                                aún está en fases previas de planificación,
+                                sin embargo, estaremos compartiendo
+                                actualizaciones en los próximos meses.
+                            </p>
+                            <h3 class="mt-10 text-3xl font-semibold text-white">
+                                ¿Por qué participar?
+                            </h3>
+                            <dl id = "eventDescriptionReasonsContainer"
+                            class="mt-10 max-w-xl space-y-8 text-base/7 text-gray-400 lg:max-w-none">
+                                <div class="relative pl-9 text-lg">
+                                    <dt class="inline font-semibold text-[#61b3ff]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="#61b3ff" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" class="absolute top-1 left-1 size-6">
+                                            <path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8" />
+                                            <path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8" />
+                                            <path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5" />
+                                            <path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0" />
+                                            <path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5" />
+                                            <path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10" />
+                                        </svg>
+                                        Aprende haciendo:
+                                    </dt>
+                                    <dd class="inline text-white">
+                                        pon a prueba tus conocimientos y
+                                        adquiere nuevas habilidades técnicas
+                                        y creativas en un entorno real.
+                                    </dd>
+                                </div>
+                                <div class="relative pl-9 text-lg">
+                                    <dt class="inline font-semibold text-[#61b3ff]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="#61b3ff" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" class="absolute top-1 left-1 size-6">
+                                            <path d="M6 9a6 6 0 1 0 12 0a6 6 0 0 0 -12 0" />
+                                            <path d="M12 3c1.333 .333 2 2.333 2 6s-.667 5.667 -2 6" />
+                                            <path d="M12 3c-1.333 .333 -2 2.333 -2 6s.667 5.667 2 6" />
+                                            <path d="M6 9h12" />
+                                            <path d="M3 20h7" />
+                                            <path d="M14 20h7" />
+                                            <path d="M10 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                            <path d="M12 15v3" />
+                                        </svg>
+                                        Conecta con personas increíbles:
+                                    </dt>
+                                    <dd class="inline text-white">
+                                        conoce a otros estudiantes,
+                                        profesionales y mentores que pueden
+                                        convertirse en futuros colegas o
+                                        aliados.
+                                    </dd>
+                                </div>
+                                <div class="relative pl-9 text-lg">
+                                    <dt class="inline font-semibold text-[#61b3ff]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="#61b3ff" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" class="absolute top-1 left-1 size-6">
+                                            <path
+                                                d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" />
+                                        </svg>
+                                        Crea e innova:
+                                    </dt>
+                                    <dd class="inline text-white">
+                                        transforma tus ideas en proyectos
+                                        concretos que pueden tener impacto y
+                                        abrirte nuevas oportunidades.
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="sm:px-6 lg:px-0 h-full flex items-end justify-center">
+                        <div
+                            class="relative isolate overflow-hidden bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-6 pt-8 sm:mx-auto sm:max-w-2xl sm:rounded-3xl sm:pt-16 sm:pr-0 sm:pl-16 lg:mx-0 lg:max-w-none">
+                            <div aria-hidden="true"
+                                class="absolute -inset-y-px -left-3 -z-10 w-full origin-bottom-left skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-white ring-inset">
+                            </div>
+                            <div class="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">
+                                <img id = "eventDescriptionImg" src="assets/images/hackathon.jpg" alt="img-event"
+                                    class="-mb-12 w-full h-auto min-h-[80vh] rounded-tl-xl bg-gray-950 ring-1 ring-white/10 object-cover" />
+                            </div>
+                            <div aria-hidden="true"
+                                class="pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset sm:rounded-3xl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt-24 sm:pt-32 max-w-7xl mx-auto">
+            <h3 class="text-6xl font-bold tracking-tight text-white sm:text-5xl text-center mb-12">
+                Detalles del evento
+            </h3>
+            <div class="flex flex-row flex-wrap justify-between items-stretch gap-x-4 gap-y-8 px-8 lg:px-36">
+                <article
+                    class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm">
+                    <h5
+                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#61b3ff"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8 mr-1">
+                            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                            <path
+                                d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                        </svg>
+                        Ubicación
+                    </h5>
+                    <p id = "eventLocation" class="font-normal text-white text-center lg:text-left">
+                        ESEN, La Libertad, El Salvador
+                    </p>
+                </article>
+                <article
+                    class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm">
+                    <h5
+                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#61b3ff"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8 mr-1">
+                            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                            <path
+                                d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                        </svg>
+                        Modalidad
+                    </h5>
+                    <p id = "eventModalidad" class="font-normal text-white text-center lg:text-left">
+                        Equipos de 5 personas compiten presencialmente en un
+                        maratón de 24 horas, desarrollando soluciones
+                        innovadoras a desafíos reales.
+                    </p>
+                </article>
+                <article
+                    class="grow block w-full lg:w-[30%] p-6 bg-white/5 border border-gray-700 rounded-lg shadow-sm">
+                    <h5
+                        class="mb-2 text-2xl font-bold tracking-tight text-[#61b3ff] flex items-center justify-center lg:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#61b3ff"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-8 mr-1">
+                            <path d="M8 21l8 0" />
+                            <path d="M12 17l0 4" />
+                            <path d="M7 4l10 0" />
+                            <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
+                            <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        </svg>
+                        Premios
+                    </h5>
+                    <p id = "eventAwards" class="font-normal text-white text-center lg:text-left">
+                        $5000 en premios para los tres equipos ganadores,
+                        además de oportunidades de mentoría y networking con
+                        expertos de la industria.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="py-24 sm:py-32 mx-auto max-w-7xl text-center px-8">
+            <h2 class="text-4xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+                ¡No te pierdas esta oportunidad única!
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-gray-300">
+                Inscríbete ahora y sé parte de una experiencia
+                transformadora que potenciará tu carrera y te conectará con
+                una comunidad apasionada por la tecnología y la innovación.
             </p>
-        </footer>
-    </body>
+            <a id = "inscriptionForm"href="https://docs.google.com/forms/u/0" target="_blank"
+                class="inline-block mt-12 text-white text-2xl font-bold bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] px-8 py-4 rounded-full transition-transform duration-500 hover:scale-105">
+                Inscribirme
+            </a>
+        </section>
+    </main>
+    <footer
+        class="relative text-white h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4 flex-shrink-0">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <p class="z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center">
+            © 2025 Competitive Coding Club. Todos los derechos reservados.
+        </p>
+    </footer>
+    <script type="module" src="js/future_event.js"></script>
+</body>
+
 </html>

@@ -246,21 +246,21 @@
                                 <label for="cta" class="block text-xs font-bold text-gray-500 mb-1">Texto superior (Call
                                     to
                                     Action) *</label>
-                                <input type="text" id="cta"
+                                <input type="text" id="eventPrefix"
                                     class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                             </div>
 
                             <div>
                                 <label for="title" class="block text-xs font-bold text-gray-500 mb-1">Título del evento
                                     *</label>
-                                <input type="text" id="title"
+                                <input type="text" id="eventTitle"
                                     class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                             </div>
 
                             <div>
                                 <label for="subtitle" class="block text-xs font-bold text-gray-500 mb-1">Subtítulo del
                                     evento *</label>
-                                <input type="text" id="subtitle"
+                                <input type="text" id="eventSubtitle"
                                     class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                             </div>
 
@@ -268,7 +268,7 @@
                                 <label class="block text-xs font-bold text-gray-500 mb-2">Imagen de fondo *</label>
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-blue-50 hover:border-[#004aad] transition-all group">
-                                    <input type="file" class="hidden" accept="image/*" />
+                                    <input id="eventImage" type="file" class="hidden" accept="image/*" />
                                     <div class="flex flex-col items-center justify-center pt-4 pb-5">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="w-8 h-8 mb-2 text-gray-400 group-hover:text-[#004aad] transition-colors"
@@ -292,7 +292,7 @@
                         <div>
                             <label for="description" class="block text-xs font-bold text-gray-500 mb-1">Descripción
                                 *</label>
-                            <textarea id="description" rows="4"
+                            <textarea id="eventDescription" rows="4"
                                 class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"></textarea>
                         </div>
                     </fieldset>
@@ -304,13 +304,13 @@
                         <div class="space-y-6">
                             <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 relative">
                                 <span
-                                    class="absolute -top-2.5 left-3 bg-gray-100 px-2 text-xs font-bold text-gray-500 border border-gray-200 rounded">Razón
-                                    #1</span>
+                                    class="absolute -top-2.5 left-3 bg-gray-100 px-2 text-xs font-bold text-gray-500 border border-gray-200 rounded">
+                                    Razón #1</span>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                                     <div>
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Icono</label>
                                         <div class="relative">
-                                            <select
+                                            <select id="reason1Icon"
                                                 class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm pr-8">
                                                 <option value="trophy">
                                                     🏆 Trofeo
@@ -337,13 +337,13 @@
                                     </div>
                                     <div class="md:col-span-2">
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Título</label>
-                                        <input type="text"
+                                        <input id="reason1Title" type="text"
                                             class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 mb-1">Descripción</label>
-                                    <textarea rows="2"
+                                    <textarea id="reason1Description" rows="2"
                                         class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"></textarea>
                                 </div>
                             </div>
@@ -356,7 +356,7 @@
                                     <div>
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Icono</label>
                                         <div class="relative">
-                                            <select
+                                            <select id="reason2Icon"
                                                 class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm pr-8">
                                                 <option value="code">
                                                     💻 Código
@@ -383,26 +383,27 @@
                                     </div>
                                     <div class="md:col-span-2">
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Título</label>
-                                        <input type="text"
+                                        <input id="reason2Title" type="text"
                                             class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 mb-1">Descripción</label>
-                                    <textarea rows="2"
+                                    <textarea id="reason2Description" rows="2"
                                         class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"></textarea>
                                 </div>
                             </div>
 
                             <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 relative">
                                 <span
-                                    class="absolute -top-2.5 left-3 bg-gray-100 px-2 text-xs font-bold text-gray-500 border border-gray-200 rounded">Razón
-                                    #3</span>
+                                    class="absolute -top-2.5 left-3 bg-gray-100 px-2 text-xs font-bold text-gray-500 border border-gray-200 rounded">
+                                    Razón #3</span>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                                     <div>
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Icono</label>
                                         <div class="relative">
                                             <select
+                                                id = "reason3Icon"
                                                 class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm pr-8">
                                                 <option value="users">
                                                     👥 Comunidad
@@ -429,13 +430,14 @@
                                     </div>
                                     <div class="md:col-span-2">
                                         <label class="block text-xs font-bold text-gray-500 mb-1">Título</label>
-                                        <input type="text"
+                                        <input id = "reason3Title"
+                                        type="text"
                                             class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 mb-1">Descripción</label>
-                                    <textarea rows="2"
+                                    <textarea id = "reason3Description" rows="2"
                                         class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"></textarea>
                                 </div>
                             </div>
@@ -451,14 +453,14 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="date" class="block text-xs font-bold text-gray-500 mb-1">Fecha</label>
-                                    <input type="date" id="date"
+                                    <input type="date" id="eventDate"
                                         class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm" />
                                 </div>
                                 <div>
                                     <label for="modality"
                                         class="block text-xs font-bold text-gray-500 mb-1">Modalidad</label>
                                     <div class="relative">
-                                        <select id="modality"
+                                        <select id="eventModality"
                                             class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm pr-8">
                                             <option value="presencial">
                                                 Presencial
@@ -485,14 +487,14 @@
                             <div>
                                 <label for="location"
                                     class="block text-xs font-bold text-gray-500 mb-1">Ubicación</label>
-                                <textarea id="location" rows="5"
+                                <textarea id="eventLocation" rows="5"
                                     class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"
                                     placeholder="Ej: Remoto (Virtual) o Dirección completa de la sede..."></textarea>
                             </div>
 
                             <div>
                                 <label for="prizes" class="block text-xs font-bold text-gray-500 mb-1">Premios</label>
-                                <textarea id="prizes" rows="5"
+                                <textarea id="eventPrizes" rows="5"
                                     class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent transition-shadow text-sm resize-none"
                                     placeholder="Lista los premios para los ganadores..."></textarea>
                             </div>
@@ -630,7 +632,7 @@
                         class="flex-1 bg-gray-100 text-gray-700 font-semibold px-4 py-3 rounded-lg hover:bg-gray-200 transition-colors border border-gray-200">
                         Cancelar
                     </button>
-                    <button type="submit"
+                    <button id = "eventBtnGuardarCambios" type="submit"
                         class="flex-1 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold px-4 py-3 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
                         Guardar Cambios
                     </button>
@@ -638,7 +640,7 @@
             </form>
         </div>
     </div>
-    <script src="js/eventos_pasados.js"></script>
+    <script type="module" src="js/eventos_pasados.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,9 @@ import * as validations from "../../js/validations.js";
 
 const COLLECTION_NAME = "events";
 let events = [];
+let filteredEvents = [];
+let currentPage = 1;
+const itemsPerPage = 5;
 
 /**
  * Obtiene todos los eventos futuros desde Firestore.
@@ -18,7 +21,6 @@ async function getAllUpcomingEvents() {
 
         const res = await getDocs(q);
 
-        events = [];
         res.forEach((doc) => {
             const data = doc.data();
             events.push({
@@ -27,6 +29,7 @@ async function getAllUpcomingEvents() {
             });
         });
 
+        filteredEvents = [...events];
         return { success: true, data: events };
 
     } catch (error) {
@@ -40,74 +43,228 @@ async function getAllUpcomingEvents() {
  */
 async function renderTable() {
     const tableBody = document.getElementById("tableBody");
-
-    // Muestra "cargando"
-    tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
-
-    const res = await getAllUpcomingEvents();
-
-    if (!res.success) {
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "No se pudieron cargar los eventos",
-            confirmButtonText: "Ok",
-            buttonsStyling: false,
-            customClass: {
-                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
-            }
-        });
-        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error al cargar datos</td></tr>';
-        return;
-    }
-
     tableBody.innerHTML = "";
 
-    if (res.data.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">No hay eventos registrados.</td></tr>';
+    if (filteredEvents.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No se encontraron eventos.</td></tr>';
+        renderPagination(); // Actualizar paginación a vacío
         return;
     }
 
-    res.data.forEach((event) => {
-        const row = `
-            <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
-                <td class="px-6 py-4 text-sm font-semibold text-gray-800">
+    // Lógica de Paginación
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
+
+    paginatedEvents.forEach((event) => {
+
+        // Formateo de Fecha
+        let dateStr = "Sin fecha";
+        if (event.date && event.date.toDate) {
+            dateStr = event.date.toDate().toLocaleDateString();
+        }
+
+        // Badges
+        const isVisible = event.visibility === 'visible';
+        const visibilityClass = isVisible ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-600 border-gray-200";
+        const visibilityLabel = isVisible ? "Público" : "Borrador";
+
+        let modalityClass = "bg-blue-50 text-blue-700 border-blue-200";
+        if (event.modality === 'Remoto') modalityClass = "bg-purple-50 text-purple-700 border-purple-200";
+        if (event.modality === 'Híbrido') modalityClass = "bg-orange-50 text-orange-700 border-orange-200";
+
+        const row = `<tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
+                <td class="px-6 py-4 text-sm font-semibold text-gray-800 truncate">
                     ${event.title}
                 </td>
-
                 <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
                     ${event.date ? validations.formatDate(event.date) : 'Sin fecha'}
                 </td>
-
                 <td class="px-6 py-4">
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
                             ${event.modality}
                         </span>
                 </td>
-
                 <td class="px-6 py-4">
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
                             ${event.visibility ? 'Visible' : 'No visible'}
                         </span>
                 </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+        <div class="flex justify-center space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
+            
+            <button class="btn-finish text-[#3F95E2] hover:text-blue-600 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Marcar como finalizado">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </button>
 
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex justify-center space-x-3">
-                        <button class="btn-edit text-blue-600 hover:text-blue-800 transition-colors p-1" data-id="${event.id}">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </button>
-                        <button class="btn-del text-red-600 hover:text-red-800 transition-colors p-1" data-id="${event.id}">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </td>
+            <button class="btn-edit text-blue-600 hover:text-blue-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Editar">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            </button>
+            
+            <button class="btn-del text-red-600 hover:text-red-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Eliminar">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+        </div>
+    </td>
             </tr>
         `;
         tableBody.innerHTML += row;
+    });
+
+    renderPagination();
+}
+
+function renderPagination() {
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+    if (!paginationContainer) return;
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    let buttonsHTML = '<div class="flex space-x-2" id="pagination-wrapper">';
+
+    // Botón Anterior
+    const prevDisabled = currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage - 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${prevDisabled}" ${currentPage === 1 ? 'disabled' : ''}>
+            Anterior
+        </button>
+    `;
+
+    // Números de página
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+            // Página Activa (Sin data-page porque ya estamos ahí)
+            buttonsHTML += `<button class="px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white rounded-lg shadow-md cursor-default">${i}</button>`;
+        } else {
+            // Otras Páginas
+            buttonsHTML += `<button data-page="${i}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">${i}</button>`;
+        }
+    }
+
+    // Botón Siguiente
+    const nextDisabled = currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage + 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${nextDisabled}" ${currentPage === totalPages ? 'disabled' : ''}>
+            Siguiente
+        </button>
+    `;
+
+    buttonsHTML += '</div>';
+    paginationContainer.innerHTML = buttonsHTML;
+}
+
+let availableCategories = [];
+
+async function loadCategories() {
+    const categoryList = document.getElementById('categoryList');
+
+    try {
+        const q = query(collection(db, "categories"), orderBy("name", "asc"));
+        const querySnapshot = await getDocs(q);
+
+        availableCategories = [];
+        querySnapshot.forEach((doc) => {
+            availableCategories.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        categoryList.innerHTML = '';
+
+        if (availableCategories.length === 0) {
+            categoryList.innerHTML = '<li class="p-2 text-gray-500 text-xs">No hay categorías disponibles</li>';
+            return;
+        }
+
+        availableCategories.forEach(cat => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                    <input 
+                        type="checkbox" 
+                        value="${cat.id}" 
+                        data-name="${cat.name}"
+                        class="category-checkbox w-4 h-4 text-[#004aad] bg-gray-100 border-gray-300 rounded focus:ring-[#004aad] focus:ring-2"
+                    >
+                    <span class="ml-2">${cat.name}</span>
+                </label>
+            `;
+            categoryList.appendChild(li);
+        });
+
+        setupMultiSelectLogic();
+
+    } catch (error) {
+        console.error("Error cargando categorías:", error);
+        categoryList.innerHTML = '<li class="p-2 text-red-500 text-xs">Error al cargar</li>';
+    }
+}
+
+function setupMultiSelectLogic() {
+    const btnText = document.getElementById('categoryBtnText');
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+
+    const updateButtonText = () => {
+        const selected = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.getAttribute('data-name'));
+
+        if (selected.length === 0) {
+            btnText.innerText = "Seleccionar categorías...";
+            btnText.classList.add("text-gray-500");
+            btnText.classList.remove("text-gray-900");
+        } else {
+            if (selected.length > 2) {
+                btnText.innerText = `${selected.length} seleccionadas`;
+            } else {
+                btnText.innerText = selected.join(", ");
+            }
+            btnText.classList.remove("text-gray-500");
+            btnText.classList.add("text-gray-900");
+        }
+    };
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonText);
+    });
+}
+
+function initMultiSelectUI() {
+    const btn = document.getElementById('categoryBtn');
+    const dropdown = document.getElementById('categoryDropdown');
+    const searchInput = document.getElementById('categorySearch');
+    const wrapper = document.getElementById('category-wrapper');
+
+    btn.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const listItems = document.querySelectorAll('#categoryList li');
+
+        listItems.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(term)) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
     });
 }
 
@@ -215,22 +372,52 @@ function clearImagePreviews() {
 // Otras partes del CRUD
 
 /**
+ *  Buscador
+ */
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+
+        filteredEvents = events.filter(event =>
+            event.title.toLowerCase().includes(searchTerm) ||
+            event.modality.toLowerCase().includes(searchTerm)
+        );
+
+        currentPage = 1;
+        renderTable();
+    });
+}
+
+/**
  * Captura y estructura los datos del formulario.
  */
 function getEventFormData() {
     const form = document.getElementById('modalForm');
     const formData = new FormData(form);
 
+    // Procesamiento de fecha para Firebase
     const dateString = formData.get('date');
-
     let firebaseDate = null;
+    let rawDate = null; // Fecha cruda para validación
+
     if (dateString) {
         const jsDate = new Date(dateString + 'T12:00:00');
         firebaseDate = Timestamp.fromDate(jsDate);
+        rawDate = new Date(dateString + 'T00:00:00');
     }
 
+    // Captura de categorias
+    const selectedCategories = [];
+    document.querySelectorAll('.category-checkbox:checked').forEach(cb => {
+        selectedCategories.push(
+            cb.getAttribute('data-name')
+        );
+    });
+
     const eventData = {
-        id: formData.get('id').trim(), // Si tiene ID es edición
+        id: formData.get('id').trim(),
 
         // Banner
         heroPrefix: formData.get('heroPrefix').trim(),
@@ -243,6 +430,7 @@ function getEventFormData() {
 
         // Detalles
         date: firebaseDate,
+        rawDate: rawDate, // Usado solo para validación
         modality: formData.get('modality').trim(),
         location: formData.get('location').trim(),
         awardsText: formData.get('awardsText').trim(),
@@ -252,8 +440,9 @@ function getEventFormData() {
         bannerFile: formData.get('banner'),
         coverImageFile: formData.get('coverImage'),
 
-        // Array de Razones
-        reasons: []
+        // Arrays
+        reasons: [],
+        categories: selectedCategories // <--- NUEVO CAMPO
     };
 
     // Procesar las 3 razones
@@ -261,7 +450,6 @@ function getEventFormData() {
         const title = formData.get(`reason_${i}_title`);
         const text = formData.get(`reason_${i}_text`);
 
-        // Solo guardar si tiene minimo titulo
         if (title && title.trim() !== "") {
             eventData.reasons.push({
                 order: parseInt(formData.get(`reason_${i}_order`)),
@@ -273,6 +461,80 @@ function getEventFormData() {
     }
 
     return eventData;
+}
+
+function validateEventData(data) {
+    // 1. Validación de Campos de Texto y Archivos (General)
+    const isNew = !data.id;
+    if (
+        data.heroPrefix === "" ||
+        data.title === "" ||
+        data.participantsText === "" ||
+        data.description === "" ||
+        !data.date ||
+        data.location === "" ||
+        data.awardsText === "" ||
+        (isNew && (!data.bannerFile || data.bannerFile.size === 0)) ||
+        (isNew && (!data.coverImageFile || data.coverImageFile.size === 0))
+    ) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos incompletos',
+            html: `Por favor, completa todos los campos obligatorios marcados con asterisco <b>(*)</b>, incluyendo imágenes. <br> <b> Consejo: </b> Revisa todas las pestañas.`,
+            confirmButtonText: "Entendido",
+            buttonsStyling: false,
+            customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
+        });
+        return false;
+    }
+
+    // 2. Validación de Fecha (No permitir pasado)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (data.rawDate && data.rawDate < today) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Fecha inválida',
+            text: 'No puedes crear un evento futuro con una fecha anterior al día de hoy.',
+            confirmButtonText: "Corregir",
+            buttonsStyling: false,
+            customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
+        });
+        return false;
+    }
+
+    // 3. Validación de Razones (Al menos una)
+    if (data.reasons.length === 0) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Faltan Razones',
+            html: `Debes agregar al menos una <b>razón</b> para asistir al evento.<br>(Pestaña: <b>Acerca de</b>)`,
+            confirmButtonText: "Ir a razones",
+            buttonsStyling: false,
+            customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
+        }).then(() => {
+            // Opcional: Cambiar automáticamente a la pestaña
+            document.querySelector('.tabBtn[data-target="tab-about"]').click();
+        });
+        return false;
+    }
+
+    // 4. Validación de Categorías (Al menos una)
+    if (data.categories.length === 0) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Sin Categorías',
+            html: `Debes seleccionar al menos una <b>categoría</b> para el evento.<br>(Pestaña: <b>Detalles</b>)`,
+            confirmButtonText: "Ir a categorías",
+            buttonsStyling: false,
+            customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
+        }).then(() => {
+            document.querySelector('.tabBtn[data-target="tab-details"]').click();
+        });
+        return false;
+    }
+
+    return true;
 }
 
 async function addNewUpcomingEvent(eventData) {
@@ -332,6 +594,7 @@ async function addNewUpcomingEvent(eventData) {
             modality: eventData.modality,
             location: eventData.location,
             awardsText: eventData.awardsText,
+            categories: eventData.categories,
             visibility: isVisible,
 
             // Metadata
@@ -383,13 +646,206 @@ async function addNewUpcomingEvent(eventData) {
     }
 }
 
+async function getUpcomingEvent(id) {
+    const event = events.find(e => e.id === id);
+    if (!event) return;
+
+    openModal();
+
+    document.getElementById('modalTitle').innerText = 'Editar Evento';
+    document.getElementById('eventId').value = event.id;
+
+    // Pestaña Banner
+    document.getElementById('heroPrefix').value = event.heroPrefix || '';
+    document.getElementById('title').value = event.title || '';
+    document.getElementById('participantsText').value = event.participantsText || '';
+    document.getElementById('summary').value = event.summary || '';
+
+    // Pestaña Acerca de
+    document.getElementById('description').value = event.description || '';
+
+    // Pestaña Detalles
+    document.getElementById('modality').value = event.modality || 'Presencial';
+    document.getElementById('location').value = event.location || '';
+    document.getElementById('awardsText').value = event.awardsText || '';
+
+    // Visibilidad (Convertir booleano a string del select)
+    document.getElementById('visibility').value = event.visibility ? 'visible' : 'not_visible';
+
+    // Fecha (convertir el timestamp)
+    if (event.date && event.date.toDate) {
+        const dateObj = event.date.toDate();
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        document.getElementById('date').value = `${year}-${month}-${day}`;
+    }
+
+    //Previsualizar imagenes
+    const showExistingImage = (inputId, imageUrl) => {
+        if (!imageUrl) return;
+
+        const input = document.getElementById(inputId);
+        const container = input.closest('label');
+
+        const oldImg = container.querySelector('.preview-image');
+        if (oldImg) oldImg.remove();
+
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+
+        container.appendChild(img);
+        container.classList.add('relative', 'overflow-hidden');
+    };
+
+    //Mostrar con las url
+    showExistingImage('banner', event.banner);
+    showExistingImage('coverImage', event.coverImage);
+
+    //Razones ordenadas según "order"
+    try {
+        const reasonsRef = collection(db, COLLECTION_NAME, id, "reasons");
+
+        const q = query(reasonsRef, orderBy("order", "asc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+            console.log("Este evento no tiene razones guardadas.");
+        }
+
+        querySnapshot.forEach((doc) => {
+            const reason = doc.data();
+            const slot = reason.order;
+
+            if (slot && slot <= 3) {
+                const titleInput = document.getElementById(`reason_${slot}_title`);
+                const textInput = document.getElementById(`reason_${slot}_text`);
+                const iconInput = document.getElementById(`reason_${slot}_icon`);
+
+                if (titleInput) titleInput.value = reason.title || '';
+                if (textInput) textInput.value = reason.text || '';
+                if (iconInput) iconInput.value = reason.icon || 'trophy';
+            }
+        });
+    } catch (error) {
+        Swal.fire({
+            toast: true,
+            icon: 'warning',
+            title: 'Alerta',
+            text: 'No se pudieron cargar los detalles de las razones.',
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+    }
+
+    //Marcar las categorias
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+
+    checkboxes.forEach(cb => cb.checked = false);
+
+    if (event.categories && Array.isArray(event.categories)) {
+        event.categories.forEach(catName => {
+            const checkbox = document.querySelector(`.category-checkbox[data-name="${catName}"]`);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    if (checkboxes.length > 0) {
+        checkboxes[0].dispatchEvent(new Event('change'));
+    }
+}
+
+async function updateExistingEvent(eventData) {
+    try {
+        Swal.fire({
+            title: 'Actualizando...',
+            text: 'Procesando cambios',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        const currentEvent = events.find(e => e.id === eventData.id);
+
+        let bannerUrl = currentEvent.banner;
+        if (eventData.bannerFile && eventData.bannerFile.size > 0) {
+            bannerUrl = await validations.uploadImageToCloudinary(eventData.bannerFile);
+        }
+
+        let coverImageUrl = currentEvent.coverImage;
+        if (eventData.coverImageFile && eventData.coverImageFile.size > 0) {
+            coverImageUrl = await validations.uploadImageToCloudinary(eventData.coverImageFile);
+        }
+
+        const isVisible = eventData.visibility === "visible";
+
+        const updateData = {
+            heroPrefix: eventData.heroPrefix,
+            title: eventData.title,
+            participantsText: eventData.participantsText,
+            summary: eventData.summary,
+            banner: bannerUrl,
+
+            description: eventData.description,
+            coverImage: coverImageUrl,
+
+            date: eventData.date,
+            modality: eventData.modality,
+            location: eventData.location,
+            awardsText: eventData.awardsText,
+            visibility: isVisible,
+            categories: eventData.categories
+        };
+
+        const eventRef = doc(db, COLLECTION_NAME, eventData.id);
+        await updateDoc(eventRef, updateData);
+
+        const reasonsRef = collection(db, COLLECTION_NAME, eventData.id, "reasons");
+
+        const qReasons = query(reasonsRef);
+        const snapshot = await getDocs(qReasons);
+        const deletePromises = snapshot.docs.map(d => deleteDoc(d.ref));
+        await Promise.all(deletePromises);
+
+        const createPromises = eventData.reasons.map(r => addDoc(reasonsRef, r));
+        await Promise.all(createPromises);
+
+        Swal.fire({
+            toast: true, position: 'top-end', icon: 'success',
+            title: 'Actualizado', text: 'El evento se actualizó correctamente.',
+            showConfirmButton: false, timer: 3000, timerProgressBar: true
+        });
+
+        return { success: true };
+
+    } catch (error) {
+        console.error("Error actualizando:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo actualizar el evento ',
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+        return { success: false, error: error.message };
+    }
+}
+
 async function deleteUpcomingEvent(id) {
     const result = await Swal.fire({
         title: '¿Estás seguro?',
         html: "Se eliminará el evento y sus datos asociados.<br><b>No podrás revertir esta acción.</b>",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Sí, eliminar',
+        confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar',
         buttonsStyling: false,
         customClass: {
@@ -453,11 +909,49 @@ async function deleteUpcomingEvent(id) {
     }
 }
 
+async function markAsFinished(id) {
+    const result = await Swal.fire({
+        title: '¿Finalizar evento?',
+        text: "El evento pasará al historial de eventos pasados.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Finalizar',
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg mr-2",
+            cancelButton: "bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+        }
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+        // Actualizamos solo el estado
+        const eventRef = doc(db, COLLECTION_NAME, id);
+        await updateDoc(eventRef, { status: "finished" });
+
+        // Actualizamos UI localmente (lo quitamos de la lista porque ya no es 'upcoming')
+        events = events.filter(e => e.id !== id);
+        filteredEvents = filteredEvents.filter(e => e.id !== id);
+        renderTable();
+
+        Swal.fire({
+            toast: true, position: 'top-end', icon: 'success',
+            title: 'Evento finalizado', showConfirmButton: false, timer: 3000, timerProgressBar: true
+        });
+
+    } catch (error) {
+        console.error(error);
+        Swal.fire('Error', 'No se pudo actualizar el estado', 'error');
+    }
+}
+
 // ==========================================
 // 6. INICIALIZACIÓN (DOM READY)
 // ==========================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     // Cargar datos iniciales
     renderTable();
@@ -478,6 +972,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview('banner');
     setupImagePreview('coverImage');
 
+    // Configurar select de categorías
+    initMultiSelectUI();
+    await loadCategories();
+
+    setupSearch();
+
+    const res = await getAllUpcomingEvents();
+    if (res.success) {
+        renderTable();
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al cargar los eventos.',
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+    }
+
     const tableBody = document.getElementById('tableBody');
 
     if (tableBody) {
@@ -488,10 +1004,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = btn.dataset.id;
 
             if (btn.classList.contains('btn-edit')) {
-                // Aca se carga el modal para editar
+                getUpcomingEvent(id);
             }
             else if (btn.classList.contains('btn-del')) {
                 deleteUpcomingEvent(id);
+            } else if (btn.classList.contains('btn-finish')) {
+                markAsFinished(id);
+            }
+        });
+    }
+
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+
+    if (paginationContainer) {
+        paginationContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.pagination-btn');
+
+            if (!btn || btn.disabled) return;
+
+            const newPage = parseInt(btn.dataset.page);
+
+            if (newPage) {
+                currentPage = newPage;
+                renderTable();
             }
         });
     }
@@ -503,14 +1038,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const eventData = getEventFormData();
 
-        if (eventData.id) {
-            // Lógica de ACTUALIZAR (La haremos después)
-            console.log("Actualizando evento...", eventData.id);
-            // await updateEvent(eventData);
-        } else {
-            // Aca crea
-            const res = await addNewUpcomingEvent(eventData);
+        if (!validateEventData(eventData)) {
+            return;
+        }
 
+        if (!eventData.id) {
+            const res = await addNewUpcomingEvent(eventData);
+            if (res.success) {
+                closeModal();
+                renderTable();
+            }
+        }
+        else {
+            const res = await updateExistingEvent(eventData);
             if (res.success) {
                 closeModal();
                 renderTable();

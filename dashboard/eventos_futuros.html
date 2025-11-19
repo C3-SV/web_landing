@@ -16,6 +16,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../css/style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-gray-50 h-screen overflow-hidden">
         <!-- Header -->
@@ -226,35 +227,43 @@
                     </div>
 
                     <!-- Table -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100"
+                    >
                         <div class="overflow-x-auto">
-                            <table class="w-full">
+                            <table
+                                class="w-full min-w-[800px] table-fixed border-collapse"
+                            >
                                 <thead
                                     class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white"
                                 >
                                     <tr>
                                         <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
+                                            class="w-[40%] px-6 py-4 text-left text-sm font-bold tracking-wider"
                                         >
                                             Título
                                         </th>
+
                                         <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
+                                            class="w-[15%] px-6 py-4 text-left text-sm font-bold tracking-wider"
                                         >
                                             Fecha
                                         </th>
+
                                         <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
                                         >
                                             Modalidad
                                         </th>
+
                                         <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
                                         >
                                             Visibilidad
                                         </th>
+
                                         <th
-                                            class="px-6 py-3 text-center text-sm font-semibold"
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
                                         >
                                             Acciones
                                         </th>
@@ -262,10 +271,8 @@
                                 </thead>
                                 <tbody
                                     id="tableBody"
-                                    class="divide-y divide-gray-200"
-                                >
-                                    <!-- Rows will be inserted here by JavaScript -->
-                                </tbody>
+                                    class="divide-y divide-gray-100 bg-white"
+                                ></tbody>
                             </table>
                         </div>
                     </div>
@@ -904,38 +911,116 @@
                                         class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
                                     ></textarea>
                                 </div>
-
-                                <div>
-                                    <label
-                                        for="visibility"
-                                        class="block text-xs font-bold text-gray-500 mb-1"
-                                        >Visibilidad *</label
-                                    >
-                                    <div class="relative">
-                                        <select
-                                            id="visibility"
-                                            name="visibility"
-                                            class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm pr-8 cursor-pointer"
+                                <div
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                >
+                                    <div>
+                                        <label
+                                            for="visibility"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Visibilidad *</label
                                         >
-                                            <option value="visible">
-                                                Visible (Público)
-                                            </option>
-                                            <option value="not_visible">
-                                                No visible (Borrador)
-                                            </option>
-                                        </select>
-                                        <div
-                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
-                                        >
-                                            <svg
-                                                class="fill-current h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
+                                        <div class="relative">
+                                            <select
+                                                id="visibility"
+                                                name="visibility"
+                                                class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm pr-8 cursor-pointer"
                                             >
-                                                <path
-                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                                />
-                                            </svg>
+                                                <option value="visible">
+                                                    Visible (Público)
+                                                </option>
+                                                <option value="not_visible">
+                                                    No visible (Borrador)
+                                                </option>
+                                            </select>
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                                            >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="relative" id="category-wrapper">
+                                        <label
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Categorías del evento *
+                                        </label>
+
+                                        <button
+                                            type="button"
+                                            id="categoryBtn"
+                                            class="relative w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm text-left flex justify-between items-center transition-shadow group"
+                                        >
+                                            <span
+                                                id="categoryBtnText"
+                                                class="text-gray-500 truncate"
+                                                >Seleccionar categorías...</span
+                                            >
+                                            <div
+                                                class="pointer-events-none flex items-center px-1 text-gray-500"
+                                            >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </button>
+
+                                        <div
+                                            id="categoryDropdown"
+                                            class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg"
+                                        >
+                                            <div
+                                                class="p-2 border-b border-gray-100"
+                                            >
+                                                <div class="relative">
+                                                    <div
+                                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                                                    >
+                                                        <svg
+                                                            class="w-4 h-4 text-gray-400"
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 20 20"
+                                                        >
+                                                            <path
+                                                                stroke="currentColor"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        id="categorySearch"
+                                                        class="block w-full p-2 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-[#004aad] focus:border-[#004aad] focus:outline-none"
+                                                        placeholder="Buscar categoría..."
+                                                    />
+                                                </div>
+                                            </div>
+                                            <ul
+                                                class="max-h-48 overflow-y-auto py-1 text-sm text-gray-700"
+                                                id="categoryList"
+                                            >
+                                                <!-- Las categorías se cargarán aquí dinámicamente -->
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -965,6 +1050,5 @@
         </div>
         <script src="js/eventos_futuros.js" type="module"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
     </body>
 </html>

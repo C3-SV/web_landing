@@ -16,6 +16,7 @@ import {
 import * as validations from "../../js/validations.js";
 
 import * as structure from "./modules/structure.js";
+import * as stats from "./modules/stats.js";
 
 // Manejo de iconos
 import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
@@ -271,10 +272,15 @@ async function editEvent(id) {
     const reasons = await loadReasons(id);
     fillReasons(reasons);
 
-    // TAB de STRUCTURE
+    //! TAB de STRUCTURE
     const sections = await structure.loadStructure(id);
     const html = structure.renderStructureHTML(sections);
     document.getElementById("structureList").innerHTML = html;
+
+    //! TAB de STATS
+    const statsData = await stats.loadStats(id);
+    const statsHTML = stats.renderStatsHTML(statsData);
+    document.getElementById("statsList").innerHTML = statsHTML;
 }
 
 //! 5. Crud -- guardar cambios y eliminar 
@@ -298,7 +304,7 @@ function getReasonsFromForm() {
             order: r.order
         };
     }).filter(r => r.title !== "" || r.text !== "" || r.icon !== "");
-    
+
 }
 
 async function guardarRazones(eventId, reasons) {
@@ -351,6 +357,15 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
     catch (err) {
         console.error("Error guardando estructura", err)
     }
+
+    //* Guardar Stats 
+      try {
+        const statsData = stats.getStatsFromDOM();
+        await stats.saveStats(editingId, statsData);
+    } catch (err) {
+        console.error("Error guardando estadísticas", err);
+    }
+
     closeModal();
     renderTable();
 });
@@ -363,8 +378,6 @@ function deleteEvent(id) {
         renderTable();
     }
 }
-
-
 
 //! 6. Gestion de imagenes 
 
@@ -539,12 +552,68 @@ function setupStructureListeners() {
     });
 }
 
+// para stats 
+
+function setupStatsListeners() {
+    const container = document.getElementById("statsList");
+    const addStatBtn = document.getElementById("addStatBtn");
+
+    if (!container || !addStatBtn) return;
+
+    // iniciar listeners del contenedor
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+
+    const activeContainer = document.getElementById("statsList");
+
+    // delegar eventos dentro de statsList
+    activeContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const target = e.target;
+
+        // Eliminar STAT
+        const deleteBtn = target.closest(".delete-stat");
+        if (deleteBtn) {
+            e.preventDefault();
+            const statItem = deleteBtn.closest(".stat-item");
+            if (statItem) {
+                if (confirm("¿Eliminar esta estadística?")) {
+                    statItem.remove();
+                }
+            }
+            return;
+        }
+    });
+
+    // agregar dato
+    const newAddBtn = addStatBtn.cloneNode(true);
+    addStatBtn.parentNode.replaceChild(newAddBtn, addStatBtn);
+
+    newAddBtn.addEventListener("click", () => {
+        const tempId = "temp-stat-" + Date.now() + Math.floor(Math.random() * 1000);
+
+        const newStat = {
+            id: tempId,
+            icon: "",
+            text: "",
+            value: "",
+            order: activeContainer.children.length + 1
+        };
+
+        activeContainer.insertAdjacentHTML(
+            "beforeend",
+            stats.renderStatsHTML([newStat])
+        );
+    });
+}
+
+//! INICIALIZAR REALMENTE 
+
 document.addEventListener("DOMContentLoaded", () => {
     renderTable();
     setupTabs();
     setupStructureListeners();
-
-    // Listener de botones 
+    setupStatsListeners();
 
     // Imagenes 
     setupImagePreview('eventImage');

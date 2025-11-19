@@ -227,24 +227,22 @@ function fillGeneralImages(data) {
 }
 
 function fillReasons(reasons) {
-    const fields = [
-        { icon: "reason1Icon", title: "reason1Title", desc: "reason1Description" },
-        { icon: "reason2Icon", title: "reason2Title", desc: "reason2Description" },
-        { icon: "reason3Icon", title: "reason3Title", desc: "reason3Description" },
+    const mapping = [
+        { wrapper: "reason1IconWrapper", icon: "reason1Icon", title: "reason1Title", desc: "reason1Description" },
+        { wrapper: "reason2IconWrapper", icon: "reason2Icon", title: "reason2Title", desc: "reason2Description" },
+        { wrapper: "reason3IconWrapper", icon: "reason3Icon", title: "reason3Title", desc: "reason3Description" }
     ];
 
-    fields.forEach(f => {
-        document.getElementById(f.icon).value = "";
-        document.getElementById(f.title).value = "";
-        document.getElementById(f.desc).value = "";
-    });
+    mapping.forEach((f, index) => {
+        const r = reasons[index] || {};
 
-    // Llenar según orden
-    reasons.forEach((r, idx) => {
-        if (idx >= 3) return;
-        document.getElementById(fields[idx].icon).value = r.icon || "";
-        document.getElementById(fields[idx].title).value = r.title || "";
-        document.getElementById(fields[idx].desc).value = r.text || "";
+        // 1. Insertar el select dinámico
+        const container = document.getElementById(f.wrapper);
+        container.innerHTML = renderIconSelect(r.icon || "");
+
+        // 2. Rellenar los campos normales
+        document.getElementById(f.title).value = r.title || "";
+        document.getElementById(f.desc).value = r.text || "";
     });
 }
 
@@ -283,29 +281,24 @@ async function editEvent(id) {
 
 // tomar reasons para guardar y guardar Reasons 
 function getReasonsFromForm() {
-    const data = [
-        {
-            icon: document.getElementById("reason1Icon").value,
-            title: document.getElementById("reason1Title").value.trim(),
-            text: document.getElementById("reason1Description").value.trim(),
-            order: 1
-        },
-        {
-            icon: document.getElementById("reason2Icon").value,
-            title: document.getElementById("reason2Title").value.trim(),
-            text: document.getElementById("reason2Description").value.trim(),
-            order: 2
-        },
-        {
-            icon: document.getElementById("reason3Icon").value,
-            title: document.getElementById("reason3Title").value.trim(),
-            text: document.getElementById("reason3Description").value.trim(),
-            order: 3
-        }
-    ]
-    return data.filter(r =>
-        r.title !== "" || r.text !== "" || r.icon !== ""
-    );
+    const rows = [
+        { wrapper: "reason1IconWrapper", title: "reason1Title", desc: "reason1Description", order: 1 },
+        { wrapper: "reason2IconWrapper", title: "reason2Title", desc: "reason2Description", order: 2 },
+        { wrapper: "reason3IconWrapper", title: "reason3Title", desc: "reason3Description", order: 3 }
+    ];
+
+    return rows.map(r => {
+        const container = document.getElementById(r.wrapper);
+        const iconSelect = container.querySelector(".icon-select");
+
+        return {
+            icon: iconSelect?.value || "",
+            title: document.getElementById(r.title).value.trim(),
+            text: document.getElementById(r.desc).value.trim(),
+            order: r.order
+        };
+    }).filter(r => r.title !== "" || r.text !== "" || r.icon !== "");
+    
 }
 
 async function guardarRazones(eventId, reasons) {

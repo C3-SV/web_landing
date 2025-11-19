@@ -17,6 +17,10 @@ import * as validations from "../../js/validations.js";
 
 import * as structure from "./modules/structure.js";
 
+// Manejo de iconos
+import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
+
+
 const COLLECTION_NAME = "events";
 let events = [];
 let editingId = null;
@@ -269,7 +273,10 @@ async function editEvent(id) {
     const reasons = await loadReasons(id);
     fillReasons(reasons);
 
-    // TODO: El resto de tabs + reazons
+    // TAB de STRUCTURE
+    const sections = await structure.loadStructure(id);
+    const html = structure.renderStructureHTML(sections);
+    document.getElementById("structureList").innerHTML = html;
 }
 
 //! 5. Crud -- guardar cambios y eliminar 
@@ -307,14 +314,14 @@ async function guardarRazones(eventId, reasons) {
     // 1. Borrar todas las razones previas
     const existing = await getDocs(reasonsRef);
     const deletions = existing.docs.map(d => deleteDoc(d.ref));
-    await Promise.all(deletions.map(d => d.catch(() => { }))); 
+    await Promise.all(deletions.map(d => d.catch(() => { })));
 
     // 2. Crear nuevas
     const creates = reasons.map(r => addDoc(reasonsRef, r));
     await Promise.all(creates);
 }
 
-// on submit para guardar 
+//! On submit para guardar 
 document.getElementById("modalForm").addEventListener("submit", async (element) => {
     element.preventDefault();
 
@@ -341,6 +348,15 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
         await guardarRazones(editingId, reasons);
     } catch (err) {
         console.error("Error guardando razones", err);
+    }
+
+    //* Guardar structure 
+    const structData = structure.getStructureFromDOM();
+    try {
+        await structure.saveStructure(editingId, structData);
+    }
+    catch (err) {
+        console.error("Error guardando estructura", err)
     }
     closeModal();
     renderTable();
@@ -431,16 +447,130 @@ function setupTabs() {
     });
 }
 
+// Logica de estructura 
+
+function setupStructureListeners() {
+    const container = document.getElementById("structureList");
+    const addSectionBtn = document.getElementById("addSectionBtn");
+
+    if (!container || !addSectionBtn) return;
+
+    // 1. Limpiar listeners viejos
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+    
+    const activeContainer = document.getElementById("structureList");
+
+    // 2. Delegar eventos
+    activeContainer.addEventListener("click", (e) => { 
+        e.stopPropagation();
+        const target = e.target; // Definimos target correctamente
+        
+        // A) Eliminar ÍTEM
+        const deleteItemBtn = target.closest(".delete-item");
+        if (deleteItemBtn) {
+            e.preventDefault();
+            // Encontrar el item 
+            const itemRow = deleteItemBtn.closest(".structure-item");
+            
+            if (itemRow) {
+                if(confirm("¿Eliminar este ítem?")) {
+                    itemRow.remove();
+                }
+            } else {
+                console.error("Error: No se encontró el contenedor .structure-item");
+            }
+            return;
+        }
+
+        // B) Agregar ÍTEM
+        const addItemBtn = target.closest(".add-item");
+        if (addItemBtn) {
+            e.preventDefault();
+            // 1. Encontrar la SECCIÓN padre
+            const sectionParent = addItemBtn.closest(".structure-section");
+            
+            if (sectionParent) {
+                // 2. Buscar el contenedor de items dentro de esa sección
+                const sectionBox = sectionParent.querySelector(".section-items");
+                if (sectionBox) {
+                    const tempId = "temp-item-" + Date.now() + Math.floor(Math.random() * 1000);
+                    
+                    const newItemHTML = structure.renderItemsHTML([{
+                        id: tempId,
+                        icon: "",
+                        title: "",
+                        text: "",
+                        order: sectionBox.children.length + 1
+                    }]);
+
+                    sectionBox.insertAdjacentHTML("beforeend", newItemHTML);
+                }
+            }
+            return;
+        }
+
+        // C) Eliminar SECCIÓN
+        const deleteSectionBtn = target.closest(".delete-section");
+        if (deleteSectionBtn) {
+            e.preventDefault();
+            const section = deleteSectionBtn.closest(".structure-section");
+            if (section) {
+                if(confirm("¿Borrar toda la sección?")) {
+                    section.remove();
+                }
+            }
+            return;
+        }
+    });
+
+    // 3. Botón de "Nueva Sección" 
+    const newAddBtn = addSectionBtn.cloneNode(true);
+    addSectionBtn.parentNode.replaceChild(newAddBtn, addSectionBtn);
+
+    newAddBtn.addEventListener("click", () => {
+        const tempId = "temp-sec-" + Date.now();
+        const newSection = {
+            id: tempId,
+            order: 999,
+            title: "",
+            type: "default",
+            icon: "",
+            items: []
+        };
+
+        activeContainer.insertAdjacentHTML(
+            "beforeend",
+            structure.renderStructureHTML([newSection])
+        );
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     renderTable();
     setupTabs();
+    setupStructureListeners();
 
     // Listener de botones 
 
     // Imagenes 
     setupImagePreview('eventImage');
-
 });
+
+// Manejar cambiso en selects de icons 
+document.addEventListener("change", (e) => {
+    if (!e.target.matches(".icon-select")) return;
+
+    const wrapper = e.target.closest(".flex");
+    const preview = wrapper.querySelector(".icon-preview");
+
+    preview.className = "icon-preview text-gray-700 text-xl w-6 text-center";
+
+    if (e.target.value.trim() !== "") {
+        preview.classList.add(...e.target.value.split(" "));
+    }
+});
+
 
 window.openModal = openModal;
 window.closeModal = closeModal;

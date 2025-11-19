@@ -238,43 +238,17 @@
                                     class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white"
                                 >
                                     <tr>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            ID
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            Nombre
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            Descripción
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            Color
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            Estado
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-center text-sm font-semibold"
-                                        >
-                                            Acciones
-                                        </th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold">Nombre</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold">Descripción</th>
+                                        <th class="px-6 py-3 text-center text-sm font-semibold">Acciones</th>
                                     </tr>
                                 </thead>
+
                                 <tbody
                                     id="tableBody"
                                     class="divide-y divide-gray-200"
                                 >
-                                    <!-- Rows will be inserted here by JavaScript -->
+                                    <!-- Rows insertadas desde archivo categorias.js-->
                                 </tbody>
                             </table>
                         </div>
@@ -369,42 +343,13 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
                         ></textarea>
                     </div>
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Color</label
-                        >
-                        <select
-                            id="categoryColor"
-                            required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
-                        >
-                            <option value="Azul">Azul</option>
-                            <option value="Verde">Verde</option>
-                            <option value="Rojo">Rojo</option>
-                            <option value="Amarillo">Amarillo</option>
-                            <option value="Púrpura">Púrpura</option>
-                            <option value="Naranja">Naranja</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Estado</label
-                        >
-                        <select
-                            id="categoryStatus"
-                            required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
-                        >
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
-                    </div>
+
                     <div class="flex space-x-3 pt-4">
                         <button
                             type="submit"
                             class="flex-1 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition"
                         >
-                            Guardar
+                            Guardar   
                         </button>
                         <button
                             type="button"
@@ -417,6 +362,10 @@
                 </form>
             </div>
         </div>
+
+        <!--Firebase-->
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
         <script src="js/categorias.js"></script>
     </body>

@@ -8,13 +8,20 @@ import {
     getDocs,
     where,
     query,
-    orderBy
+    orderBy,
+    addDoc,
+    deleteDoc,
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
+import * as validations from "../../js/validations.js";
+
+import * as structure from "./modules/structure.js";
+
+const COLLECTION_NAME = "events";
 let events = [];
 let editingId = null;
 
-// formato de fecha 
+//! 0. UTILIDADES 
 
 function formatearFecha(timestamp) {
     try {
@@ -29,28 +36,70 @@ function formatearFecha(timestamp) {
     }
 }
 
-// cargar eventos 
+//! 1. Cargar datos 
 
 async function loadEvents() {
-    const ref = collection(db, "events");
-    const q = query(ref, where("status", "==", "finished"), orderBy("date", "asc"));
-    const snapshot = await getDocs(q);
+    try {
+        const ref = collection(db, COLLECTION_NAME);
+        const q = query(ref, where("status", "==", "finished"), orderBy("date", "asc"));
+        const res = await getDocs(q);
 
-    events = snapshot.docs.map(docSnap => ({
-        id: docSnap.id,
-        ...docSnap.data()
-    }));
+        events = [];
+        res.forEach((doc) => {
+            const data = doc.data();
+            events.push({
+                id: doc.id,
+                ...data,
+            });
+        });
 
-    renderTable();
+        return { success: true, data: events };
+    } catch (err) {
+        console.error("Error cargando eventos", err);
+        return { success: false, error: err.message };
+
+    }
 }
 
-// Función para mostrar la tabla 
 
-function renderTable() {
+//! 2. Mostrar datos -- Tabla 
+
+async function renderTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
-    events.forEach(event => {
+    const res = await loadEvents();
+
+    // Cargando...
+    tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
+
+    // si falla 
+
+    if (!res.success) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se pudieron cargar los eventos",
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error al cargar datos</td></tr>';
+        return;
+    }
+
+    tableBody.innerHTML = "";
+
+    // Si no hay
+    if (res.data.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">No hay eventos registrados.</td></tr>';
+        return;
+    }
+
+    // Si hay, mostrar
+    res.data.forEach(event => {
         const row = `
                 <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
                     
@@ -63,7 +112,7 @@ function renderTable() {
                     </td>
 
                     <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
-                        ${formatearFecha(event.date)}
+                        ${event.date ? formatearFecha(event.date) : 'Sin fecha'}
                     </td>
 
                     <td class="px-6 py-4">
@@ -98,20 +147,101 @@ function renderTable() {
     });
 }
 
-// Funciones del Modal y tabs 
+//! 3. GESTION DEL MODAL  - abrir, cerrar, 
+// Abrir y resetear 
 function openModal() {
-    document.getElementById('modal').classList.remove('hidden');
-    document.getElementById('modalForm').reset();
+    const modal = document.getElementById('modal');
+    const form = document.getElementById('modalForm');
+    const title = document.getElementById('modalTitle');
 
-    document.querySelectorAll(".tabContent").forEach(c => c.classList.add("hidden"));
-    document.querySelector("#tab-general").classList.remove("hidden");
+    modal.classList.remove('hidden');
+    title.innerText = 'Agregar evento pasado';
+    form.reset();
+    document.getElementById('eventId').value = '';
 
-    document.querySelectorAll(".tabBtn").forEach(b => b.classList.remove("activeTab"));
-    document.querySelector('.tabBtn[data-tab="tab-general"]').classList.add("activeTab");
+    clearImagePreviews();
+
+    // Ir a primera tab 
+    const firstTabBtn = document.querySelector('.tabBtn[data-target="tab-general"]');
+    if (firstTabBtn) firstTabBtn.click();
 }
 
 function closeModal() {
     document.getElementById('modal').classList.add('hidden');
+}
+
+
+
+
+//! 4. Llenar el formulario con datos + Editar
+
+//* TAB 1 -- General 
+// Dentro de tab 1 -- reasons 
+async function loadReasons(eventId) {
+    const reasonsRef = collection(db, COLLECTION_NAME, eventId, "reasons");
+    const q = query(reasonsRef, orderBy("order", "asc"));
+    const res = await getDocs(q);
+
+    const reasons = [];
+    res.forEach(doc => {
+        reasons.push({
+            id: doc.id,
+            ...doc.data()
+        });
+    });
+
+    return reasons;
+}
+function fillGeneralTab(data) {
+    document.getElementById("eventPrefix").value = data.heroPrefix || "";
+    document.getElementById("eventTitle").value = data.title || "";
+    document.getElementById("eventSubtitle").value = data.subtitle || "";
+    document.getElementById("eventDescription").value = data.description || "";
+
+    document.getElementById("eventModality").value = data.modality || "presencial";
+    document.getElementById("eventLocation").value = data.location || "";
+    document.getElementById("eventPrizes").value = data.awardsText || "";
+
+    // Fecha
+    if (data.date?.toDate) {
+        const d = data.date.toDate();
+        document.getElementById("eventDate").value = d.toISOString().split("T")[0];
+    }
+
+}
+
+function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage").closest("label");
+    clearImagePreviews();
+
+    if (data.banner) {
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+        container.appendChild(img);
+    }
+}
+
+function fillReasons(reasons) {
+    const fields = [
+        { icon: "reason1Icon", title: "reason1Title", desc: "reason1Description" },
+        { icon: "reason2Icon", title: "reason2Title", desc: "reason2Description" },
+        { icon: "reason3Icon", title: "reason3Title", desc: "reason3Description" },
+    ];
+
+    fields.forEach(f => {
+        document.getElementById(f.icon).value = "";
+        document.getElementById(f.title).value = "";
+        document.getElementById(f.desc).value = "";
+    });
+
+    // Llenar según orden
+    reasons.forEach((r, idx) => {
+        if (idx >= 3) return;
+        document.getElementById(fields[idx].icon).value = r.icon || "";
+        document.getElementById(fields[idx].title).value = r.title || "";
+        document.getElementById(fields[idx].desc).value = r.text || "";
+    });
 }
 
 
@@ -132,32 +262,65 @@ async function editEvent(id) {
     openModal();
 
     //*  Cargar informacion
-    //! TAB 1 
-    document.getElementById("eventId").value = id;
-    document.getElementById("eventPrefix").value = data.heroPrefix;
-    document.getElementById("eventTitle").value = data.title || "";
-    document.getElementById("eventSubtitle").value = data.subtitle || "";
-    document.getElementById("eventDescription").value = data.description || "";
+    //! TAB GENERAL
 
-    document.getElementById("eventModality").value = data.modality || "presencial";
-    document.getElementById("eventLocation").value = data.location || "";
-    document.getElementById("eventPrizes").value = data.awardsText || "";
+    fillGeneralTab(data);
+    fillGeneralImages(data);
+    const reasons = await loadReasons(id);
+    fillReasons(reasons);
 
-    // Fecha 
-    if (data.date?.toDate) {
-        const d = data.date.toDate();
-        document.getElementById("eventDate").value = d.toISOString().split("T")[0];
-    }
-
-    //! RAZONES -- PENDIENTE DE APLICAR, CONSULTAR ESTRUCTURA 
+    // TODO: El resto de tabs + reazons
 }
 
-document.getElementById("modalForm").addEventListener("submit", async(element) => {
-    element.preventDefault(); 
+//! 5. Crud -- guardar cambios y eliminar 
+
+// tomar reasons para guardar y guardar Reasons 
+function getReasonsFromForm() {
+    const data = [
+        {
+            icon: document.getElementById("reason1Icon").value,
+            title: document.getElementById("reason1Title").value.trim(),
+            text: document.getElementById("reason1Description").value.trim(),
+            order: 1
+        },
+        {
+            icon: document.getElementById("reason2Icon").value,
+            title: document.getElementById("reason2Title").value.trim(),
+            text: document.getElementById("reason2Description").value.trim(),
+            order: 2
+        },
+        {
+            icon: document.getElementById("reason3Icon").value,
+            title: document.getElementById("reason3Title").value.trim(),
+            text: document.getElementById("reason3Description").value.trim(),
+            order: 3
+        }
+    ]
+    return data.filter(r =>
+        r.title !== "" || r.text !== "" || r.icon !== ""
+    );
+}
+
+async function guardarRazones(eventId, reasons) {
+    const reasonsRef = collection(db, COLLECTION_NAME, eventId, "reasons");
+
+    // 1. Borrar todas las razones previas
+    const existing = await getDocs(reasonsRef);
+    const deletions = existing.docs.map(d => deleteDoc(d.ref));
+    await Promise.all(deletions.map(d => d.catch(() => { }))); 
+
+    // 2. Crear nuevas
+    const creates = reasons.map(r => addDoc(reasonsRef, r));
+    await Promise.all(creates);
+}
+
+// on submit para guardar 
+document.getElementById("modalForm").addEventListener("submit", async (element) => {
+    element.preventDefault();
 
     if (!editingId) return;
 
-    const ref = doc(db, "events", editingId); 
+    const ref = doc(db, "events", editingId);
 
     const updated = {
         heroPrefix: document.getElementById("eventPrefix").value,
@@ -170,12 +333,21 @@ document.getElementById("modalForm").addEventListener("submit", async(element) =
         location: document.getElementById("eventLocation").value,
         awardsText: document.getElementById("eventPrizes").value
     }
-
     await updateDoc(ref, updated);
+
+    //* Guardar razones 
+    const reasons = getReasonsFromForm();
+    try {
+        await guardarRazones(editingId, reasons);
+    } catch (err) {
+        console.error("Error guardando razones", err);
+    }
     closeModal();
-    loadEvents(); 
+    renderTable();
 });
 
+
+// Eliminar evento 
 function deleteEvent(id) {
     if (confirm('¿Borrar evento?')) {
         events = events.filter(e => e.id !== id);
@@ -183,28 +355,91 @@ function deleteEvent(id) {
     }
 }
 
-function iniciarTabs() {
+
+
+//! 6. Gestion de imagenes 
+
+function clearImagePreviews() {
+    // Selecciona todas las imágenes creadas dinámicamente con la clase .preview-image
+    const previewElements = document.querySelectorAll('.preview-image');
+
+    // Las elimina del DOM
+    previewElements.forEach(el => el.remove());
+}
+
+
+const setupImagePreview = (inputId) => {
+    const input = document.getElementById(inputId);
+    const container = input.closest('label');
+
+    if (!input || !container) return;
+
+    container.classList.add('relative', 'overflow-hidden');
+
+    input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            // Si no hay archivo, remover la previsualización existente
+            const oldPreview = container.querySelector('.preview-image');
+            if (oldPreview) oldPreview.remove();
+            return;
+        }
+
+        const oldPreview = container.querySelector('.preview-image');
+        if (oldPreview) oldPreview.remove();
+
+        const imageUrl = URL.createObjectURL(file);
+
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+
+        container.appendChild(img);
+    });
+};
+
+
+//! DOM + init + tabs
+
+// Logica de Tabs 
+function setupTabs() {
     const tabButtons = document.querySelectorAll(".tabBtn");
     const tabContents = document.querySelectorAll(".tabContent");
 
     tabButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const targetTab = btn.dataset.tab;
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
 
-            // quitar estado anterior
-            tabButtons.forEach(b => b.classList.remove("activeTab"));
+            // Resetear clase de botones
+            tabButtons.forEach(btn => {
+                btn.className = "tabBtn text-gray-500 hover:text-gray-700 pb-2 border-b-2 border-transparent transition-colors cursor-pointer";
+            });
+
+            // Ocultar todos 
             tabContents.forEach(c => c.classList.add("hidden"));
 
-            // activar el nuevo
-            btn.classList.add("activeTab");
-            document.getElementById(targetTab).classList.remove("hidden");
+            // Activar boton actual 
+            btn.className = "tabBtn text-[#004aad] border-b-2 border-[#004aad] pb-2 font-bold transition-colors cursor-pointer";
+            const targetTab = btn.dataset.tab;
+
+            // Mostrar contenido
+            const targetContent = document.getElementById(targetTab);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
         });
     });
 }
 
-// Inicializar
 document.addEventListener("DOMContentLoaded", () => {
-    loadEvents(), iniciarTabs();
+    renderTable();
+    setupTabs();
+
+    // Listener de botones 
+
+    // Imagenes 
+    setupImagePreview('eventImage');
+
 });
 
 window.openModal = openModal;

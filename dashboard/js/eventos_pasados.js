@@ -20,6 +20,7 @@ import * as stats from "./modules/stats.js";
 import * as gallery from "./modules/gallery.js";
 import * as awards from "./modules/awards.js";
 import * as links from "./modules/links.js";
+import * as banner from "./modules/eventBanner.js";
 
 
 // Manejo de iconos
@@ -220,6 +221,90 @@ function fillGeneralTab(data) {
 }
 
 function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) {
+        console.error("❌ Container del banner no encontrado");
+        return;
+    }
+    
+    // Limpiar solo el banner
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) {
+        bannerPreview.remove();
+    }
+    
+    const placeholder = container.querySelector("#bannerPlaceholder");
+    if (!placeholder) {
+        console.error("❌ Placeholder del banner no encontrado");
+        return;
+    }
+
+    if (data.banner) {
+        console.log("✅ Cargando banner:", data.banner);
+        
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+        
+        // Agregar listener de error
+        img.onerror = () => {
+            console.error("❌ Error cargando imagen del banner");
+            placeholder.style.display = "flex";
+            img.remove();
+        };
+        
+        img.onload = () => {
+            console.log("✅ Banner cargado exitosamente");
+        };
+        
+        container.appendChild(img);
+        
+        // Ocultar placeholder
+        placeholder.style.display = "none";
+    } else {
+        console.log("ℹ️ No hay banner, mostrando placeholder");
+        // Mostrar placeholder si no hay banner
+        placeholder.style.display = "flex";
+    }
+}
+
+/*
+function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) return;
+    
+    // Limpiar solo el banner (ya corregido antes)
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) bannerPreview.remove();
+    
+    const placeholder = container.querySelector("#bannerPlaceholder");
+
+    if (!placeholder) {
+        console.error("Placeholder del banner no encontrado");
+        return;
+    }
+    if (data.banner) {
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+        container.appendChild(img);
+        
+        // Ocultar placeholder
+        if (placeholder) {
+            placeholder.style.display = "none";
+        }
+    } else {
+        // Mostrar placeholder si no hay banner
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+    }
+}*/
+
+/*
+function fillGeneralImages(data) {
     const container = document.getElementById("eventImage").closest("label");
     clearImagePreviews();
 
@@ -229,7 +314,7 @@ function fillGeneralImages(data) {
         img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
         container.appendChild(img);
     }
-}
+}*/
 
 function fillReasons(reasons) {
     const mapping = [
@@ -273,6 +358,7 @@ async function editEvent(id) {
 
     fillGeneralTab(data);
     fillGeneralImages(data);
+    setupBannerListener();
     const reasons = await loadReasons(id);
     fillReasons(reasons);
 
@@ -351,6 +437,8 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
 
     const ref = doc(db, "events", editingId);
 
+    const bannerUrl = banner.getBannerUrl();
+
     const updated = {
         heroPrefix: document.getElementById("eventPrefix").value,
         title: document.getElementById("eventTitle").value,
@@ -360,7 +448,8 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
         date: new Date(document.getElementById("eventDate").value),
         modality: document.getElementById("eventModality").value,
         location: document.getElementById("eventLocation").value,
-        awardsText: document.getElementById("eventPrizes").value
+        awardsText: document.getElementById("eventPrizes").value,
+        banner: bannerUrl || ""
     }
     await updateDoc(ref, updated);
 
@@ -428,13 +517,36 @@ function deleteEvent(id) {
 //! 6. Gestion de imagenes 
 
 function clearImagePreviews() {
-    // Selecciona todas las imágenes creadas dinámicamente con la clase .preview-image
-    const previewElements = document.querySelectorAll('.preview-image');
-
-    // Las elimina del DOM
-    previewElements.forEach(el => el.remove());
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
+        
+        // ← NUEVO: Restaurar placeholder
+        const placeholder = bannerContainer.querySelector("#bannerPlaceholder");
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+        
+        // ← NUEVO: Limpiar data attribute
+        const input = document.getElementById("eventImage");
+        if (input) {
+            delete input.dataset.cloudinaryUrl;
+        }
+    }
 }
 
+/*
+function clearImagePreviews() {
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
+    }
+}
+*/
 
 const setupImagePreview = (inputId) => {
     const input = document.getElementById(inputId);
@@ -708,6 +820,11 @@ function setupGalleryListeners(eventId) {
             "beforeend",
             gallery.renderGalleryHTML([newItem])
         );
+
+        const newInput = document.getElementById(`gallery-file-${tempId}`);
+        if (newInput) {
+            setupImagePreview(newInput.id);
+        }
     });
 }
 
@@ -869,6 +986,38 @@ function setupLinksListeners(eventId) {
         );
     });
 }
+
+// banner 
+// Configurar listener para el banner
+function setupBannerListener() {
+    const bannerInput = document.getElementById("eventImage");
+    
+    if (!bannerInput) {
+        console.error("Input del banner no encontrado");
+        return;
+    }
+    
+    // Limpiar listener previo clonando el nodo
+    const newInput = bannerInput.cloneNode(true);
+    bannerInput.parentNode.replaceChild(newInput, bannerInput);
+    
+    // Obtener referencia al input actualizado
+    const activeInput = document.getElementById("eventImage");
+    
+    // Agregar nuevo listener
+    activeInput.addEventListener("change", async (e) => {
+        console.log("Archivo seleccionado para banner");
+        const result = await banner.handleBannerImageChange(e.target);
+        if (result) {
+            console.log("Banner subido:", result);
+        } else {
+            console.error("No se subió banner");
+        }
+    });
+    
+    console.log("Listener del banner configurado");
+}
+
 //! INICIALIZAR REALMENTE 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -876,6 +1025,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupTabs();
     setupStructureListeners();
     setupStatsListeners();
+    setupBannerListener();
 });
 
 // Manejar cambiso en selects de icons 

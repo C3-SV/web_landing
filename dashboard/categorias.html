@@ -45,6 +45,7 @@
                         >Volver al sitio</a
                     >
                     <button
+                        id="btnLogout"
                         class="bg-white text-[#004aad] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg hover:bg-gray-100 transition text-sm sm:text-base"
                     >
                         Cerrar Sesión
@@ -210,7 +211,7 @@
                             />
                         </div>
                         <button
-                            onclick="openModal()"
+                            id="btnAgregar"
                             class="w-full sm:w-auto bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition flex items-center justify-center space-x-2"
                         >
                             <svg
@@ -301,7 +302,7 @@
                         Agregar Categoría
                     </h3>
                     <button
-                        onclick="closeModal()"
+                        id="btnCerrarModal"
                         class="text-white hover:text-gray-200"
                     >
                         <svg
@@ -353,7 +354,7 @@
                         </button>
                         <button
                             type="button"
-                            onclick="closeModal()"
+                            id="btnCancelar"
                             class="flex-1 bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
                         >
                             Cancelar
@@ -363,10 +364,8 @@
             </div>
         </div>
 
-        <!--Firebase-->
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-        <script src="js/categorias.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="module" src="js/categorias.js"></script>
+        <script src="js/auth_guard.js" type="module"></script>
     </body>
 </html>

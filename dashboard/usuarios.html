@@ -45,6 +45,7 @@
                         >Volver al sitio</a
                     >
                     <button
+                        id="btnLogout"
                         class="bg-white text-[#004aad] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg hover:bg-gray-100 transition text-sm sm:text-base"
                     >
                         Cerrar Sesión
@@ -210,7 +211,7 @@
                             />
                         </div>
                         <button
-                            onclick="openModal()"
+                            id="btnAgregar"
                             class="w-full sm:w-auto bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition flex items-center justify-center space-x-2"
                         >
                             <svg
@@ -241,12 +242,12 @@
                                         <th
                                             class="px-6 py-3 text-left text-sm font-semibold"
                                         >
-                                            ID
+                                            Nombre Completo
                                         </th>
                                         <th
                                             class="px-6 py-3 text-left text-sm font-semibold"
                                         >
-                                            Nombre
+                                            Username
                                         </th>
                                         <th
                                             class="px-6 py-3 text-left text-sm font-semibold"
@@ -257,11 +258,6 @@
                                             class="px-6 py-3 text-left text-sm font-semibold"
                                         >
                                             Rol
-                                        </th>
-                                        <th
-                                            class="px-6 py-3 text-left text-sm font-semibold"
-                                        >
-                                            Estado
                                         </th>
                                         <th
                                             class="px-6 py-3 text-center text-sm font-semibold"
@@ -327,7 +323,7 @@
                         Agregar Usuario
                     </h3>
                     <button
-                        onclick="closeModal()"
+                        id="btnCerrarModal"
                         class="text-white hover:text-gray-200"
                     >
                         <svg
@@ -345,68 +341,128 @@
                         </svg>
                     </button>
                 </div>
-                <form id="userForm" class="p-6 space-y-4">
-                    <input type="hidden" id="userId" />
+                <form id="userForm" class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+                    <input type="hidden" id="userId" name="id" />
+
+                    <!-- Campos requeridos -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">
+                                Nombre <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                                placeholder="Juan"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">
+                                Apellido <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                                placeholder="Pérez"
+                            />
+                        </div>
+                    </div>
+
                     <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Nombre</label
-                        >
+                        <label class="block text-gray-700 font-medium mb-2">
+                            Username <span class="text-red-500">*</span>
+                        </label>
                         <input
                             type="text"
-                            id="userName"
+                            id="username"
+                            name="username"
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                            placeholder="juanperez"
                         />
+                        <p class="text-xs text-gray-500 mt-1">Único en el sistema</p>
                     </div>
+
                     <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Email</label
-                        >
+                        <label class="block text-gray-700 font-medium mb-2">
+                            Email <span class="text-red-500">*</span>
+                        </label>
                         <input
                             type="email"
-                            id="userEmail"
+                            id="email"
+                            name="email"
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                            placeholder="juan@ejemplo.com"
                         />
                     </div>
+
                     <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Rol</label
-                        >
+                        <label class="block text-gray-700 font-medium mb-2">
+                            Rol <span class="text-red-500">*</span>
+                        </label>
                         <select
-                            id="userRole"
+                            id="role"
+                            name="role"
                             required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
                         >
-                            <option value="Administrador">Administrador</option>
-                            <option value="Usuario">Usuario</option>
-                            <option value="Moderador">Moderador</option>
+                            <option value="">Selecciona un rol</option>
+                            <option value="user">Usuario</option>
+                            <option value="moderator">Moderador</option>
+                            <option value="admin">Administrador</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2"
-                            >Estado</label
-                        >
-                        <select
-                            id="userStatus"
-                            required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
-                        >
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
+
+                    <!-- Campos opcionales -->
+                    <div class="border-t pt-4 mt-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3">Información Adicional (Opcional)</h4>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">
+                                    Teléfono
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                                    placeholder="+503 1234-5678"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">
+                                    Fecha de Nacimiento
+                                </label>
+                                <input
+                                    type="date"
+                                    id="birthdate"
+                                    name="birthdate"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex space-x-3 pt-4">
+
+                    <div class="flex space-x-3 pt-4 border-t">
                         <button
                             type="submit"
-                            class="flex-1 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition"
+                            class="flex-1 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-semibold"
                         >
                             Guardar
                         </button>
                         <button
                             type="button"
-                            onclick="closeModal()"
-                            class="flex-1 bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                            id="btnCancelar"
+                            class="flex-1 bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition font-semibold"
                         >
                             Cancelar
                         </button>
@@ -415,6 +471,8 @@
             </div>
         </div>
 
-        <script src="js/usuarios.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="module" src="js/usuarios.js"></script>
+        <script src="js/auth_guard.js" type="module"></script>
     </body>
 </html>

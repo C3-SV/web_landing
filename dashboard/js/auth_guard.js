@@ -43,7 +43,7 @@ onAuthStateChanged(auth, async (user) => {
 
     } else {
         if (isDashboard) {
-            window.location.href = "index.html";
+            window.location.href = "../login.html";
         } else {
             document.body.style.display = "block";
         }

@@ -26,29 +26,11 @@ const itemsPerPage = 5;
 let editingId = null;
 
 /**
- * Genera una contraseña aleatoria segura
+ * Genera una contraseña por defecto
  */
-function generateRandomPassword(length = 12) {
-    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*';
-    const allChars = uppercase + lowercase + numbers + symbols;
-
-    let password = '';
-    // Asegurar al menos un carácter de cada tipo
-    password += uppercase.charAt(Math.floor(Math.random() * uppercase.length));
-    password += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
-    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    password += symbols.charAt(Math.floor(Math.random() * symbols.length));
-
-    // Completar el resto
-    for (let i = password.length; i < length; i++) {
-        password += allChars.charAt(Math.floor(Math.random() * allChars.length));
-    }
-
-    // Mezclar la contraseña
-    return password.split('').sort(() => Math.random() - 0.5).join('');
+function generateRandomPassword() {
+    // Contraseña por defecto para todos los usuarios
+    return "password";
 }
 
 /**
@@ -312,8 +294,8 @@ async function addNewUser(userData) {
             }
         });
 
-        // Generar contraseña aleatoria
-        const generatedPassword = generateRandomPassword(12);
+        // Generar contraseña por defecto
+        const generatedPassword = generateRandomPassword();
 
         // Crear usuario en Firebase Authentication
         const userCredential = await createUserWithEmailAndPassword(auth, userData.email, generatedPassword);
@@ -572,6 +554,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             sidebarOverlay.classList.add('hidden');
         });
     }
+
+    // Cerrar el sidebar al hacer clic en cualquier enlace del menú
+    const sidebarLinks = sidebar?.querySelectorAll('a');
+    sidebarLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+    });
 
     // Configurar búsqueda
     setupSearch();

@@ -267,6 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cerrar el sidebar al hacer clic en cualquier enlace del menú
+    const sidebarLinks = sidebar?.querySelectorAll('a');
+    sidebarLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+    });
+
     // Configurar listener en tiempo real
     setupRealtimeListener();
 

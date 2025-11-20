@@ -1,8 +1,8 @@
 import { app, db, auth } from "./firebase_config.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 //import { getAnalytics } from "firebase/analytics";
 import { doc, addDoc, setDoc, getDoc, getDocs, collection, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-import {CLOUDINARY_PRESET, CLOUDINARY_URL} from "./cloudinary_config.js"
+import { CLOUDINARY_PRESET, CLOUDINARY_URL } from "./cloudinary_config.js"
 
 // Función para registrar usuarios
 function isEmail(text) {
@@ -57,7 +57,7 @@ export async function registerUser(email, password, username) {
 
         // 3. Guardar datos en Firestore
         await setDoc(doc(db, "users", user.uid), {
-            badges: [],             
+            badges: [],
             birthdate: "",
             createdAt: new Date(),
             email: email,
@@ -66,7 +66,7 @@ export async function registerUser(email, password, username) {
             lastName: "",
             phone: "",
             profilePhoto: "",
-            role: "user",            
+            role: "user",
             username: username
         });
 
@@ -123,6 +123,14 @@ onAuthStateChanged(auth, async (user) => {
             window.location.href = "login.html";
         }
         return;
+    }
+    try {
+        const ref = doc(db, "users", user.uid);
+        await updateDoc(ref, {
+            lastLoginAt: new Date().toISOString()
+        });
+    } catch (err) {
+        console.error("Error actualizando lastLoginAt:", err);
     }
 
     console.log("Sesión iniciada:", user.uid);
@@ -221,7 +229,7 @@ document.addEventListener("click", async (e) => {
         // Si no está editando → Activar edición
         container.classList.add("editing");
 
-         if (field === "password") {
+        if (field === "password") {
             input.value = "";
         } else {
             const currentValue = view.textContent.trim();
@@ -257,7 +265,7 @@ async function saveField(container) {
         const user = auth.currentUser;
         if (!user) return;
 
-         if (field === "password") {
+        if (field === "password") {
             if (newValue.length < 8) {
                 await showError("La contraseña debe tener al menos 8 caracteres.");
                 return;
@@ -271,7 +279,7 @@ async function saveField(container) {
                     await showError("Por seguridad, vuelve a iniciar sesión para cambiar la contraseña.");
                 } else {
                     console.error("Error cambiando contraseña:", err);
-                     await showError("Error cambiando contraseña")
+                    await showError("Error cambiando contraseña")
                 }
                 return;
             }
@@ -284,7 +292,7 @@ async function saveField(container) {
             btn.textContent = "Editar";
 
             await showUpdateSuccess();
-            return; 
+            return;
         }
         const firebaseField = fieldMap[field];
         if (!firebaseField) return;
@@ -305,7 +313,7 @@ async function saveField(container) {
 
         const updatedData = await loadUserData(user.uid);
         injectUserData(updatedData);
-        
+
         await showUpdateSuccess();
 
     } catch (error) {

@@ -126,9 +126,13 @@ onAuthStateChanged(auth, async (user) => {
     }
     try {
         const ref = doc(db, "users", user.uid);
-        await updateDoc(ref, {
-            lastLoginAt: new Date().toISOString()
-        });
+        const snap = await getDoc(ref);
+
+        if (snap.exists() && snap.data().lastLoginAt) {
+            await setDoc(ref, {
+                lastLoginAt: new Date().toISOString()
+            }, { merge: true });
+        }
     } catch (err) {
         console.error("Error actualizando lastLoginAt:", err);
     }

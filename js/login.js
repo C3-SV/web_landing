@@ -1,10 +1,18 @@
-import { registerUser, loginUser, showUpdateSuccess } from "./auth.js";
+import { registerUser, loginUser, showUpdateSuccess, showError } from "./auth.js";
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     let correo = document.getElementById("registerEmail").value;
     let password = document.getElementById("registerPassword").value;
     let userName = document.getElementById("userName").value;
+
+    const pass1 = document.getElementById("registerPassword").value.trim();
+    const pass2 = document.getElementById("registerPassword2").value.trim();
+
+    if (pass1 !== pass2) {
+        await showError("Las contraseñas no coinciden");
+        return;
+    }
 
     const status = await registerUser(correo, password, userName);
 
@@ -14,6 +22,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         // Limpiar los controles del formulario
         document.getElementById("registerEmail").value = '';
         document.getElementById("registerPassword").value = '';
+        document.getElementById("registerPassword2").value = '';
         document.getElementById("userName").value = '';
 
     } else if (status.reason === "username_exists") {

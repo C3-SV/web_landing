@@ -1,4 +1,4 @@
-// Firebase y datos 
+// Firebase y datos
 import { db } from "../../js/firebase_config.js";
 import {
     doc,
@@ -14,6 +14,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 import * as validations from "../../js/validations.js";
+import { getModalityBadge, getEventStatusBadge } from "./badge_styles.js";
 
 import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
@@ -99,9 +100,12 @@ async function renderTable() {
 
     // eventos de la página actual
     paginatedEvents.forEach(event => {
+        const modalityBadge = getModalityBadge(event.modality || '');
+        const statusBadge = getEventStatusBadge(event.status || '');
+
         const row = `
             <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
-                
+
                 <td class="px-6 py-4 text-sm text-gray-900">
                     ${event.id}
                 </td>
@@ -115,14 +119,14 @@ async function renderTable() {
                 </td>
 
                 <td class="px-6 py-4">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                        ${event.modality}
+                    <span class="${modalityBadge.classes}">
+                        ${modalityBadge.text}
                     </span>
                 </td>
 
                 <td class="px-6 py-4">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                        ${event.status}
+                    <span class="${statusBadge.classes}">
+                        ${statusBadge.text}
                     </span>
                 </td>
 

@@ -12,54 +12,77 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/nav-auth.js"></script>
 </head>
 
 <body data-requires-auth class="min-h-screen flex flex-col bg-[#0c1220] text-white text-slate-900 font-codec">
-    <!--? NAVBAR - version con sesion iniciada  -->
-    <header
-        class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
-        <div class="px-4 py-2">
-            <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover" />
-        </div>
+  <header
+    class="h-16 fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-gradient-to-r from-[#004aad] to-[#4f1e5d]">
+    <div class="px-4 py-2">
+        <img src="./assets/images/logo-c3.jpeg" alt="C3 Logo" class="h-14 w-14 rounded-full object-cover" />
+    </div>
 
-        <!-- Hamburger button -->
-        <button id="menu-toggle" class="md:hidden px-4 py-2 text-white focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
+    <!-- Hamburger button -->
+    <button id="menu-toggle" class="md:hidden px-4 py-2 text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
 
-        <!-- Desktop nav -->
-        <nav class="hidden md:flex h-full">
-            <a href="index.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
-            <a href="about.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre
-                el C3</a>
-            <a href="events.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
-            <a href="contact.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
-            <a href="login.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
-        </nav>
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex h-full items-center">
+        <a href="index.html"
+            class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Inicio</a>
+        <a href="about.html"
+            class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Sobre
+            el C3</a>
+        <a href="events.html"
+            class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Eventos</a>
+        <a href="contact.html"
+            class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Contáctanos</a>
 
-        <!-- Mobile nav -->
-        <nav id="mobile-menu"
-            class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col">
-            <a href="index.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Inicio</a>
-            <a href="about.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Sobre
-                el C3</a>
-            <a href="events.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Eventos</a>
-            <a href="contact.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Contáctanos</a>
-            <a href="login.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Login</a>
-        </nav>
-    </header>
+        <!-- LOGIN (solo si NO hay sesión) -->
+        <a id="nav-login"
+            href="login.html"
+            class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Login</a>
+
+        <!-- PERFIL (solo si hay sesión) -->
+        <a id="nav-profile" href="profile.html"
+            class="hidden px-4">
+            <img id="nav-profile-img"
+                class="h-10 w-10 rounded-full object-cover ring-2 ring-white/40" />
+        </a>
+    </nav>
+
+    <!-- Mobile nav -->
+    <nav id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col">
+
+        <a href="index.html"
+            class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Inicio</a>
+        <a href="about.html"
+            class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Sobre
+            el C3</a>
+        <a href="events.html"
+            class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Eventos</a>
+        <a href="contact.html"
+            class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Contáctanos</a>
+
+        <!-- LOGIN MOBILE -->
+        <a id="nav-login-mobile"
+            href="login.html"
+            class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Login</a>
+
+        <!-- PERFIL MOBILE -->
+        <a id="nav-profile-mobile"
+            href="profile.html"
+            class="hidden flex items-center gap-3 px-6 py-4 border-t border-white/10 hover:bg-black hover:bg-opacity-30">
+            <img id="nav-profile-img-mobile" class="h-10 w-10 rounded-full object-cover ring-2 ring-white/40" />
+            <span class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30">Mi Perfil</span>
+        </a>
+    </nav>
+</header>
 
     <script>
         // Toggle mobile menu
@@ -80,285 +103,135 @@
             </h1>
 
             <!--? Perfil y resumen -->
-            <div class="flex flex-col lg:flex-row gap-8">
-                <section class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6">
-                    <header class="flex items-center gap-4">
-                        <div class="relative">
-                            <img id="profile-picture" data-user="profilePhoto"
-                                data-default="./assets/images/logo-c3.jpeg"
-                                class="h-24 w-24 rounded-full object-cover ring-2 ring-white/20" />
-                            <label for="profile-picture-input"
-                                class="absolute -bottom-1 -right-1 inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#5c2b9c] hover:opacity-90 cursor-pointer"
-                                title="Cambiar foto">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                        d="M10.5 2a1 1 0 0 1 .8.4l.9 1.2h1.3A1.5 1.5 0 0 1 15 5v7a1.5 1.5 0 0 1-1.5 1.5H2.5A1.5 1.5 0 0 1 1 12V5A1.5 1.5 0 0 1 2.5 3.5h1.3l.9-1.2a1 1 0 0 1 .8-.4zM8 6.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6m5-1.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1" />
-                                </svg>
-                            </label>
-                            <input type="file" id="profile-picture-input" accept="image/*" class="hidden" />
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold">
-                                <span data-user-fullname></span>
-                            </h2>
-                            <p class="text-white/70">@<span data-user="username"></span></p>
-                        </div>
-                        <button id="logoutBtn"
-                            class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700">
-                            Cerrar sesión
-                        </button>
-                    </header>
+            <header class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
 
-                    <!--? Campos del perfil -->
-                    <div class="mt-6 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Nombre</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="nombre">
-                                <span class="field-view" data-user="firstName"></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="text" data-user="firstName" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
+
+                <div class="relative order-1 sm:order-none">
+                    <img id="profile-picture" data-user="profilePhoto" data-default="./assets/images/logo-c3.jpeg"
+                        class="h-24 w-24 rounded-full object-cover ring-2 ring-white/20" />
+
+                    <label for="profile-picture-input"
+                        class="absolute -bottom-1 -right-1 inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#5c2b9c] hover:opacity-90 cursor-pointer"
+                        title="Cambiar foto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M10.5 2a1 1 0 0 1 .8.4l.9 1.2h1.3A1.5 1.5 0 0 1 15 5v7a1.5 1.5 0 0 1-1.5 1.5H2.5A1.5 1.5 0 0 1 1 12V5A1.5 1.5 0 0 1 2.5 3.5h1.3l.9-1.2a1 1 0 0 1 .8-.4zM8 6.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6m5-1.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1" />
+                        </svg>
+                    </label>
+
+                    <input type="file" id="profile-picture-input" accept="image/*" class="hidden" />
+                </div>
+
+                <div class="flex flex-col items-center sm:items-start text-center sm:text-left order-2">
+                    <h2 class="text-2xl font-bold">
+                        <span data-user-fullname></span>
+                    </h2>
+
+                    <p class="text-white/70">@<span data-user="username"></span></p>
+
+                    <button id="logoutBtn"
+                        class="mt-3 bg-red-600 text-white text-xs font-semibold py-1 px-3 rounded-md hover:bg-red-700">
+                        Cerrar sesión
+                    </button>
+                </div>
+            </header>
+
+            <!--? Campos del perfil -->
+            
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 w-full max-w-3xl mx-auto space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Nombre</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="nombre">
+                        <span class="field-view" data-user="firstName"></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="text"
+                            data-user="firstName" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
                         </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Apellido</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="apellido">
-                                <span class="field-view" data-user="lastName"></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="text" data-user="lastName" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Correo</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="correo">
-                                <span class="field-view" data-user="email"></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="email" data-user="email" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Usuario</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="usuario">
-                                <span class="field-view"><span data-user="username"></span></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="text" data-user="username" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Teléfono</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="telefono">
-                                <span class="field-view"><span data-user="phone"></span></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="text" data-user="phone" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Contraseña</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="password">
-                                <span class="field-view">••••••••</span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="password" value="password123" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <label class="w-48 text-white/80">Fecha de nacimiento</label>
-                            <div class="flex-1 flex items-center gap-3" data-field="dob">
-                                <span class="field-view" data-user="birthdate"></span>
-                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
-                                    type="date" data-user="birthdate" />
-                                <div class="ml-auto flex gap-2">
-                                    <button
-                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
-                                        Editar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!--? Resumen de la cuenta / estadisticas del perfil  -->
-                <aside class="w-full lg:w-80 shrink-0 space-y-4">
-                    <div class="bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] rounded-2xl p-[1px]">
-                        <div class="bg-[#0c1220] rounded-2xl p-5">
-                            <h3 class="font-extrabold text-lg mb-2">
-                                Resumen
-                            </h3>
-                            <ul class="space-y-2 text-white/90">
-                                <li>
-                                    Problemas resueltos:
-                                    <span class="font-bold">16</span>
-                                </li>
-                                <li>
-                                    Puntaje total:
-                                    <span class="font-bold">1,280</span>
-                                </li>
-                                <li>
-                                    Ranking local:
-                                    <span class="font-bold">#7</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
-                        <h4 class="font-bold mb-2">Insignias</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Finalista CSP2025</span>
-                            <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Miembro OG</span>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-
-            <!--? Eventos Pasados -->
-            <section class="space-y-4">
-                <h2 class="text-2xl font-extrabold">Eventos pasados</h2>
-
-                <!--? EJEMPLO: CSP 2025 -->
-                <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <h3 class="text-xl font-bold">
-                                CSP 2025 — Copa Salvadoreña de Programación
-                            </h3>
-                            <p class="text-white/80">
-                                Sede ESEN · 07/07/2025
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="px-3 py-1 rounded-full bg-[#004aad] text-sm font-bold">Finalista</span>
-                            <span class="px-3 py-1 rounded-full bg-white/10 text-sm">4/6 problemas</span>
-                            <span class="px-3 py-1 rounded-full bg-white/10 text-sm">Top 10</span>
-                        </div>
-                    </div>
-
-                    <!--? Desempeño / DATOS -->
-                    <div class="mt-4 overflow-x-auto">
-                        <table class="min-w-[480px] w-full text-left text-sm">
-                            <thead class="text-white/70">
-                                <tr>
-                                    <th class="py-2">Problema</th>
-                                    <th class="py-2">Resultado</th>
-                                    <th class="py-2">Tiempo</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-white/10">
-                                <tr>
-                                    <td class="py-2">
-                                        A - Fotografiando Autovengadores
-                                    </td>
-                                    <td class="py-2">Aceptado</td>
-                                    <td class="py-2">00:18</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        B - Autovengadores Vs Darthinho:
-                                        Round I
-                                    </td>
-                                    <td class="py-2">Aceptado</td>
-                                    <td class="py-2">01:04</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        C - Entrando al Cuarto de Mordor
-                                    </td>
-                                    <td class="py-2">Aceptado</td>
-                                    <td class="py-2">01:47</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        D - Decodificando el Lenguaje de
-                                        Og-Die
-                                    </td>
-                                    <td class="py-2">Wrong Answer</td>
-                                    <td class="py-2">-</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        E - Autovengadores: Programación del
-                                        Infinito (Vol. 2)
-                                    </td>
-                                    <td class="py-2">Aceptado</td>
-                                    <td class="py-2">02:39</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        F - Autovengadores: Fin de la
-                                        Compilación (Vol. 2)
-                                    </td>
-                                    <td class="py-2">Wrong Answer</td>
-                                    <td class="py-2">-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </article>
-            </section>
-
-            <!--? Eventos Futuros -->
-            <section class="space-y-4">
-                <h2 class="text-2xl font-extrabold">Eventos futuros</h2>
-
-                <!--? EJEMPLO: Hackathon C3 2026 -->
-                <div
-                    class="rounded-2xl border border-white/10 bg-white/5 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h3 class="text-xl font-bold">
-                            Hackathon C3 — 2026
-                        </h3>
-                        <p class="text-white/80">
-                            San Salvador · 15/03/2026
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="px-3 py-1 rounded-full bg-emerald-600/80 text-sm font-bold">Inscrito</span>
-                        <a href="#" class="px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm">Ver
-                            detalles</a>
                     </div>
                 </div>
-            </section>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Apellido</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="apellido">
+                        <span class="field-view" data-user="lastName"></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="text"
+                            data-user="lastName" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Correo</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="correo">
+                        <span class="field-view" data-user="email"></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="email"
+                            data-user="email" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Usuario</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="usuario">
+                        <span class="field-view"><span data-user="username"></span></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="text"
+                            data-user="username" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Teléfono</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="telefono">
+                        <span class="field-view"><span data-user="phone"></span></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="text"
+                            data-user="phone" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Contraseña</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="password">
+                        <span class="field-view">••••••••</span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                            type="password" value="password123" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label class="w-48 text-white/80">Fecha de nacimiento</label>
+                    <div class="flex-1 flex items-center gap-3" data-field="dob">
+                        <span class="field-view" data-user="birthdate"></span>
+                        <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black" type="date"
+                            data-user="birthdate" />
+                        <div class="ml-auto flex gap-2">
+                            <button class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <!-- Footer -->

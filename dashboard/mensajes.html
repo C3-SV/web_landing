@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Mensajes | C3</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/images/logo-c3.jpeg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 h-screen overflow-hidden">
+
+  <!-- Header -->
+  <header
+    class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white shadow-lg fixed w-full top-0 z-50">
+    <div
+      class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <img src="../assets/images/logo-c3.jpeg" alt="Logo C3"
+          class="h-10 w-10 sm:h-12 sm:w-12 rounded-full" />
+        <h1 class="text-lg sm:text-xl font-bold">C3 Dashboard</h1>
+      </div>
+
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <a href="../index.html"
+          class="hidden sm:block hover:text-gray-200 transition">Volver al sitio</a>
+        <button
+          class="bg-white text-[#004aad] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg hover:bg-gray-100 transition text-sm sm:text-base">
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex h-screen pt-16">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-white w-64 shadow-lg pt-16 lg:pt-0 z-40">
+
+      <nav class="p-4 pt-6 space-y-2">
+
+        <a href="usuarios.html"
+          class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <span class="font-medium">Usuarios</span>
+        </a>
+
+        <a href="eventos_pasados.html"
+          class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+          </svg>
+          <span class="font-medium">Eventos pasados</span>
+        </a>
+
+        <a href="eventos_futuros.html"
+          class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span class="font-medium">Eventos futuros</span>
+        </a>
+
+        <a href="categorias.html"
+          class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+          </svg>
+          <span class="font-medium">Categorías</span>
+        </a>
+
+        <a href="mensajes.html"
+          class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          <span class="font-medium">Mensajes</span>
+        </a>
+
+      </nav>
+    </aside>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebar-overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn"
+      class="lg:hidden fixed bottom-4 right-4 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white p-4 rounded-full shadow-lg z-50">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Page Header -->
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">
+            Gestión de Mensajes
+          </h2>
+          <p class="text-gray-600">
+            Administra los mensajes de contacto de la plataforma
+          </p>
+        </div>
+
+        <!-- Actions Bar -->
+        <div
+          class="bg-white rounded-lg shadow-md p-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div class="flex-1 w-full sm:w-auto">
+            <input type="text" id="searchInput" placeholder="Buscar mensajes..."
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]" />
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead
+                class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
+                <tr>
+                  <th class="px-6 py-3 text-left text-sm font-semibold">
+                    Remitente
+                  </th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold">
+                    Email
+                  </th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold">
+                    Asunto
+                  </th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold">
+                    Fecha
+                  </th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold">
+                    Estado
+                  </th>
+                  <th class="px-6 py-3 text-center text-sm font-semibold">
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="tableBody" class="divide-y divide-gray-200">
+                <!-- Esta parte se completo en mensajes.js-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6 flex justify-center">
+          <div class="flex space-x-2">
+            <button
+              class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              Anterior
+            </button>
+            <button
+              class="px-4 py-2 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white rounded-lg">
+              1
+            </button>
+            <button
+              class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              2
+            </button>
+            <button
+              class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              3
+            </button>
+            <button
+              class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              Siguiente
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- View Message Modal -->
+  <div id="viewModal"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div
+      class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+
+      <div
+        class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white px-6 py-4 rounded-t-lg flex justify-between items-center sticky top-0">
+        <h3 class="text-xl font-semibold">Detalle del Mensaje</h3>
+        <button onclick="closeViewModal()" class="text-white hover:text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="viewContent" class="p-6 space-y-4">
+  
+      </div>
+
+    </div>
+  </div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLNj65uwgORStzqR7FulNIuDT7lqnaE5s",
+    authDomain: "landing-c3.firebaseapp.com",
+    projectId: "landing-c3",
+    storageBucket: "landing-c3.firebasestorage.app",
+    messagingSenderId: "911691009600",
+    appId: "1:911691009600:web:e8c1433f78823634b0d9a5",
+    measurementId: "G-Z2JB5KBFZK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app);
+</script>
+
+<!-- Conexion con el dashboard -->
+<script type="module" src="js/mensajes.js"></script>
+
+
+</body>
+</html>

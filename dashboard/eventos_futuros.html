@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard - Eventos | C3</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="../assets/images/logo-c3.jpeg"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-50 h-screen overflow-hidden">
+        <!-- Header -->
+        <header
+            class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white shadow-lg fixed w-full top-0 z-50"
+        >
+            <div
+                class="container mx-auto px-4 py-3 flex items-center justify-between"
+            >
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <img
+                        src="../assets/images/logo-c3.jpeg"
+                        alt="Logo C3"
+                        class="h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+                    />
+                    <h1 class="text-lg sm:text-xl font-bold">C3 Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <a
+                        href="../index.html"
+                        class="hidden sm:block hover:text-gray-200 transition"
+                        >Volver al sitio</a
+                    >
+                    <button
+                        id="btnLogout"
+                        class="bg-white text-[#004aad] px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg hover:bg-gray-100 transition text-sm sm:text-base"
+                    >
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-screen pt-16">
+            <!-- Sidebar -->
+            <aside
+                id="sidebar"
+                class="fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-white w-64 shadow-lg pt-16 lg:pt-0 z-40"
+            >
+                <nav class="p-4 pt-6 space-y-2">
+                    <a
+                        href="usuarios.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                            ></path>
+                        </svg>
+                        <span class="font-medium">Usuarios</span>
+                    </a>
+                    <a
+                        href="eventos_pasados.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                            ></path>
+                        </svg>
+                        <span class="font-medium">Eventos pasados</span>
+                    </a>
+                    <a
+                        href="eventos_futuros.html"
+                        class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white rounded-lg"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            ></path>
+                        </svg>
+                        <span class="font-medium">Eventos futuros</span>
+                    </a>
+                    <a
+                        href="categorias.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                            ></path>
+                        </svg>
+                        <span class="font-medium">Categorías</span>
+                    </a>
+                    <a
+                        href="mensajes.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            ></path>
+                        </svg>
+                        <span class="font-medium">Mensajes</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Mobile Sidebar Overlay -->
+            <div
+                id="sidebar-overlay"
+                class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"
+            ></div>
+
+            <!-- Mobile Menu Button -->
+            <button
+                id="mobile-menu-btn"
+                class="lg:hidden fixed bottom-4 right-4 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white p-4 rounded-full shadow-lg z-50"
+            >
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                </svg>
+            </button>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Page Header -->
+                    <div class="mb-6">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                            Gestión de Eventos
+                        </h2>
+                        <p class="text-gray-600">
+                            Administra los eventos de la plataforma
+                        </p>
+                    </div>
+
+                    <!-- Actions Bar -->
+                    <div
+                        class="bg-white rounded-lg shadow-md p-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+                    >
+                        <div class="flex-1 w-full sm:w-auto">
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Buscar eventos..."
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#408cd3]"
+                            />
+                        </div>
+                        <button
+                            id="btnAgregar"
+                            class="w-full sm:w-auto bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white px-6 py-2 rounded-lg hover:shadow-lg transition flex items-center justify-center space-x-2"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 4v16m8-8H4"
+                                ></path>
+                            </svg>
+                            <span>Agregar Evento</span>
+                        </button>
+                    </div>
+
+                    <!-- Table -->
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100"
+                    >
+                        <div class="overflow-x-auto">
+                            <table
+                                class="w-full min-w-[800px] table-fixed border-collapse"
+                            >
+                                <thead
+                                    class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white"
+                                >
+                                    <tr>
+                                        <th
+                                            class="w-[40%] px-6 py-4 text-left text-sm font-bold tracking-wider"
+                                        >
+                                            Título
+                                        </th>
+
+                                        <th
+                                            class="w-[15%] px-6 py-4 text-left text-sm font-bold tracking-wider"
+                                        >
+                                            Fecha
+                                        </th>
+
+                                        <th
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
+                                        >
+                                            Modalidad
+                                        </th>
+
+                                        <th
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
+                                        >
+                                            Visibilidad
+                                        </th>
+
+                                        <th
+                                            class="w-[15%] px-6 py-4 text-center text-sm font-bold tracking-wider"
+                                        >
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    id="tableBody"
+                                    class="divide-y divide-gray-100 bg-white"
+                                ></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-6 flex justify-center">
+                        <div class="flex space-x-2">
+                            <button
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                            >
+                                Anterior
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white rounded-lg"
+                            >
+                                1
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                            >
+                                2
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                            >
+                                3
+                            </button>
+                            <button
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- Modal -->
+        <div
+            id="modal"
+            class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
+        >
+            <div
+                class="bg-white rounded-xl shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col max-h-[90vh]"
+            >
+                <div
+                    class="bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white px-6 py-4 flex justify-between items-center shrink-0"
+                >
+                    <h3 id="modalTitle" class="text-xl font-bold tracking-wide">
+                        Editar Evento
+                    </h3>
+                    <button
+                        id="btnCerrarModal"
+                        type="button"
+                        class="text-white/80 hover:text-white transition-colors"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="border-b bg-gray-50 px-6 shrink-0">
+                    <div
+                        class="flex space-x-8 overflow-x-auto py-3 text-sm font-semibold"
+                    >
+                        <button
+                            type="button"
+                            class="tabBtn text-[#004aad] border-b-2 border-[#004aad] pb-2 font-bold transition-colors"
+                            data-target="tab-banner"
+                        >
+                            Banner
+                        </button>
+                        <button
+                            type="button"
+                            class="tabBtn text-gray-500 hover:text-gray-700 pb-2 border-b-2 border-transparent transition-colors"
+                            data-target="tab-about"
+                        >
+                            Acerca de
+                        </button>
+                        <button
+                            type="button"
+                            class="tabBtn text-gray-500 hover:text-gray-700 pb-2 border-b-2 border-transparent transition-colors"
+                            data-target="tab-details"
+                        >
+                            Detalles
+                        </button>
+                    </div>
+                </div>
+
+                <form id="modalForm" class="p-6 overflow-y-auto">
+                    <input type="hidden" id="eventId" name="id" />
+
+                    <div id="tab-banner" class="tabContent block">
+                        <fieldset
+                            class="border border-gray-200 rounded-xl p-5 bg-white"
+                        >
+                            <legend
+                                class="text-lg font-bold text-[#004aad] px-2"
+                            >
+                                Banner
+                            </legend>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label
+                                        for="heroPrefix"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Texto superior (Call to Action)
+                                        *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="heroPrefix"
+                                        name="heroPrefix"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label
+                                        for="title"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Título del evento *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        name="title"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label
+                                        for="participantsText"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Subtítulo *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="participantsText"
+                                        name="participantsText"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label
+                                        for="shortDescription"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Resumen *</label
+                                    >
+                                    <textarea
+                                        id="summary"
+                                        name="summary"
+                                        rows="3"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                    ></textarea>
+                                </div>
+
+                                <div class="pt-2">
+                                    <label
+                                        class="block text-xs font-bold text-gray-500 mb-2"
+                                        >Banner *</label
+                                    >
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-blue-50 hover:border-[#004aad] transition-all group"
+                                    >
+                                        <input
+                                            type="file"
+                                            id="banner"
+                                            name="banner"
+                                            class="hidden"
+                                            accept="image/*"
+                                        />
+                                        <div
+                                            class="flex flex-col items-center justify-center pt-4 pb-5"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="w-10 h-10 mb-3 text-gray-400 group-hover:text-[#004aad] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                />
+                                            </svg>
+                                            <p
+                                                class="text-xs text-gray-500 group-hover:text-gray-700 font-medium"
+                                            >
+                                                Subir banner
+                                            </p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div id="tab-about" class="tabContent hidden">
+                        <fieldset
+                            class="border border-gray-200 rounded-xl p-5 bg-white mb-6"
+                        >
+                            <legend
+                                class="text-lg font-bold text-[#004aad] px-2"
+                            >
+                                Acerca del evento
+                            </legend>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label
+                                        for="description"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                    >
+                                        Descripción detallada *</label
+                                    >
+                                    <textarea
+                                        id="description"
+                                        name="description"
+                                        rows="5"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                    ></textarea>
+                                </div>
+
+                                <div class="pt-2">
+                                    <label
+                                        class="block text-xs font-bold text-gray-500 mb-2"
+                                        >Imagen de portada *</label
+                                    >
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-blue-50 hover:border-[#004aad] transition-all group"
+                                    >
+                                        <input
+                                            type="file"
+                                            id="coverImage"
+                                            name="coverImage"
+                                            class="hidden"
+                                            accept="image/*"
+                                        />
+                                        <div
+                                            class="flex flex-col items-center justify-center pt-4 pb-5"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="w-10 h-10 mb-3 text-gray-400 group-hover:text-[#004aad] transition-colors"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                />
+                                            </svg>
+                                            <p
+                                                class="text-xs text-gray-500 group-hover:text-gray-700 font-medium"
+                                            >
+                                                Subir imagen
+                                            </p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset
+                            class="border border-gray-200 rounded-xl p-5 bg-white"
+                        >
+                            <legend
+                                class="text-lg font-bold text-[#004aad] px-2"
+                            >
+                                Razones para asistir
+                            </legend>
+                            <div class="space-y-6">
+                                <div
+                                    class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative"
+                                >
+                                    <span
+                                        class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold text-[#004aad] border border-gray-200 rounded shadow-sm"
+                                        >Razón #1</span
+                                    >
+                                    <input
+                                        type="hidden"
+                                        name="reason_1_order"
+                                        value="1"
+                                    />
+
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3"
+                                    >
+                                        <div>
+                                            <label
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Ícono *</label
+                                            >
+
+                                            <div
+                                                class="relative icon-selector-wrapper"
+                                                id="icon-wrapper-1"
+                                            >
+                                                <input
+                                                    type="hidden"
+                                                    id="reason_1_icon"
+                                                    name="reason_1_icon"
+                                                    value="bi bi-star"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    class="icon-dropdown-btn w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm text-left flex items-center justify-between transition-shadow"
+                                                >
+                                                    <div
+                                                        class="flex items-center gap-2 selected-content"
+                                                    >
+                                                        <i
+                                                            class="bi bi-star text-lg text-[#004aad]"
+                                                        ></i>
+                                                        <span
+                                                            class="text-gray-700"
+                                                            >Estrella</span
+                                                        >
+                                                    </div>
+                                                    <svg
+                                                        class="w-4 h-4 text-gray-400"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 9l-7 7-7-7"
+                                                        ></path>
+                                                    </svg>
+                                                </button>
+
+                                                <div
+                                                    class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-xl max-h-48 overflow-y-auto icon-dropdown-list"
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label
+                                                for="reason_1_title"
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Título *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                id="reason_1_title"
+                                                name="reason_1_title"
+                                                class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label
+                                            for="reason_1_text"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                        >
+                                            Descripción *</label
+                                        >
+                                        <textarea
+                                            id="reason_1_text"
+                                            name="reason_1_text"
+                                            rows="2"
+                                            class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative"
+                                >
+                                    <span
+                                        class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold text-[#004aad] border border-gray-200 rounded shadow-sm"
+                                        >Razón #2</span
+                                    >
+                                    <input
+                                        type="hidden"
+                                        name="reason_2_order"
+                                        value="2"
+                                    />
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3"
+                                    >
+                                        <div>
+                                            <label
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Ícono</label
+                                            >
+
+                                            <div
+                                                class="relative icon-selector-wrapper"
+                                                id="icon-wrapper-2"
+                                            >
+                                                <input
+                                                    type="hidden"
+                                                    id="reason_2_icon"
+                                                    name="reason_2_icon"
+                                                    value="bi bi-star"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    class="icon-dropdown-btn w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm text-left flex items-center justify-between transition-shadow"
+                                                >
+                                                    <div
+                                                        class="flex items-center gap-2 selected-content"
+                                                    >
+                                                        <i
+                                                            class="bi bi-star text-lg text-[#004aad]"
+                                                        ></i>
+                                                        <span
+                                                            class="text-gray-700"
+                                                            >Estrella</span
+                                                        >
+                                                    </div>
+                                                    <svg
+                                                        class="w-4 h-4 text-gray-400"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 9l-7 7-7-7"
+                                                        ></path>
+                                                    </svg>
+                                                </button>
+
+                                                <div
+                                                    class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-xl max-h-48 overflow-y-auto icon-dropdown-list"
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label
+                                                for="reason_2_title"
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Título</label
+                                            >
+                                            <input
+                                                type="text"
+                                                id="reason_2_title"
+                                                name="reason_2_title"
+                                                class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label
+                                            for="reason_2_text"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Descripción</label
+                                        >
+                                        <textarea
+                                            id="reason_2_text"
+                                            name="reason_2_text"
+                                            rows="2"
+                                            class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative"
+                                >
+                                    <span
+                                        class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold text-[#004aad] border border-gray-200 rounded shadow-sm"
+                                        >Razón #3</span
+                                    >
+                                    <input
+                                        type="hidden"
+                                        name="reason_3_order"
+                                        value="3"
+                                    />
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3"
+                                    >
+                                        <div>
+                                            <label
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Ícono</label
+                                            >
+
+                                            <div
+                                                class="relative icon-selector-wrapper"
+                                                id="icon-wrapper-3"
+                                            >
+                                                <input
+                                                    type="hidden"
+                                                    id="reason_3_icon"
+                                                    name="reason_3_icon"
+                                                    value="bi bi-star"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    class="icon-dropdown-btn w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm text-left flex items-center justify-between transition-shadow"
+                                                >
+                                                    <div
+                                                        class="flex items-center gap-2 selected-content"
+                                                    >
+                                                        <i
+                                                            class="bi bi-star text-lg text-[#004aad]"
+                                                        ></i>
+                                                        <span
+                                                            class="text-gray-700"
+                                                            >Estrella</span
+                                                        >
+                                                    </div>
+                                                    <svg
+                                                        class="w-4 h-4 text-gray-400"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 9l-7 7-7-7"
+                                                        ></path>
+                                                    </svg>
+                                                </button>
+
+                                                <div
+                                                    class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-xl max-h-48 overflow-y-auto icon-dropdown-list"
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label
+                                                for="reason_3_title"
+                                                class="block text-xs font-bold text-gray-500 mb-1"
+                                                >Título</label
+                                            >
+                                            <input
+                                                type="text"
+                                                id="reason_3_title"
+                                                name="reason_3_title"
+                                                class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label
+                                            for="reason_3_text"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Descripción</label
+                                        >
+                                        <textarea
+                                            id="reason_3_text"
+                                            name="reason_3_text"
+                                            rows="2"
+                                            class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div id="tab-details" class="tabContent hidden">
+                        <fieldset
+                            class="border border-gray-200 rounded-xl p-5 bg-white"
+                        >
+                            <legend
+                                class="text-lg font-bold text-[#004aad] px-2"
+                            >
+                                Detalles del evento
+                            </legend>
+
+                            <div class="space-y-4">
+                                <div
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                >
+                                    <div>
+                                        <label
+                                            for="date"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Fecha del evento *</label
+                                        >
+                                        <input
+                                            type="date"
+                                            id="date"
+                                            name="date"
+                                            class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm transition-shadow cursor-pointer"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label
+                                            for="modality"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Modalidad *</label
+                                        >
+                                        <div class="relative">
+                                            <select
+                                                id="modality"
+                                                name="modality"
+                                                class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm pr-8 cursor-pointer"
+                                            >
+                                                <option value="Presencial">
+                                                    Presencial
+                                                </option>
+                                                <option value="Híbrido">
+                                                    Híbrido
+                                                </option>
+                                                <option value="Remoto">
+                                                    Remoto
+                                                </option>
+                                            </select>
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                                            >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label
+                                        for="location"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Ubicación *</label
+                                    >
+                                    <textarea
+                                        id="location"
+                                        name="location"
+                                        rows="3"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                        placeholder="Lugar físico o Remoto/Virtual"
+                                    ></textarea>
+                                </div>
+
+                                <div>
+                                    <label
+                                        for="awardsText"
+                                        class="block text-xs font-bold text-gray-500 mb-1"
+                                        >Premios y reconocimientos *</label
+                                    >
+                                    <textarea
+                                        id="awardsText"
+                                        name="awardsText"
+                                        rows="4"
+                                        class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm resize-none transition-shadow"
+                                    ></textarea>
+                                </div>
+                                <div
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                >
+                                    <div>
+                                        <label
+                                            for="visibility"
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Visibilidad *</label
+                                        >
+                                        <div class="relative">
+                                            <select
+                                                id="visibility"
+                                                name="visibility"
+                                                class="appearance-none w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] text-sm pr-8 cursor-pointer"
+                                            >
+                                                <option value="visible">
+                                                    Visible (Público)
+                                                </option>
+                                                <option value="not_visible">
+                                                    No visible (Borrador)
+                                                </option>
+                                            </select>
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                                            >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="relative" id="category-wrapper">
+                                        <label
+                                            class="block text-xs font-bold text-gray-500 mb-1"
+                                            >Categorías del evento *
+                                        </label>
+
+                                        <button
+                                            type="button"
+                                            id="categoryBtn"
+                                            class="relative w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004aad] focus:border-transparent text-sm text-left flex justify-between items-center transition-shadow group"
+                                        >
+                                            <span
+                                                id="categoryBtnText"
+                                                class="text-gray-500 truncate"
+                                                >Seleccionar categorías...</span
+                                            >
+                                            <div
+                                                class="pointer-events-none flex items-center px-1 text-gray-500"
+                                            >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </button>
+
+                                        <div
+                                            id="categoryDropdown"
+                                            class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg"
+                                        >
+                                            <div
+                                                class="p-2 border-b border-gray-100"
+                                            >
+                                                <div class="relative">
+                                                    <div
+                                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                                                    >
+                                                        <svg
+                                                            class="w-4 h-4 text-gray-400"
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 20 20"
+                                                        >
+                                                            <path
+                                                                stroke="currentColor"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        id="categorySearch"
+                                                        class="block w-full p-2 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-[#004aad] focus:border-[#004aad] focus:outline-none"
+                                                        placeholder="Buscar categoría..."
+                                                    />
+                                                </div>
+                                            </div>
+                                            <ul
+                                                class="max-h-48 overflow-y-auto py-1 text-sm text-gray-700"
+                                                id="categoryList"
+                                            >
+                                                <!-- Las categorías se cargarán aquí dinámicamente -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div
+                        class="flex space-x-3 mt-8 pt-4 border-t border-gray-100"
+                    >
+                        <button
+                            type="button"
+                            id="btnCancelarFooter"
+                            class="flex-1 bg-gray-100 text-gray-700 font-semibold px-4 py-3 rounded-lg hover:bg-gray-200 transition-colors border border-gray-200 shadow-sm"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            type="submit"
+                            class="flex-1 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold px-4 py-3 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
+                        >
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="js/eventos_futuros.js" type="module"></script>
+        <script src="js/auth_guard.js" type="module"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+</html>

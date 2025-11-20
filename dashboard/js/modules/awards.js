@@ -77,7 +77,7 @@ export function renderAwardsHTML(items = []) {
                 </label>
 
                 <span class="award-file-name mt-1.5 text-[11px] text-gray-500 truncate block text-center">
-                    ${item.url ? "✓ Imagen cargada" : "Ningún archivo seleccionado"}
+                    ${item.url ? "Imagen cargada" : "Ningún archivo seleccionado"}
                 </span>
             </div>
 

@@ -21,6 +21,7 @@ async function getAllUpcomingEvents() {
 
         const res = await getDocs(q);
 
+        events = [];
         res.forEach((doc) => {
             const data = doc.data();
             events.push({
@@ -253,6 +254,65 @@ function initMultiSelectUI() {
     });
 }
 
+// Al inicio de eventos.js
+const ICON_DATA = [
+    { value: "bi bi-person", label: "Persona" },
+    { value: "bi bi-people", label: "Comunidad" },
+    { value: "bi bi-trophy", label: "Trofeo" },
+    { value: "bi bi-star", label: "Estrella" },
+    { value: "bi bi-award", label: "Premio" },
+    { value: "bi bi-check-circle", label: "Check" },
+    { value: "bi bi-clock", label: "Reloj" },
+    { value: "bi bi-geo-alt", label: "Ubicación" },
+    { value: "bi bi-megaphone", label: "Anuncio" },
+    { value: "bi bi-calendar-event", label: "Calendario" }
+];
+
+function initIconSelectors() {
+    const wrappers = document.querySelectorAll('.icon-selector-wrapper');
+
+    wrappers.forEach(wrapper => {
+        const btn = wrapper.querySelector('.icon-dropdown-btn');
+        const list = wrapper.querySelector('.icon-dropdown-list');
+        const input = wrapper.querySelector('input[type="hidden"]');
+        const display = wrapper.querySelector('.selected-content');
+
+        ICON_DATA.forEach(icon => {
+            const item = document.createElement('div');
+            item.className = "flex items-center gap-3 px-4 py-2 hover:bg-blue-50 cursor-pointer transition-colors border-b border-gray-50 last:border-0";
+            item.innerHTML = `
+                <i class="${icon.value} text-lg text-gray-600"></i>
+                <span class="text-sm text-gray-700">${icon.label}</span>
+            `;
+
+            item.addEventListener('click', () => {
+                input.value = icon.value;
+
+                display.innerHTML = `
+                    <i class="${icon.value} text-lg text-[#004aad]"></i>
+                    <span class="text-gray-700">${icon.label}</span>
+                `;
+
+                list.classList.add('hidden');
+            });
+
+            list.appendChild(item);
+        });
+
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.icon-dropdown-list').forEach(el => {
+                if (el !== list) el.classList.add('hidden');
+            });
+            list.classList.toggle('hidden');
+            e.stopPropagation();
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.icon-dropdown-list').forEach(list => list.classList.add('hidden'));
+    });
+}
+
 /**
  * Abre el modal y resetea el formulario.
  */
@@ -480,7 +540,7 @@ function validateEventData(data) {
         Swal.fire({
             icon: 'warning',
             title: 'Fecha inválida',
-            text: 'No puedes crear un evento futuro con una fecha anterior al día de hoy.',
+            text: 'No puedes crear/editar un evento futuro con una fecha anterior al día de hoy.',
             confirmButtonText: "Corregir",
             buttonsStyling: false,
             customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
@@ -688,16 +748,12 @@ async function getUpcomingEvent(id) {
     showExistingImage('banner', event.banner);
     showExistingImage('coverImage', event.coverImage);
 
-    //Razones ordenadas según "order"
+    //Razones
+    //Razones
     try {
         const reasonsRef = collection(db, COLLECTION_NAME, id, "reasons");
-
         const q = query(reasonsRef, orderBy("order", "asc"));
         const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.empty) {
-            console.log("Este evento no tiene razones guardadas.");
-        }
 
         querySnapshot.forEach((doc) => {
             const reason = doc.data();
@@ -710,10 +766,29 @@ async function getUpcomingEvent(id) {
 
                 if (titleInput) titleInput.value = reason.title || '';
                 if (textInput) textInput.value = reason.text || '';
-                if (iconInput) iconInput.value = reason.icon || 'trophy';
+
+                if (iconInput) {
+                    const iconValue = reason.icon || 'bi bi-star';
+                    iconInput.value = iconValue;
+
+                    const wrapper = iconInput.closest('.icon-selector-wrapper');
+
+                    if (wrapper) {
+                        const iconObj = ICON_DATA.find(i => i.value === iconValue) || ICON_DATA[0];
+                        const display = wrapper.querySelector('.selected-content');
+
+                        if (display) {
+                            display.innerHTML = `
+                                <i class="${iconObj.value} text-lg text-[#004aad]"></i>
+                                <span class="text-gray-700">${iconObj.label}</span>
+                            `;
+                        }
+                    }
+                }
             }
         });
     } catch (error) {
+        console.error("Error cargando subcolección de razones:", error);
         Swal.fire({
             toast: true,
             icon: 'warning',
@@ -722,7 +797,7 @@ async function getUpcomingEvent(id) {
             confirmButtonText: "Ok",
             buttonsStyling: false,
             customClass: {
-                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg focus:outline-none"
             }
         });
     }
@@ -932,10 +1007,6 @@ async function markAsFinished(id) {
     }
 }
 
-// ==========================================
-// 6. INICIALIZACIÓN (DOM READY)
-// ==========================================
-
 document.addEventListener('DOMContentLoaded', async () => {
 
     // Cargar datos iniciales
@@ -962,6 +1033,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadCategories();
 
     setupSearch();
+
+    initIconSelectors();
 
     const res = await getAllUpcomingEvents();
     if (res.success) {
@@ -1010,6 +1083,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const newPage = parseInt(btn.dataset.page);
 
             if (newPage) {
+                document.getElementById('searchInput').value = '';
                 currentPage = newPage;
                 renderTable();
             }
@@ -1030,6 +1104,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!eventData.id) {
             const res = await addNewUpcomingEvent(eventData);
             if (res.success) {
+                document.getElementById('searchInput').value = '';
+                await getAllUpcomingEvents();
                 closeModal();
                 renderTable();
             }
@@ -1037,6 +1113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         else {
             const res = await updateExistingEvent(eventData);
             if (res.success) {
+                document.getElementById('searchInput').value = '';
+                await getAllUpcomingEvents();
                 closeModal();
                 renderTable();
             }

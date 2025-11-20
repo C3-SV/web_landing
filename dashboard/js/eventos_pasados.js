@@ -18,6 +18,7 @@ import * as validations from "../../js/validations.js";
 import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
 import * as gallery from "./modules/gallery.js";
+import * as awards from "./modules/awards.js";
 
 // Manejo de iconos
 import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
@@ -289,6 +290,12 @@ async function editEvent(id) {
     document.getElementById("galleryList").innerHTML = galleryHTML;
     setupGalleryListeners(id);
 
+    //! TAB de Awards
+    const awardsData = await awards.loadAwards(id);
+    const awardsHTML = awards.renderAwardsHTML(awardsData);
+    document.getElementById("awardsList").innerHTML = awardsHTML;
+    setupAwardsListeners(id);
+
 }
 
 //! 5. Crud -- guardar cambios y eliminar 
@@ -382,6 +389,13 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
         console.error("Error guardando galeria:", err);
     }
 
+    //* Guardar Awards
+    try {
+        const awardsArray = awards.getAwardsFromDOM();
+        await awards.saveAwards(editingId, awardsArray);
+    } catch (err) {
+        console.error("Error guardando premios:", err);
+    }
     closeModal();
     renderTable();
 });
@@ -681,6 +695,94 @@ function setupGalleryListeners(eventId) {
     });
 }
 
+// Lógica de listeners para awards
+function setupAwardsListeners(eventId) {
+    const container = document.getElementById("awardsList");
+    const addBtn = document.getElementById("addAwardBtn");
+
+    if (!container || !addBtn) return;
+
+    // Reset container events
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+
+    const active = document.getElementById("awardsList");
+
+    // Activar preview para todos los inputs de awards
+    active.querySelectorAll(".award-file").forEach(input => {
+        setupImagePreview(input.id);
+    });
+
+    // Delegar dentro de la lista de awards
+    active.addEventListener("change", async (e) => {
+        if (e.target.classList.contains("award-file")) {
+            await awards.handleAwardImageChange(eventId, e.target);
+        }
+    });
+
+    // Botón de eliminar
+    active.addEventListener("click", async (e) => {
+        const del = e.target.closest(".delete-award");
+        if (del) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (!confirm("¿Eliminar este premio? Esta acción no se puede deshacer.")) {
+                return;
+            }
+
+            const awardItem = del.closest(".award-item");
+            const awardId = awardItem.dataset.awardId;
+
+
+            try {
+                // Eliminar de Firestore
+                await awards.deleteAward(eventId, awardId);
+                
+                // Eliminar del DOM
+                awardItem.remove();
+
+                // Mostrar confirmación
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                toast.textContent = '✓ Premio eliminado correctamente';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => toast.remove(), 3000);
+            } catch (err) {
+                console.error("Error eliminando premio:", err);
+                alert("Error al eliminar el premio. Intenta de nuevo.");
+            }
+        }
+    });
+
+    // Botón agregar
+    const newBtn = addBtn.cloneNode(true);
+    addBtn.parentNode.replaceChild(newBtn, addBtn);
+
+
+    newBtn.addEventListener("click", () => {
+        const tempId = "temp-" + Date.now();
+
+        const newItem = {
+            id: tempId,
+            caption: "",
+            url: "",
+            order: active.children.length + 1
+        };
+
+        active.insertAdjacentHTML(
+            "beforeend",
+            awards.renderAwardsHTML([newItem])
+        );
+
+        // Activar preview en el nuevo item
+        const newInput = document.getElementById(`award-file-${tempId}`);
+        if (newInput) {
+            setupImagePreview(newInput.id);
+        }
+    });
+}
 //! INICIALIZAR REALMENTE 
 
 document.addEventListener("DOMContentLoaded", () => {

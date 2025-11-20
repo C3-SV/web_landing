@@ -333,6 +333,17 @@ function openModal() {
     // Resetear pestañas a la primera
     const firstTabBtn = document.querySelector('.tabBtn[data-target="tab-banner"]');
     if (firstTabBtn) firstTabBtn.click();
+
+    const searchInput = document.getElementById('categorySearch');
+    if (searchInput) {
+        searchInput.value = ''; // Asegurar que el input esté vacío
+        
+        // Quitar la clase 'hidden' de todas las opciones de la lista
+        const listItems = document.querySelectorAll('#categoryList li');
+        listItems.forEach(item => {
+            item.classList.remove('hidden');
+        });
+    }
 }
 
 /**
@@ -481,6 +492,7 @@ function getEventFormData() {
         modality: formData.get('modality').trim(),
         location: formData.get('location').trim(),
         awardsText: formData.get('awardsText').trim(),
+        formUrl: formData.get('formUrl') ? formData.get('formUrl').trim() : "",
         visibility: formData.get('visibility'),
 
         // Archivos
@@ -641,6 +653,7 @@ async function addNewUpcomingEvent(eventData) {
             modality: eventData.modality,
             location: eventData.location,
             awardsText: eventData.awardsText,
+            formUrl: eventData.formUrl,
             categories: eventData.categories,
             visibility: isVisible,
 
@@ -714,6 +727,9 @@ async function getUpcomingEvent(id) {
     document.getElementById('modality').value = event.modality || 'Presencial';
     document.getElementById('location').value = event.location || '';
     document.getElementById('awardsText').value = event.awardsText || '';
+    if (document.getElementById('formUrl')) {
+        document.getElementById('formUrl').value = event.formUrl || '';
+    }
 
     // Visibilidad (Convertir booleano a string del select)
     document.getElementById('visibility').value = event.visibility ? 'visible' : 'not_visible';
@@ -858,6 +874,7 @@ async function updateExistingEvent(eventData) {
             modality: eventData.modality,
             location: eventData.location,
             awardsText: eventData.awardsText,
+            formUrl: eventData.formUrl,
             visibility: isVisible,
             categories: eventData.categories
         };
@@ -951,7 +968,8 @@ async function deleteUpcomingEvent(id) {
             timerProgressBar: true
         });
 
-        await renderTable();
+        await getAllUpcomingEvents();
+        renderTable();
 
     } catch (error) {
         console.error("Error eliminando evento:", error);
@@ -990,9 +1008,7 @@ async function markAsFinished(id) {
         const eventRef = doc(db, COLLECTION_NAME, id);
         await updateDoc(eventRef, { status: "finished" });
 
-        // Actualizamos UI localmente (lo quitamos de la lista porque ya no es 'upcoming')
-        events = events.filter(e => e.id !== id);
-        filteredEvents = filteredEvents.filter(e => e.id !== id);
+        await getAllUpcomingEvents();
         renderTable();
 
         Swal.fire({

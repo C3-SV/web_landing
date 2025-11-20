@@ -1,5 +1,5 @@
 import { app, db, auth, storage } from "./firebase_config.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 //import { getAnalytics } from "firebase/analytics";
 import { doc, addDoc, setDoc, getDoc, getDocs, collection, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
@@ -29,7 +29,7 @@ export async function registerUser(email, password, username) {
 
         // 3. Guardar datos en Firestore
         await setDoc(doc(db, "users", user.uid), {
-            badges: [],             
+            badges: [],
             birthdate: "",
             createdAt: new Date(),
             email: email,
@@ -38,7 +38,7 @@ export async function registerUser(email, password, username) {
             lastName: "",
             phone: "",
             profilePhoto: "",
-            role: "user",            
+            role: "user",
             username: username
         });
 
@@ -89,6 +89,34 @@ export async function loginUser(email, password) {
     }
 }
 
+export async function logoutUser() {
+    await Swal.fire({
+        title: 'Cerrar sesión',
+        html: "¿Estás seguro de que deseas cerrar sesión?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Cerrar sesión',
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 mr-2 focus:outline-none",
+            cancelButton: "bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 focus:outline-none"
+        }
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await Swal.fire({
+                title: 'Cerrando sesión...',
+                timer: 1000,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            await signOut(auth);
+        }
+    });
+}
+
+/*
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         if (document.body.hasAttribute("data-requires-auth")) {
@@ -195,7 +223,7 @@ document.addEventListener("click", async (e) => {
         container.classList.add("editing");
 
         const currentValue = view.textContent.trim();
-        if (!currentValue || currentValue === "-"   ) {
+        if (!currentValue || currentValue === "-") {
             input.value = "";
         } else {
             input.value = currentValue;
@@ -280,4 +308,4 @@ fileInput.addEventListener("change", async (event) => {
         console.error("Error subiendo foto:", error);
         alert("Error al subir la imagen.");
     }
-});
+});*/

@@ -42,29 +42,31 @@
                     />
 
                     <!-- Usuario y Contraseña -->
-                    <form>
+                    <form id="loginForm">
                         <label
                             class="block text-sm sm:text-base md:text-lg font-semibold text-slate-700 mb-2"
-                            >Usuario</label
+                            >Usuario o email *</label
                         >
                         <input
                             type="text"
+                            id="userInput"
                             required
                             class="w-full px-4 py-2 rounded-lg border border-slate-300 mb-4 focus:outline-none focus:ring-2 focus:ring-[#004aad]"
                         />
 
                         <label
                             class="block text-sm sm:text-base md:text-lg font-semibold text-slate-700 mb-2"
-                            >Contraseña</label
+                            >Contraseña *</label
                         >
                         <input
                             type="password"
+                            id="passInput"
                             required
                             class="w-full px-4 py-2 rounded-lg border border-slate-300 mb-2 focus:outline-none focus:ring-2 focus:ring-[#004aad]"
                         />
 
                         <button
-                            type="button"
+                            type="submit"
                             class="w-full mt-12 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white font-extrabold py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                             data-modal-target="crud-modal"
                             data-modal-toggle="crud-modal"
@@ -75,5 +77,7 @@
                 </section>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="js/login.js" type="module"></script>
     </body>
 </html>

@@ -17,6 +17,7 @@ import * as validations from "../../js/validations.js";
 
 import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
+import * as gallery from "./modules/gallery.js";
 
 // Manejo de iconos
 import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
@@ -281,6 +282,13 @@ async function editEvent(id) {
     const statsData = await stats.loadStats(id);
     const statsHTML = stats.renderStatsHTML(statsData);
     document.getElementById("statsList").innerHTML = statsHTML;
+
+    //! TAB de Galeria 
+    const galleryData = await gallery.loadGallery(id);
+    const galleryHTML = gallery.renderGalleryHTML(galleryData);
+    document.getElementById("galleryList").innerHTML = galleryHTML;
+    setupGalleryListeners(id);
+
 }
 
 //! 5. Crud -- guardar cambios y eliminar 
@@ -359,11 +367,19 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
     }
 
     //* Guardar Stats 
-      try {
+    try {
         const statsData = stats.getStatsFromDOM();
         await stats.saveStats(editingId, statsData);
     } catch (err) {
         console.error("Error guardando estadísticas", err);
+    }
+
+    //* Guardar Gallery 
+    try {
+        const galArray = gallery.getGalleryFromDOM();
+        await gallery.saveGallery(editingId, galArray);
+    } catch (err) {
+        console.error("Error guardando galeria:", err);
     }
 
     closeModal();
@@ -464,23 +480,23 @@ function setupStructureListeners() {
     // 1. Limpiar listeners viejos
     const newContainer = container.cloneNode(true);
     container.parentNode.replaceChild(newContainer, container);
-    
+
     const activeContainer = document.getElementById("structureList");
 
     // 2. Delegar eventos
-    activeContainer.addEventListener("click", (e) => { 
+    activeContainer.addEventListener("click", (e) => {
         e.stopPropagation();
         const target = e.target; // Definimos target correctamente
-        
+
         // A) Eliminar ÍTEM
         const deleteItemBtn = target.closest(".delete-item");
         if (deleteItemBtn) {
             e.preventDefault();
             // Encontrar el item 
             const itemRow = deleteItemBtn.closest(".structure-item");
-            
+
             if (itemRow) {
-                if(confirm("¿Eliminar este ítem?")) {
+                if (confirm("¿Eliminar este ítem?")) {
                     itemRow.remove();
                 }
             } else {
@@ -495,13 +511,13 @@ function setupStructureListeners() {
             e.preventDefault();
             // 1. Encontrar la SECCIÓN padre
             const sectionParent = addItemBtn.closest(".structure-section");
-            
+
             if (sectionParent) {
                 // 2. Buscar el contenedor de items dentro de esa sección
                 const sectionBox = sectionParent.querySelector(".section-items");
                 if (sectionBox) {
                     const tempId = "temp-item-" + Date.now() + Math.floor(Math.random() * 1000);
-                    
+
                     const newItemHTML = structure.renderItemsHTML([{
                         id: tempId,
                         icon: "",
@@ -522,7 +538,7 @@ function setupStructureListeners() {
             e.preventDefault();
             const section = deleteSectionBtn.closest(".structure-section");
             if (section) {
-                if(confirm("¿Borrar toda la sección?")) {
+                if (confirm("¿Borrar toda la sección?")) {
                     section.remove();
                 }
             }
@@ -607,6 +623,64 @@ function setupStatsListeners() {
     });
 }
 
+// logica de listeners para galeria 
+
+function setupGalleryListeners(eventId) {
+    const container = document.getElementById("galleryList");
+    const addBtn = document.getElementById("addGalleryBtn");
+
+    if (!container || !addBtn) return;
+
+    // Reset container events
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+
+    const active = document.getElementById("galleryList");
+
+    // Activar preview para todos
+    active.querySelectorAll(".gallery-file").forEach(input => {
+        setupImagePreview(input.id);
+    });
+
+
+    // Delegar dentro de la galería
+    active.addEventListener("change", async (e) => {
+        if (e.target.classList.contains("gallery-file")) {
+            await gallery.handleGalleryImageChange(eventId, e.target);
+        }
+    });
+
+    // boton de eliminar
+    active.addEventListener("click", (e) => {
+        const del = e.target.closest(".delete-gallery");
+        if (del) {
+            if (confirm("¿Eliminar imagen de la galería?")) {
+                del.closest(".gallery-item").remove();
+            }
+        }
+    });
+
+    // Botón agregar
+    const newBtn = addBtn.cloneNode(true);
+    addBtn.parentNode.replaceChild(newBtn, addBtn);
+
+    newBtn.addEventListener("click", () => {
+        const tempId = "temp-" + Date.now();
+
+        const newItem = {
+            id: tempId,
+            caption: "",
+            url: "",
+            order: active.children.length + 1
+        };
+
+        active.insertAdjacentHTML(
+            "beforeend",
+            gallery.renderGalleryHTML([newItem])
+        );
+    });
+}
+
 //! INICIALIZAR REALMENTE 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -614,9 +688,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupTabs();
     setupStructureListeners();
     setupStatsListeners();
-
-    // Imagenes 
-    setupImagePreview('eventImage');
 });
 
 // Manejar cambiso en selects de icons 

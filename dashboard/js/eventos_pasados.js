@@ -19,6 +19,8 @@ import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
 import * as gallery from "./modules/gallery.js";
 import * as awards from "./modules/awards.js";
+import * as links from "./modules/links.js";
+
 
 // Manejo de iconos
 import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
@@ -296,6 +298,12 @@ async function editEvent(id) {
     document.getElementById("awardsList").innerHTML = awardsHTML;
     setupAwardsListeners(id);
 
+    //! TAB de Links
+    const linksData = await links.loadLinks(id);
+    const linksHTML = links.renderLinksHTML(linksData);
+    document.getElementById("linksList").innerHTML = linksHTML;
+    setupLinksListeners(id);
+
 }
 
 //! 5. Crud -- guardar cambios y eliminar 
@@ -395,6 +403,14 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
         await awards.saveAwards(editingId, awardsArray);
     } catch (err) {
         console.error("Error guardando premios:", err);
+    }
+
+    //* Guardar Links
+    try {
+        const linksArray = links.getLinksFromDOM();
+        await links.saveLinks(editingId, linksArray);
+    } catch (err) {
+        console.error("Error guardando links:", err);
     }
     closeModal();
     renderTable();
@@ -726,7 +742,7 @@ function setupAwardsListeners(eventId) {
         if (del) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             if (!confirm("¿Eliminar este premio? Esta acción no se puede deshacer.")) {
                 return;
             }
@@ -738,7 +754,7 @@ function setupAwardsListeners(eventId) {
             try {
                 // Eliminar de Firestore
                 await awards.deleteAward(eventId, awardId);
-                
+
                 // Eliminar del DOM
                 awardItem.remove();
 
@@ -747,7 +763,7 @@ function setupAwardsListeners(eventId) {
                 toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
                 toast.textContent = '✓ Premio eliminado correctamente';
                 document.body.appendChild(toast);
-                
+
                 setTimeout(() => toast.remove(), 3000);
             } catch (err) {
                 console.error("Error eliminando premio:", err);
@@ -781,6 +797,76 @@ function setupAwardsListeners(eventId) {
         if (newInput) {
             setupImagePreview(newInput.id);
         }
+    });
+}
+
+// Lógica de listeners para links
+function setupLinksListeners(eventId) {
+    const container = document.getElementById("linksList");
+    const addBtn = document.getElementById("addLinkBtn");
+
+    if (!container || !addBtn) return;
+
+    // Reset container events
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+
+    const active = document.getElementById("linksList");
+
+    // Botón de eliminar - CON ELIMINACIÓN REAL
+    active.addEventListener("click", async (e) => {
+        const del = e.target.closest(".delete-link");
+        if (del) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (!confirm("¿Eliminar este link? Esta acción no se puede deshacer.")) {
+                return;
+            }
+
+            const linkItem = del.closest(".link-item");
+            const linkId = linkItem.dataset.linkId;
+
+            try {
+                // Eliminar de Firestore
+                await links.deleteLink(eventId, linkId);
+
+                // Eliminar del DOM
+                linkItem.remove();
+
+                // Mostrar confirmación
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                toast.textContent = '✓ Link eliminado correctamente';
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.remove(), 3000);
+            } catch (err) {
+                console.error("Error eliminando link:", err);
+                alert("Error al eliminar el link. Intenta de nuevo.");
+            }
+        }
+    });
+
+    // Botón agregar
+    const newBtn = addBtn.cloneNode(true);
+    addBtn.parentNode.replaceChild(newBtn, addBtn);
+
+    newBtn.addEventListener("click", () => {
+        const tempId = "temp-" + Date.now();
+
+        const newItem = {
+            id: tempId,
+            icon: "",
+            title: "",
+            url: "",
+            order: active.children.length + 1
+        };
+
+        active.insertAdjacentHTML(
+            "beforeend",
+            links.renderLinksHTML([newItem])
+        );
     });
 }
 //! INICIALIZAR REALMENTE 

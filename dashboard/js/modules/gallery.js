@@ -4,8 +4,10 @@ import {
     getDocs,
     addDoc,
     deleteDoc,
+    updateDoc,
     orderBy,
-    query
+    query,
+    doc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 // tomar cloudinary 
@@ -135,6 +137,29 @@ export function getGalleryFromDOM() {
         const caption = el.querySelector(".gallery-caption")?.value.trim() || "";
         const order = parseInt(el.querySelector(".gallery-order")?.value.trim()) || index + 1;
         const url = el.querySelector(".preview-image")?.src || "";
+        const galleryId = el.dataset.galleryId || ""; // ← NUEVO: Capturar el ID
+
+        if (!url && !caption) return;
+
+        gallery.push({
+            id: galleryId.startsWith("temp-") ? null : galleryId, // ← NUEVO: Mantener ID
+            caption,
+            url,
+            order
+        });
+    });
+
+    return gallery;
+}
+/*
+export function getGalleryFromDOM() {
+    const els = document.querySelectorAll(".gallery-item");
+    const gallery = [];
+
+    els.forEach((el, index) => {
+        const caption = el.querySelector(".gallery-caption")?.value.trim() || "";
+        const order = parseInt(el.querySelector(".gallery-order")?.value.trim()) || index + 1;
+        const url = el.querySelector(".preview-image")?.src || "";
 
         if (!url && !caption) return;
 
@@ -146,10 +171,56 @@ export function getGalleryFromDOM() {
     });
 
     return gallery;
-}
+}*/
 
 // guardar cambios en galeria de firestore
 
+
+export async function saveGallery(eventId, array) {
+    const galRef = collection(db, "events", eventId, "gallery");
+
+    // 1. Obtener IDs actuales
+    const existing = await getDocs(galRef);
+    const existingIds = existing.docs.map(d => d.id);
+
+    // 2. IDs en el DOM
+    const currentIds = array.filter(a => a.id).map(a => a.id);
+
+    // 3. Eliminar los que ya NO están
+    const idsToDelete = existingIds.filter(id => !currentIds.includes(id));
+    const deletions = idsToDelete.map(id => 
+        deleteDoc(doc(db, "events", eventId, "gallery", id))
+    );
+    await Promise.all(deletions.map(p => p.catch(() => {})));
+
+    // 4. Actualizar o crear
+    const ops = array.map(item => {
+        if (item.id) {
+            const docRef = doc(db, "events", eventId, "gallery", item.id);
+            return updateDoc(docRef, {
+                caption: item.caption || "",
+                url: item.url || "",
+                order: item.order || 1
+            }).catch(() => {
+                return addDoc(galRef, {
+                    caption: item.caption || "",
+                    url: item.url || "",
+                    order: item.order || 1
+                });
+            });
+        } else {
+            return addDoc(galRef, {
+                caption: item.caption || "",
+                url: item.url || "",
+                order: item.order || 1
+            });
+        }
+    });
+
+    await Promise.all(ops);
+}
+
+/*
 export async function saveGallery(eventId, array) {
     const galRef = collection(db, "events", eventId, "gallery");
 
@@ -168,7 +239,7 @@ export async function saveGallery(eventId, array) {
     );
 
     await Promise.all(ops);
-}
+}*/
 
 // subir + preview con dom 
 

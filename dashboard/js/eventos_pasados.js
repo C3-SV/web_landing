@@ -19,6 +19,9 @@ import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
 import * as gallery from "./modules/gallery.js";
 import * as awards from "./modules/awards.js";
+import * as links from "./modules/links.js";
+import * as banner from "./modules/eventBanner.js";
+
 
 // Manejo de iconos
 import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
@@ -27,6 +30,9 @@ import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
 const COLLECTION_NAME = "events";
 let events = [];
 let editingId = null;
+let filteredEvents = [];
+let currentPage = 1;
+const itemsPerPage = 5;
 
 //! 0. UTILIDADES 
 
@@ -75,11 +81,72 @@ async function renderTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
-    const res = await loadEvents();
-
     // Cargando...
-    tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
+    //tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
 
+    // si no hay eventos filtrados
+    if (filteredEvents.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No se encontraron eventos.</td></tr>';
+        renderPagination();
+        return;
+    }
+
+    // Lógica de Paginación
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
+
+
+    // eventos de la página actual
+    paginatedEvents.forEach(event => {
+        const row = `
+            <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
+                
+                <td class="px-6 py-4 text-sm text-gray-900">
+                    ${event.id}
+                </td>
+
+                <td class="px-6 py-4 text-sm font-semibold text-gray-800">
+                    ${event.title}
+                </td>
+
+                <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                    ${event.date ? formatearFecha(event.date) : 'Sin fecha'}
+                </td>
+
+                <td class="px-6 py-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
+                        ${event.modality}
+                    </span>
+                </td>
+
+                <td class="px-6 py-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
+                        ${event.status}
+                    </span>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex justify-center space-x-3">
+                        <button onclick="editEvent('${event.id}')" class="text-blue-600 hover:text-blue-800 transition-colors p-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                        </button>
+                        <button onclick="deleteEvent('${event.id}')" class="text-red-600 hover:text-red-800 transition-colors p-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+
+    renderPagination();
+    /*
     // si falla 
 
     if (!res.success) {
@@ -152,6 +219,67 @@ async function renderTable() {
             `;
         tableBody.innerHTML += row;
     });
+    */
+}
+
+function renderPagination() {
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+    if (!paginationContainer) return;
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    let buttonsHTML = '<div class="flex space-x-2" id="pagination-wrapper">';
+
+    // Botón Anterior
+    const prevDisabled = currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage - 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${prevDisabled}" ${currentPage === 1 ? 'disabled' : ''}>
+            Anterior
+        </button>
+    `;
+
+    // Números de página
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+            buttonsHTML += `<button class="px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white rounded-lg shadow-md cursor-default">${i}</button>`;
+        } else {
+            buttonsHTML += `<button data-page="${i}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">${i}</button>`;
+        }
+    }
+
+    // Botón Siguiente
+    const nextDisabled = currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage + 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${nextDisabled}" ${currentPage === totalPages ? 'disabled' : ''}>
+            Siguiente
+        </button>
+    `;
+
+    buttonsHTML += '</div>';
+    paginationContainer.innerHTML = buttonsHTML;
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+
+        filteredEvents = events.filter(event =>
+            event.title.toLowerCase().includes(searchTerm) ||
+            (event.modality && event.modality.toLowerCase().includes(searchTerm)) ||
+            (event.id && event.id.toLowerCase().includes(searchTerm))
+        );
+
+        currentPage = 1;
+        renderTable();
+    });
 }
 
 //! 3. GESTION DEL MODAL  - abrir, cerrar, 
@@ -218,6 +346,90 @@ function fillGeneralTab(data) {
 }
 
 function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) {
+        console.error("❌ Container del banner no encontrado");
+        return;
+    }
+
+    // Limpiar solo el banner
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) {
+        bannerPreview.remove();
+    }
+
+    const placeholder = container.querySelector("#bannerPlaceholder");
+    if (!placeholder) {
+        console.error("❌ Placeholder del banner no encontrado");
+        return;
+    }
+
+    if (data.banner) {
+        console.log("✅ Cargando banner:", data.banner);
+
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+
+        // Agregar listener de error
+        img.onerror = () => {
+            console.error("❌ Error cargando imagen del banner");
+            placeholder.style.display = "flex";
+            img.remove();
+        };
+
+        img.onload = () => {
+            console.log("✅ Banner cargado exitosamente");
+        };
+
+        container.appendChild(img);
+
+        // Ocultar placeholder
+        placeholder.style.display = "none";
+    } else {
+        console.log("ℹ️ No hay banner, mostrando placeholder");
+        // Mostrar placeholder si no hay banner
+        placeholder.style.display = "flex";
+    }
+}
+
+/*
+function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) return;
+    
+    // Limpiar solo el banner (ya corregido antes)
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) bannerPreview.remove();
+    
+    const placeholder = container.querySelector("#bannerPlaceholder");
+
+    if (!placeholder) {
+        console.error("Placeholder del banner no encontrado");
+        return;
+    }
+    if (data.banner) {
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+        container.appendChild(img);
+        
+        // Ocultar placeholder
+        if (placeholder) {
+            placeholder.style.display = "none";
+        }
+    } else {
+        // Mostrar placeholder si no hay banner
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+    }
+}*/
+
+/*
+function fillGeneralImages(data) {
     const container = document.getElementById("eventImage").closest("label");
     clearImagePreviews();
 
@@ -227,7 +439,7 @@ function fillGeneralImages(data) {
         img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
         container.appendChild(img);
     }
-}
+}*/
 
 function fillReasons(reasons) {
     const mapping = [
@@ -271,6 +483,7 @@ async function editEvent(id) {
 
     fillGeneralTab(data);
     fillGeneralImages(data);
+    setupBannerListener();
     const reasons = await loadReasons(id);
     fillReasons(reasons);
 
@@ -295,6 +508,12 @@ async function editEvent(id) {
     const awardsHTML = awards.renderAwardsHTML(awardsData);
     document.getElementById("awardsList").innerHTML = awardsHTML;
     setupAwardsListeners(id);
+
+    //! TAB de Links
+    const linksData = await links.loadLinks(id);
+    const linksHTML = links.renderLinksHTML(linksData);
+    document.getElementById("linksList").innerHTML = linksHTML;
+    setupLinksListeners(id);
 
 }
 
@@ -343,6 +562,8 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
 
     const ref = doc(db, "events", editingId);
 
+    const bannerUrl = banner.getBannerUrl();
+
     const updated = {
         heroPrefix: document.getElementById("eventPrefix").value,
         title: document.getElementById("eventTitle").value,
@@ -352,7 +573,8 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
         date: new Date(document.getElementById("eventDate").value),
         modality: document.getElementById("eventModality").value,
         location: document.getElementById("eventLocation").value,
-        awardsText: document.getElementById("eventPrizes").value
+        awardsText: document.getElementById("eventPrizes").value,
+        banner: bannerUrl || ""
     }
     await updateDoc(ref, updated);
 
@@ -396,6 +618,19 @@ document.getElementById("modalForm").addEventListener("submit", async (element) 
     } catch (err) {
         console.error("Error guardando premios:", err);
     }
+
+    //* Guardar Links
+    try {
+        const linksArray = links.getLinksFromDOM();
+        await links.saveLinks(editingId, linksArray);
+    } catch (err) {
+        console.error("Error guardando links:", err);
+    }
+
+    const reloadRes = await loadEvents();
+    if (reloadRes.success) {
+        filteredEvents = [...events];
+    }
     closeModal();
     renderTable();
 });
@@ -412,13 +647,36 @@ function deleteEvent(id) {
 //! 6. Gestion de imagenes 
 
 function clearImagePreviews() {
-    // Selecciona todas las imágenes creadas dinámicamente con la clase .preview-image
-    const previewElements = document.querySelectorAll('.preview-image');
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
 
-    // Las elimina del DOM
-    previewElements.forEach(el => el.remove());
+        // ← NUEVO: Restaurar placeholder
+        const placeholder = bannerContainer.querySelector("#bannerPlaceholder");
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+
+        // ← NUEVO: Limpiar data attribute
+        const input = document.getElementById("eventImage");
+        if (input) {
+            delete input.dataset.cloudinaryUrl;
+        }
+    }
 }
 
+/*
+function clearImagePreviews() {
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
+    }
+}
+*/
 
 const setupImagePreview = (inputId) => {
     const input = document.getElementById(inputId);
@@ -692,6 +950,11 @@ function setupGalleryListeners(eventId) {
             "beforeend",
             gallery.renderGalleryHTML([newItem])
         );
+
+        const newInput = document.getElementById(`gallery-file-${tempId}`);
+        if (newInput) {
+            setupImagePreview(newInput.id);
+        }
     });
 }
 
@@ -726,7 +989,7 @@ function setupAwardsListeners(eventId) {
         if (del) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             if (!confirm("¿Eliminar este premio? Esta acción no se puede deshacer.")) {
                 return;
             }
@@ -738,7 +1001,7 @@ function setupAwardsListeners(eventId) {
             try {
                 // Eliminar de Firestore
                 await awards.deleteAward(eventId, awardId);
-                
+
                 // Eliminar del DOM
                 awardItem.remove();
 
@@ -747,7 +1010,7 @@ function setupAwardsListeners(eventId) {
                 toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
                 toast.textContent = '✓ Premio eliminado correctamente';
                 document.body.appendChild(toast);
-                
+
                 setTimeout(() => toast.remove(), 3000);
             } catch (err) {
                 console.error("Error eliminando premio:", err);
@@ -783,13 +1046,162 @@ function setupAwardsListeners(eventId) {
         }
     });
 }
+
+// Lógica de listeners para links
+function setupLinksListeners(eventId) {
+    const container = document.getElementById("linksList");
+    const addBtn = document.getElementById("addLinkBtn");
+
+    if (!container || !addBtn) return;
+
+    // Reset container events
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+
+    const active = document.getElementById("linksList");
+
+    // Botón de eliminar - CON ELIMINACIÓN REAL
+    active.addEventListener("click", async (e) => {
+        const del = e.target.closest(".delete-link");
+        if (del) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (!confirm("¿Eliminar este link? Esta acción no se puede deshacer.")) {
+                return;
+            }
+
+            const linkItem = del.closest(".link-item");
+            const linkId = linkItem.dataset.linkId;
+
+            try {
+                // Eliminar de Firestore
+                await links.deleteLink(eventId, linkId);
+
+                // Eliminar del DOM
+                linkItem.remove();
+
+                // Mostrar confirmación
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                toast.textContent = '✓ Link eliminado correctamente';
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.remove(), 3000);
+            } catch (err) {
+                console.error("Error eliminando link:", err);
+                alert("Error al eliminar el link. Intenta de nuevo.");
+            }
+        }
+    });
+
+    // Botón agregar
+    const newBtn = addBtn.cloneNode(true);
+    addBtn.parentNode.replaceChild(newBtn, addBtn);
+
+    newBtn.addEventListener("click", () => {
+        const tempId = "temp-" + Date.now();
+
+        const newItem = {
+            id: tempId,
+            icon: "",
+            title: "",
+            url: "",
+            order: active.children.length + 1
+        };
+
+        active.insertAdjacentHTML(
+            "beforeend",
+            links.renderLinksHTML([newItem])
+        );
+    });
+}
+
+// banner 
+// Configurar listener para el banner
+function setupBannerListener() {
+    const bannerInput = document.getElementById("eventImage");
+
+    if (!bannerInput) {
+        console.error("Input del banner no encontrado");
+        return;
+    }
+
+    // Limpiar listener previo clonando el nodo
+    const newInput = bannerInput.cloneNode(true);
+    bannerInput.parentNode.replaceChild(newInput, bannerInput);
+
+    // Obtener referencia al input actualizado
+    const activeInput = document.getElementById("eventImage");
+
+    // Agregar nuevo listener
+    activeInput.addEventListener("change", async (e) => {
+        console.log("Archivo seleccionado para banner");
+        const result = await banner.handleBannerImageChange(e.target);
+        if (result) {
+            console.log("Banner subido:", result);
+        } else {
+            console.error("No se subió banner");
+        }
+    });
+
+    console.log("Listener del banner configurado");
+}
+
 //! INICIALIZAR REALMENTE 
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderTable();
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // eventos iniciales 
+
+    const res = await loadEvents();
+
+    // cargar iniciales 
+    if (!res.success) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se pudieron cargar los eventos",
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+        const tableBody = document.getElementById('tableBody');
+        if (tableBody) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error al cargar datos</td></tr>';
+        }
+    } else {
+        filteredEvents = [...events];
+        renderTable();
+    }
+
+    // busqueda 
+    setupSearch();
+
+    // tabs
     setupTabs();
     setupStructureListeners();
     setupStatsListeners();
+    setupBannerListener();
+
+    // paginacion
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+    if (paginationContainer) {
+        paginationContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.pagination-btn');
+            if (!btn || btn.disabled) return;
+
+            const newPage = parseInt(btn.dataset.page);
+            if (newPage) {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) searchInput.value = '';
+                currentPage = newPage;
+                renderTable();
+            }
+        });
+    }
 });
 
 // Manejar cambiso en selects de icons 

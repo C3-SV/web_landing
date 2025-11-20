@@ -1,12 +1,7 @@
-import { app, db, auth, storage } from "./firebase_config.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { app, db, auth } from "./firebase_config.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 //import { getAnalytics } from "firebase/analytics";
 import { doc, addDoc, setDoc, getDoc, getDocs, collection, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-storage.js";
-
-
-const fileInput = document.getElementById("profile-picture-input");
-const profileImg = document.getElementById("profile-picture");
 
 // Función para registrar usuarios
 function isEmail(text) {
@@ -219,6 +214,7 @@ async function saveField(container) {
         apellido: "lastName",
         correo: "email",
         usuario: "username",
+        telefono: "phone",
         dob: "birthdate"
     };
 
@@ -250,34 +246,34 @@ async function saveField(container) {
     }
 }
 
-fileInput.addEventListener("change", async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+export async function logoutUser() {
+    await Swal.fire({
+        title: 'Cerrar sesión',
+        html: "¿Estás seguro de que deseas cerrar sesión?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Cerrar sesión',
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 mr-2 focus:outline-none",
+            cancelButton: "bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 focus:outline-none"
+        }
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await Swal.fire({
+                title: 'Cerrando sesión...',
+                timer: 1000,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            await signOut(auth);
+        }
+    });
+}
 
-    try {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        const imgRef = ref(storage, `profilePhotos/${user.uid}`);
-
-        // Subir archivo
-        await uploadBytes(imgRef, file);
-
-        // Obtener URL pública
-        const url = await getDownloadURL(imgRef);
-
-        // Guardar en Firestore
-        await updateDoc(doc(db, "users", user.uid), {
-            profilePhoto: url
-        });
-
-        // Actualizar en pantalla
-        profileImg.src = url;
-
-        alert("Foto actualizada correctamente 🎉");
-
-    } catch (error) {
-        console.error("Error subiendo foto:", error);
-        alert("Error al subir la imagen.");
-    }
-});
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", logoutUser);
+}

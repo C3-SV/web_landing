@@ -1,7 +1,6 @@
 import { registerUser, loginUser } from "./auth.js";
 
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
-    alert("Ejecutando submit");
     e.preventDefault();
 
     let correo = document.getElementById("registerEmail").value;

@@ -85,7 +85,7 @@ function crearTarjetaProximo(eventId, eventData) {
 async function loadUpcomingEvents() {
     try {
         const eventsCollection = collection(db, "events");
-        const q = query(eventsCollection, where("status", "==", "upcoming"), orderBy("date", "asc"));
+        const q = query(eventsCollection, where("status", "==", "upcoming"), where("visibility", "==", true), orderBy("date", "asc"));
         const snapshot = await getDocs(q);
 
         // Reiniciar el contenedor
@@ -223,7 +223,7 @@ function filtrarBusqueda() {
 async function loadPastEvents() {
     try {
         const eventsCollection = collection(db, "events");
-        const q = query(eventsCollection, where("status", "==", "finished"), orderBy("date", "asc"));
+        const q = query(eventsCollection, where("status", "==", "finished"), where("visibility", "==", true), orderBy("date", "asc"));
         const snapshot = await getDocs(q);
 
         eventosPasados = [];

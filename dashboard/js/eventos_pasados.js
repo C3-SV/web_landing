@@ -1,4 +1,4 @@
-// Firebase y datos 
+// Firebase y datos
 import { db } from "../../js/firebase_config.js";
 import {
     doc,
@@ -14,12 +14,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 import * as validations from "../../js/validations.js";
+import { getModalityBadge, getEventStatusBadge } from "./badge_styles.js";
 
 import * as structure from "./modules/structure.js";
 import * as stats from "./modules/stats.js";
 import * as gallery from "./modules/gallery.js";
 import * as awards from "./modules/awards.js";
 import * as links from "./modules/links.js";
+import * as banner from "./modules/eventBanner.js";
 
 
 // Manejo de iconos
@@ -29,6 +31,9 @@ import { ICON_OPTIONS, renderIconSelect } from "./utilities/icons.js";
 const COLLECTION_NAME = "events";
 let events = [];
 let editingId = null;
+let filteredEvents = [];
+let currentPage = 1;
+const itemsPerPage = 5;
 
 //! 0. UTILIDADES 
 
@@ -77,11 +82,75 @@ async function renderTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
-    const res = await loadEvents();
-
     // Cargando...
-    tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
+    //tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>';
 
+    // si no hay eventos filtrados
+    if (filteredEvents.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No se encontraron eventos.</td></tr>';
+        renderPagination();
+        return;
+    }
+
+    // Lógica de Paginación
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
+
+
+    // eventos de la página actual
+    paginatedEvents.forEach(event => {
+        const modalityBadge = getModalityBadge(event.modality || '');
+        const statusBadge = getEventStatusBadge(event.status || '');
+
+        const row = `
+            <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
+
+                <td class="px-6 py-4 text-sm text-gray-900">
+                    ${event.id}
+                </td>
+
+                <td class="px-6 py-4 text-sm font-semibold text-gray-800">
+                    ${event.title}
+                </td>
+
+                <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                    ${event.date ? formatearFecha(event.date) : 'Sin fecha'}
+                </td>
+
+                <td class="px-6 py-4">
+                    <span class="${modalityBadge.classes}">
+                        ${modalityBadge.text}
+                    </span>
+                </td>
+
+                <td class="px-6 py-4">
+                    <span class="${statusBadge.classes}">
+                        ${statusBadge.text}
+                    </span>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex justify-center space-x-3">
+                        <button onclick="editEvent('${event.id}')" class="text-blue-600 hover:text-blue-800 transition-colors p-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                        </button>
+                        <button onclick="deleteEvent('${event.id}')" class="text-red-600 hover:text-red-800 transition-colors p-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+
+    renderPagination();
+    /*
     // si falla 
 
     if (!res.success) {
@@ -154,14 +223,78 @@ async function renderTable() {
             `;
         tableBody.innerHTML += row;
     });
+    */
 }
 
-//! 3. GESTION DEL MODAL  - abrir, cerrar, 
-// Abrir y resetear 
+function renderPagination() {
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+    if (!paginationContainer) return;
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    let buttonsHTML = '<div class="flex space-x-2" id="pagination-wrapper">';
+
+    // Botón Anterior
+    const prevDisabled = currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage - 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${prevDisabled}" ${currentPage === 1 ? 'disabled' : ''}>
+            Anterior
+        </button>
+    `;
+
+    // Números de página
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+            buttonsHTML += `<button class="px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white rounded-lg shadow-md cursor-default">${i}</button>`;
+        } else {
+            buttonsHTML += `<button data-page="${i}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">${i}</button>`;
+        }
+    }
+
+    // Botón Siguiente
+    const nextDisabled = currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50';
+    buttonsHTML += `
+        <button data-page="${currentPage + 1}" class="pagination-btn px-4 py-2 bg-white border border-gray-300 rounded-lg transition ${nextDisabled}" ${currentPage === totalPages ? 'disabled' : ''}>
+            Siguiente
+        </button>
+    `;
+
+    buttonsHTML += '</div>';
+    paginationContainer.innerHTML = buttonsHTML;
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+
+        filteredEvents = events.filter(event =>
+            event.title.toLowerCase().includes(searchTerm) ||
+            (event.modality && event.modality.toLowerCase().includes(searchTerm)) ||
+            (event.id && event.id.toLowerCase().includes(searchTerm))
+        );
+
+        currentPage = 1;
+        renderTable();
+    });
+}
+
+//! 3. GESTION DEL MODAL  - abrir, cerrar,
+// Abrir y resetear
 function openModal() {
     const modal = document.getElementById('modal');
     const form = document.getElementById('modalForm');
     const title = document.getElementById('modalTitle');
+
+    // Resetear editingId para modo creación
+    editingId = null;
 
     modal.classList.remove('hidden');
     title.innerText = 'Agregar evento pasado';
@@ -170,7 +303,7 @@ function openModal() {
 
     clearImagePreviews();
 
-    // Ir a primera tab 
+    // Ir a primera tab
     const firstTabBtn = document.querySelector('.tabBtn[data-target="tab-general"]');
     if (firstTabBtn) firstTabBtn.click();
 }
@@ -220,6 +353,90 @@ function fillGeneralTab(data) {
 }
 
 function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) {
+        console.error("❌ Container del banner no encontrado");
+        return;
+    }
+
+    // Limpiar solo el banner
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) {
+        bannerPreview.remove();
+    }
+
+    const placeholder = container.querySelector("#bannerPlaceholder");
+    if (!placeholder) {
+        console.error("❌ Placeholder del banner no encontrado");
+        return;
+    }
+
+    if (data.banner) {
+        console.log("✅ Cargando banner:", data.banner);
+
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+
+        // Agregar listener de error
+        img.onerror = () => {
+            console.error("❌ Error cargando imagen del banner");
+            placeholder.style.display = "flex";
+            img.remove();
+        };
+
+        img.onload = () => {
+            console.log("✅ Banner cargado exitosamente");
+        };
+
+        container.appendChild(img);
+
+        // Ocultar placeholder
+        placeholder.style.display = "none";
+    } else {
+        console.log("ℹ️ No hay banner, mostrando placeholder");
+        // Mostrar placeholder si no hay banner
+        placeholder.style.display = "flex";
+    }
+}
+
+/*
+function fillGeneralImages(data) {
+    const container = document.getElementById("eventImage")?.closest("label");
+    if (!container) return;
+    
+    // Limpiar solo el banner (ya corregido antes)
+    const bannerPreview = container.querySelector('.preview-image');
+    if (bannerPreview) bannerPreview.remove();
+    
+    const placeholder = container.querySelector("#bannerPlaceholder");
+
+    if (!placeholder) {
+        console.error("Placeholder del banner no encontrado");
+        return;
+    }
+    if (data.banner) {
+        // Crear preview para banner existente
+        const img = document.createElement('img');
+        img.src = data.banner;
+        img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
+        container.appendChild(img);
+        
+        // Ocultar placeholder
+        if (placeholder) {
+            placeholder.style.display = "none";
+        }
+    } else {
+        // Mostrar placeholder si no hay banner
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+    }
+}*/
+
+/*
+function fillGeneralImages(data) {
     const container = document.getElementById("eventImage").closest("label");
     clearImagePreviews();
 
@@ -229,7 +446,7 @@ function fillGeneralImages(data) {
         img.className = 'preview-image absolute inset-0 w-full h-full object-cover rounded-lg z-10';
         container.appendChild(img);
     }
-}
+}*/
 
 function fillReasons(reasons) {
     const mapping = [
@@ -273,6 +490,7 @@ async function editEvent(id) {
 
     fillGeneralTab(data);
     fillGeneralImages(data);
+    setupBannerListener();
     const reasons = await loadReasons(id);
     fillReasons(reasons);
 
@@ -343,98 +561,242 @@ async function guardarRazones(eventId, reasons) {
     await Promise.all(creates);
 }
 
-//! On submit para guardar 
+//! On submit para guardar
 document.getElementById("modalForm").addEventListener("submit", async (element) => {
     element.preventDefault();
 
-    if (!editingId) return;
-
-    const ref = doc(db, "events", editingId);
-
-    const updated = {
-        heroPrefix: document.getElementById("eventPrefix").value,
-        title: document.getElementById("eventTitle").value,
-        subtitle: document.getElementById("eventSubtitle").value,
-        description: document.getElementById("eventDescription").value,
-
-        date: new Date(document.getElementById("eventDate").value),
-        modality: document.getElementById("eventModality").value,
-        location: document.getElementById("eventLocation").value,
-        awardsText: document.getElementById("eventPrizes").value
-    }
-    await updateDoc(ref, updated);
-
-    //* Guardar razones 
-    const reasons = getReasonsFromForm();
     try {
-        await guardarRazones(editingId, reasons);
-    } catch (err) {
-        console.error("Error guardando razones", err);
-    }
+        // Mostrar loading
+        const submitBtn = document.getElementById("eventBtnGuardarCambios");
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Guardando...";
 
-    //* Guardar structure 
-    const structData = structure.getStructureFromDOM();
-    try {
-        await structure.saveStructure(editingId, structData);
-    }
-    catch (err) {
-        console.error("Error guardando estructura", err)
-    }
+        const bannerUrl = banner.getBannerUrl();
 
-    //* Guardar Stats 
-    try {
-        const statsData = stats.getStatsFromDOM();
-        await stats.saveStats(editingId, statsData);
-    } catch (err) {
-        console.error("Error guardando estadísticas", err);
-    }
+        // Datos del evento
+        const eventData = {
+            heroPrefix: document.getElementById("eventPrefix").value,
+            title: document.getElementById("eventTitle").value,
+            subtitle: document.getElementById("eventSubtitle").value,
+            description: document.getElementById("eventDescription").value,
+            date: new Date(document.getElementById("eventDate").value),
+            modality: document.getElementById("eventModality").value,
+            location: document.getElementById("eventLocation").value,
+            awardsText: document.getElementById("eventPrizes").value,
+            banner: bannerUrl || "",
+            status: "finished" // Eventos pasados siempre tienen status "finished"
+        };
 
-    //* Guardar Gallery 
-    try {
-        const galArray = gallery.getGalleryFromDOM();
-        await gallery.saveGallery(editingId, galArray);
-    } catch (err) {
-        console.error("Error guardando galeria:", err);
-    }
+        let eventId;
 
-    //* Guardar Awards
-    try {
-        const awardsArray = awards.getAwardsFromDOM();
-        await awards.saveAwards(editingId, awardsArray);
-    } catch (err) {
-        console.error("Error guardando premios:", err);
-    }
+        // CREAR o ACTUALIZAR
+        if (editingId) {
+            // Modo edición: actualizar evento existente
+            const ref = doc(db, "events", editingId);
+            await updateDoc(ref, eventData);
+            eventId = editingId;
+        } else {
+            // Modo creación: crear nuevo evento
+            const ref = collection(db, "events");
+            const docRef = await addDoc(ref, eventData);
+            eventId = docRef.id;
+        }
 
-    //* Guardar Links
-    try {
-        const linksArray = links.getLinksFromDOM();
-        await links.saveLinks(editingId, linksArray);
-    } catch (err) {
-        console.error("Error guardando links:", err);
+        //* Guardar razones
+        const reasons = getReasonsFromForm();
+        try {
+            await guardarRazones(eventId, reasons);
+        } catch (err) {
+            console.error("Error guardando razones", err);
+        }
+
+        //* Guardar structure
+        const structData = structure.getStructureFromDOM();
+        try {
+            await structure.saveStructure(eventId, structData);
+        }
+        catch (err) {
+            console.error("Error guardando estructura", err)
+        }
+
+        //* Guardar Stats
+        try {
+            const statsData = stats.getStatsFromDOM();
+            await stats.saveStats(eventId, statsData);
+        } catch (err) {
+            console.error("Error guardando estadísticas", err);
+        }
+
+        //* Guardar Gallery
+        try {
+            const galArray = gallery.getGalleryFromDOM();
+            await gallery.saveGallery(eventId, galArray);
+        } catch (err) {
+            console.error("Error guardando galeria:", err);
+        }
+
+        //* Guardar Awards
+        try {
+            const awardsArray = awards.getAwardsFromDOM();
+            await awards.saveAwards(eventId, awardsArray);
+        } catch (err) {
+            console.error("Error guardando premios:", err);
+        }
+
+        //* Guardar Links
+        try {
+            const linksArray = links.getLinksFromDOM();
+            await links.saveLinks(eventId, linksArray);
+        } catch (err) {
+            console.error("Error guardando links:", err);
+        }
+
+        const reloadRes = await loadEvents();
+        if (reloadRes.success) {
+            filteredEvents = [...events];
+        }
+
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+        // Mostrar mensaje de éxito
+        const isUpdate = editingId !== null;
+        const successTitle = isUpdate ? 'Evento actualizado' : 'Evento creado';
+
+        // Resetear editingId ANTES de cerrar modal y recargar
+        editingId = null;
+
+        closeModal();
+        renderTable();
+
+        Swal.fire({
+            toast: true,
+            position: 'bottom-end',
+            icon: 'success',
+            title: successTitle,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    } catch (error) {
+        console.error("Error al guardar:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al guardar el evento: ' + error.message,
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+
+        // Restaurar botón en caso de error
+        const submitBtn = document.getElementById("eventBtnGuardarCambios");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Guardar Cambios";
     }
-    closeModal();
-    renderTable();
 });
 
 
-// Eliminar evento 
-function deleteEvent(id) {
-    if (confirm('¿Borrar evento?')) {
-        events = events.filter(e => e.id !== id);
+// Eliminar evento
+async function deleteEvent(id) {
+    const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        html: "Se eliminará el evento y sus datos asociados.<br><b>No podrás revertir esta acción.</b>",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 mr-2",
+            cancelButton: "bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+        }
+    });
+
+    if (!result.isConfirmed) return;
+
+    Swal.fire({
+        title: 'Eliminando...',
+        text: 'Por favor espere',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    try {
+        const ref = doc(db, COLLECTION_NAME, id);
+        await deleteDoc(ref);
+
+        // Recargar eventos
+        const reloadRes = await loadEvents();
+        if (reloadRes.success) {
+            filteredEvents = [...events];
+        }
+
         renderTable();
+
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Evento eliminado',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo eliminar el evento: ' + error.message,
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
     }
 }
 
 //! 6. Gestion de imagenes 
 
 function clearImagePreviews() {
-    // Selecciona todas las imágenes creadas dinámicamente con la clase .preview-image
-    const previewElements = document.querySelectorAll('.preview-image');
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
 
-    // Las elimina del DOM
-    previewElements.forEach(el => el.remove());
+        // ← NUEVO: Restaurar placeholder
+        const placeholder = bannerContainer.querySelector("#bannerPlaceholder");
+        if (placeholder) {
+            placeholder.style.display = "flex";
+        }
+
+        // ← NUEVO: Limpiar data attribute
+        const input = document.getElementById("eventImage");
+        if (input) {
+            delete input.dataset.cloudinaryUrl;
+        }
+    }
 }
 
+/*
+function clearImagePreviews() {
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
+    }
+}
+*/
 
 const setupImagePreview = (inputId) => {
     const input = document.getElementById(inputId);
@@ -708,6 +1070,11 @@ function setupGalleryListeners(eventId) {
             "beforeend",
             gallery.renderGalleryHTML([newItem])
         );
+
+        const newInput = document.getElementById(`gallery-file-${tempId}`);
+        if (newInput) {
+            setupImagePreview(newInput.id);
+        }
     });
 }
 
@@ -869,13 +1236,92 @@ function setupLinksListeners(eventId) {
         );
     });
 }
+
+// banner 
+// Configurar listener para el banner
+function setupBannerListener() {
+    const bannerInput = document.getElementById("eventImage");
+
+    if (!bannerInput) {
+        console.error("Input del banner no encontrado");
+        return;
+    }
+
+    // Limpiar listener previo clonando el nodo
+    const newInput = bannerInput.cloneNode(true);
+    bannerInput.parentNode.replaceChild(newInput, bannerInput);
+
+    // Obtener referencia al input actualizado
+    const activeInput = document.getElementById("eventImage");
+
+    // Agregar nuevo listener
+    activeInput.addEventListener("change", async (e) => {
+        console.log("Archivo seleccionado para banner");
+        const result = await banner.handleBannerImageChange(e.target);
+        if (result) {
+            console.log("Banner subido:", result);
+        } else {
+            console.error("No se subió banner");
+        }
+    });
+
+    console.log("Listener del banner configurado");
+}
+
 //! INICIALIZAR REALMENTE 
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderTable();
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // eventos iniciales 
+
+    const res = await loadEvents();
+
+    // cargar iniciales 
+    if (!res.success) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se pudieron cargar los eventos",
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+        const tableBody = document.getElementById('tableBody');
+        if (tableBody) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error al cargar datos</td></tr>';
+        }
+    } else {
+        filteredEvents = [...events];
+        renderTable();
+    }
+
+    // busqueda 
+    setupSearch();
+
+    // tabs
     setupTabs();
     setupStructureListeners();
     setupStatsListeners();
+    setupBannerListener();
+
+    // paginacion
+    const paginationContainer = document.querySelector('.mt-6.flex.justify-center');
+    if (paginationContainer) {
+        paginationContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.pagination-btn');
+            if (!btn || btn.disabled) return;
+
+            const newPage = parseInt(btn.dataset.page);
+            if (newPage) {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) searchInput.value = '';
+                currentPage = newPage;
+                renderTable();
+            }
+        });
+    }
 });
 
 // Manejar cambiso en selects de icons 

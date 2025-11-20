@@ -1,8 +1,9 @@
-import { 
-  collection, query, onSnapshot, doc, updateDoc, deleteDoc, getDoc 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  collection, query, onSnapshot, doc, updateDoc, deleteDoc, getDoc
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+import { db } from "../../js/firebase_config.js";
+import { getMessageStatusBadge } from "./badge_styles.js";
 
-const db = window.db;
 const tableBody = document.getElementById("tableBody");
 
 // Paginación
@@ -54,15 +55,21 @@ function displayMessages() {
         })
       : "Sin fecha";
 
+    const statusBadge = getMessageStatusBadge(msg.leido);
+
     const row = document.createElement("tr");
     row.classList.add("hover:bg-gray-50");
 
     row.innerHTML = `
       <td class="px-6 py-4 text-sm text-gray-700">${msg.nombre}</td>
       <td class="px-6 py-4 text-sm text-gray-700">${msg.correo}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${msg.mensaje}</td>
+      <td class="px-6 py-4 text-sm text-gray-700">${msg.mensaje.length > 20 ? msg.mensaje.substring(0, 20) + "..." : msg.mensaje}</td>
       <td class="px-6 py-4 text-sm text-gray-700">${fechaFormateada}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${msg.leido ? "Leído" : "Pendiente"}</td>
+      <td class="px-6 py-4">
+        <span class="${statusBadge.classes}">
+          ${statusBadge.text}
+        </span>
+      </td>
       <td class="px-6 py-4 text-center text-sm flex gap-3 justify-center">
         <button class="text-blue-600 hover:text-blue-800 transition-colors p-1 ver" data-id="${msg.id}">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,9 +192,17 @@ function nextPage() {
 }
 
 // Actualizar botones
+// Actualizar botones
 function updatePaginationButtons() {
   const totalPages = Math.ceil(filteredMessages.length / rowsPerPage);
 
+  if (totalPages <= 1) {
+    paginationButtonsContainer.classList.add("hidden");
+    return; 
+  } else {
+    paginationButtonsContainer.classList.remove("hidden");
+  }
+  
   while (paginationButtonsContainer.children.length > 2) {
     paginationButtonsContainer.removeChild(paginationButtonsContainer.children[1]);
   }
@@ -197,13 +212,19 @@ function updatePaginationButtons() {
     btn.textContent = i;
     btn.dataset.page = i;
     btn.className = i === currentPage
-      ? "px-4 py-2 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white rounded-lg"
+      ? "px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white rounded-lg"
       : "px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition";
+    
     paginationButtonsContainer.insertBefore(btn, btnSiguiente);
   }
 
   btnAnterior.disabled = currentPage === 1;
+  btnAnterior.classList.toggle("opacity-50", currentPage === 1);
+  btnAnterior.classList.toggle("cursor-not-allowed", currentPage === 1);
+
   btnSiguiente.disabled = currentPage === totalPages || totalPages === 0;
+  btnSiguiente.classList.toggle("opacity-50", currentPage === totalPages || totalPages === 0);
+  btnSiguiente.classList.toggle("cursor-not-allowed", currentPage === totalPages || totalPages === 0);
 }
 
 // Buscar

@@ -4,6 +4,7 @@ import {
     getDocs,
     addDoc,
     deleteDoc,
+    updateDoc,
     orderBy,
     query,
     doc
@@ -76,7 +77,7 @@ export function renderAwardsHTML(items = []) {
                 </label>
 
                 <span class="award-file-name mt-1.5 text-[11px] text-gray-500 truncate block text-center">
-                    ${item.url ? "✓ Imagen cargada" : "Ningún archivo seleccionado"}
+                    ${item.url ? "Imagen cargada" : "Ningún archivo seleccionado"}
                 </span>
             </div>
 
@@ -153,6 +154,55 @@ export function getAwardsFromDOM() {
 }
 
 // Guardar awards en Firestore
+
+export async function saveAwards(eventId, array) {
+    const awardsRef = collection(db, "events", eventId, "awards");
+
+    // 1. Obtener IDs actuales en Firestore
+    const existing = await getDocs(awardsRef);
+    const existingIds = existing.docs.map(d => d.id);
+
+    // 2. Obtener IDs que quedaron en el DOM
+    const currentIds = array.filter(a => a.id).map(a => a.id);
+
+    // 3. Eliminar los que ya NO están en el DOM
+    const idsToDelete = existingIds.filter(id => !currentIds.includes(id));
+    const deletions = idsToDelete.map(id => 
+        deleteDoc(doc(db, "events", eventId, "awards", id))
+    );
+    await Promise.all(deletions.map(p => p.catch(() => {})));
+
+    // 4. Actualizar o crear cada item
+    const ops = array.map(item => {
+        if (item.id) {
+            // Actualizar existente
+            const docRef = doc(db, "events", eventId, "awards", item.id);
+            return updateDoc(docRef, {
+                caption: item.caption || "",
+                url: item.url || "",
+                order: item.order || 1
+            }).catch(() => {
+                // Si falla la actualización (ej: doc no existe), crear nuevo
+                return addDoc(awardsRef, {
+                    caption: item.caption || "",
+                    url: item.url || "",
+                    order: item.order || 1
+                });
+            });
+        } else {
+            // Crear nuevo
+            return addDoc(awardsRef, {
+                caption: item.caption || "",
+                url: item.url || "",
+                order: item.order || 1
+            });
+        }
+    });
+
+    await Promise.all(ops);
+}
+
+/*
 export async function saveAwards(eventId, array) {
     const awardsRef = collection(db, "events", eventId, "awards");
 
@@ -187,7 +237,7 @@ export async function saveAwards(eventId, array) {
 
     await Promise.all(ops);
 }
-
+*/
 // Manejar cambio de imagen con subida a Cloudinary
 export async function handleAwardImageChange(eventId, inputEl) {
     const file = inputEl.files[0];

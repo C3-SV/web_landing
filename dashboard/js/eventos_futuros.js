@@ -1,8 +1,8 @@
 import { db } from "../../js/firebase_config.js";
 import { addDoc, collection, serverTimestamp, query, getDocs, getDoc, orderBy, updateDoc, doc, deleteDoc, where, Timestamp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
 
-
 import * as validations from "../../js/validations.js";
+import { getModalityBadge, getVisibilityBadge } from "./badge_styles.js";
 
 const COLLECTION_NAME = "events";
 let events = [];
@@ -58,7 +58,9 @@ async function renderTable() {
     const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
 
     paginatedEvents.forEach((event) => {
-        // Badges
+        const modalityBadge = getModalityBadge(event.modality || '');
+        const visibilityBadge = getVisibilityBadge(event.visibility);
+
         const row = `<tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
                 <td class="px-6 py-4 text-sm font-semibold text-gray-800 truncate">
                     ${event.title}
@@ -67,18 +69,18 @@ async function renderTable() {
                     ${event.date ? validations.formatDate(event.date) : 'Sin fecha'}
                 </td>
                 <td class="px-6 py-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                            ${event.modality}
-                        </span>
+                    <span class="${modalityBadge.classes}">
+                        ${modalityBadge.text}
+                    </span>
                 </td>
                 <td class="px-6 py-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                            ${event.visibility ? 'Visible' : 'No visible'}
-                        </span>
+                    <span class="${visibilityBadge.classes}">
+                        ${visibilityBadge.text}
+                    </span>
                 </td>
 <td class="px-6 py-4 whitespace-nowrap text-center">
         <div class="flex justify-center space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
-            
+
             <button class="btn-finish text-[#3F95E2] hover:text-blue-600 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Marcar como finalizado">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -88,7 +90,7 @@ async function renderTable() {
             <button class="btn-edit text-blue-600 hover:text-blue-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Editar">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
             </button>
-            
+
             <button class="btn-del text-red-600 hover:text-red-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Eliminar">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
             </button>
@@ -331,6 +333,17 @@ function openModal() {
     // Resetear pestañas a la primera
     const firstTabBtn = document.querySelector('.tabBtn[data-target="tab-banner"]');
     if (firstTabBtn) firstTabBtn.click();
+
+    const searchInput = document.getElementById('categorySearch');
+    if (searchInput) {
+        searchInput.value = ''; // Asegurar que el input esté vacío
+        
+        // Quitar la clase 'hidden' de todas las opciones de la lista
+        const listItems = document.querySelectorAll('#categoryList li');
+        listItems.forEach(item => {
+            item.classList.remove('hidden');
+        });
+    }
 }
 
 /**
@@ -479,6 +492,7 @@ function getEventFormData() {
         modality: formData.get('modality').trim(),
         location: formData.get('location').trim(),
         awardsText: formData.get('awardsText').trim(),
+        formUrl: formData.get('formUrl') ? formData.get('formUrl').trim() : "",
         visibility: formData.get('visibility'),
 
         // Archivos
@@ -639,6 +653,7 @@ async function addNewUpcomingEvent(eventData) {
             modality: eventData.modality,
             location: eventData.location,
             awardsText: eventData.awardsText,
+            formUrl: eventData.formUrl,
             categories: eventData.categories,
             visibility: isVisible,
 
@@ -666,8 +681,7 @@ async function addNewUpcomingEvent(eventData) {
             toast: true,
             position: 'top-end',
             icon: 'success',
-            title: '¡Éxito!',
-            text: 'El evento se ha creado correctamente.',
+            title: 'Evento creado',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true
@@ -697,7 +711,7 @@ async function getUpcomingEvent(id) {
 
     openModal();
 
-    document.getElementById('modalTitle').innerText = 'Editar Evento';
+    document.getElementById('modalTitle').innerText = 'Editar evento futuro';
     document.getElementById('eventId').value = event.id;
 
     // Pestaña Banner
@@ -713,6 +727,9 @@ async function getUpcomingEvent(id) {
     document.getElementById('modality').value = event.modality || 'Presencial';
     document.getElementById('location').value = event.location || '';
     document.getElementById('awardsText').value = event.awardsText || '';
+    if (document.getElementById('formUrl')) {
+        document.getElementById('formUrl').value = event.formUrl || '';
+    }
 
     // Visibilidad (Convertir booleano a string del select)
     document.getElementById('visibility').value = event.visibility ? 'visible' : 'not_visible';
@@ -792,8 +809,7 @@ async function getUpcomingEvent(id) {
         Swal.fire({
             toast: true,
             icon: 'warning',
-            title: 'Alerta',
-            text: 'No se pudieron cargar los detalles de las razones.',
+            title: 'No se pudieron cargar los detalles de las razones',
             confirmButtonText: "Ok",
             buttonsStyling: false,
             customClass: {
@@ -858,6 +874,7 @@ async function updateExistingEvent(eventData) {
             modality: eventData.modality,
             location: eventData.location,
             awardsText: eventData.awardsText,
+            formUrl: eventData.formUrl,
             visibility: isVisible,
             categories: eventData.categories
         };
@@ -877,7 +894,7 @@ async function updateExistingEvent(eventData) {
 
         Swal.fire({
             toast: true, position: 'top-end', icon: 'success',
-            title: 'Actualizado', text: 'El evento se actualizó correctamente.',
+            title: 'Evento actualizado',
             showConfirmButton: false, timer: 3000, timerProgressBar: true
         });
 
@@ -945,14 +962,14 @@ async function deleteUpcomingEvent(id) {
             toast: true,
             position: 'top-end',
             icon: 'success',
-            title: 'Eliminado',
-            text: 'El evento ha sido eliminado correctamente.',
+            title: 'Evento eliminado',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true
         });
 
-        await renderTable();
+        await getAllUpcomingEvents();
+        renderTable();
 
     } catch (error) {
         console.error("Error eliminando evento:", error);
@@ -991,9 +1008,7 @@ async function markAsFinished(id) {
         const eventRef = doc(db, COLLECTION_NAME, id);
         await updateDoc(eventRef, { status: "finished" });
 
-        // Actualizamos UI localmente (lo quitamos de la lista porque ya no es 'upcoming')
-        events = events.filter(e => e.id !== id);
-        filteredEvents = filteredEvents.filter(e => e.id !== id);
+        await getAllUpcomingEvents();
         renderTable();
 
         Swal.fire({

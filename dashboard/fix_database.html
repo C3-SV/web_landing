@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Database Values - C3 Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+        .console-output {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    🔧 Database Value Normalization
+                </h1>
+                <p class="text-gray-600">
+                    One-time script to standardize modality and status values in Spanish
+                </p>
+            </div>
+
+            <!-- Warning Box -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            <strong>Important:</strong> This script should be run only once. It will:
+                        </p>
+                        <ul class="mt-2 text-sm text-yellow-700 list-disc list-inside">
+                            <li>Normalize modality values: <code class="bg-yellow-100 px-1 rounded">presencial</code> → <code class="bg-yellow-100 px-1 rounded">Presencial</code></li>
+                            <li>Normalize modality values: <code class="bg-yellow-100 px-1 rounded">remoto</code> → <code class="bg-yellow-100 px-1 rounded">Remoto</code></li>
+                            <li>Normalize modality values: <code class="bg-yellow-100 px-1 rounded">hibrido/híbrido</code> → <code class="bg-yellow-100 px-1 rounded">Híbrido</code></li>
+                            <li>Normalize status values to English lowercase (for internal use)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>What happens after:</strong> All status badges will display with consistent styling:
+                        </p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">Presencial</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Remoto</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800">Híbrido</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">Finalizado</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">Próximo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="mb-6">
+                <button
+                    id="runScriptBtn"
+                    class="w-full bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                >
+                    🚀 Run Database Normalization
+                </button>
+            </div>
+
+            <!-- Console Output -->
+            <div class="bg-gray-900 text-green-400 rounded-lg p-4 console-output" style="min-height: 300px; max-height: 500px; overflow-y: auto;">
+                <div id="consoleOutput">
+                    <p class="text-gray-500">Ready to run. Click the button above to start...</p>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div class="mt-6 text-center">
+                <a href="usuarios.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { fixDatabaseValues } from './js/fix_database_values.js';
+
+        const consoleOutput = document.getElementById('consoleOutput');
+        const runScriptBtn = document.getElementById('runScriptBtn');
+
+        // Override console.log to display in our custom console
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        function addToConsole(message, type = 'log') {
+            const p = document.createElement('p');
+            p.textContent = message;
+
+            if (type === 'error') {
+                p.className = 'text-red-400';
+            } else if (message.includes('✅')) {
+                p.className = 'text-green-400';
+            } else if (message.includes('❌')) {
+                p.className = 'text-red-400';
+            } else if (message.includes('📝')) {
+                p.className = 'text-yellow-400';
+            } else if (message.includes('🎉')) {
+                p.className = 'text-cyan-400 font-bold';
+            }
+
+            consoleOutput.appendChild(p);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+
+            // Also log to real console
+            if (type === 'error') {
+                originalError(message);
+            } else {
+                originalLog(message);
+            }
+        }
+
+        console.log = (...args) => {
+            const message = args.join(' ');
+            addToConsole(message, 'log');
+        };
+
+        console.error = (...args) => {
+            const message = args.join(' ');
+            addToConsole(message, 'error');
+        };
+
+        // Run script handler
+        runScriptBtn.addEventListener('click', async () => {
+            runScriptBtn.disabled = true;
+            runScriptBtn.textContent = '⏳ Running...';
+            runScriptBtn.className = 'w-full bg-gray-400 text-white font-bold py-3 px-6 rounded-lg cursor-not-allowed';
+
+            consoleOutput.innerHTML = '';
+
+            try {
+                const result = await fixDatabaseValues();
+
+                if (result.success) {
+                    addToConsole('\n🎊 SUCCESS! Database has been normalized.', 'log');
+                    addToConsole('You can now close this page and reload your dashboard pages.', 'log');
+
+                    runScriptBtn.textContent = '✅ Completed Successfully';
+                    runScriptBtn.className = 'w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg';
+                } else {
+                    addToConsole('\n❌ Script completed with errors. Check logs above.', 'error');
+                    runScriptBtn.disabled = false;
+                    runScriptBtn.textContent = '🔄 Try Again';
+                    runScriptBtn.className = 'w-full bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700';
+                }
+            } catch (error) {
+                addToConsole(`\n❌ Fatal error: ${error.message}`, 'error');
+                runScriptBtn.disabled = false;
+                runScriptBtn.textContent = '🔄 Try Again';
+                runScriptBtn.className = 'w-full bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700';
+            }
+        });
+    </script>
+</body>
+</html>

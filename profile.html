@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Codec+Pro:wght@400;600;700;800;900&display=swap"
         rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="assets/images/logo-c3.jpeg" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="js/auth.js"></script>
 </head>
@@ -103,6 +104,10 @@
                             </h2>
                             <p class="text-white/70">@<span data-user="username"></span></p>
                         </div>
+                        <button id="logoutBtn"
+                            class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700">
+                            Cerrar sesión
+                        </button>
                     </header>
 
                     <!--? Campos del perfil -->
@@ -158,6 +163,21 @@
                                 <span class="field-view"><span data-user="username"></span></span>
                                 <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
                                     type="text" data-user="username" />
+                                <div class="ml-auto flex gap-2">
+                                    <button
+                                        class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">
+                                        Editar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                            <label class="w-48 text-white/80">Teléfono</label>
+                            <div class="flex-1 flex items-center gap-3" data-field="telefono">
+                                <span class="field-view"><span data-user="phone"></span></span>
+                                <input class="field-edit hidden w-full max-w-xs rounded-full px-3 py-2 text-black"
+                                    type="text" data-user="phone" />
                                 <div class="ml-auto flex gap-2">
                                     <button
                                         class="btn-edit px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm">

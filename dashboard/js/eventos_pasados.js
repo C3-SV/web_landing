@@ -428,11 +428,12 @@ function deleteEvent(id) {
 //! 6. Gestion de imagenes 
 
 function clearImagePreviews() {
-    // Selecciona todas las imágenes creadas dinámicamente con la clase .preview-image
-    const previewElements = document.querySelectorAll('.preview-image');
-
-    // Las elimina del DOM
-    previewElements.forEach(el => el.remove());
+    // Solo limpiar el preview del banner, NO todas las imágenes
+    const bannerContainer = document.getElementById("eventImage")?.closest("label");
+    if (bannerContainer) {
+        const bannerPreview = bannerContainer.querySelector('.preview-image');
+        if (bannerPreview) bannerPreview.remove();
+    }
 }
 
 
@@ -708,6 +709,11 @@ function setupGalleryListeners(eventId) {
             "beforeend",
             gallery.renderGalleryHTML([newItem])
         );
+
+        const newInput = document.getElementById(`gallery-file-${tempId}`);
+        if (newInput) {
+            setupImagePreview(newInput.id);
+        }
     });
 }
 

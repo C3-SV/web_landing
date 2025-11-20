@@ -57,22 +57,7 @@ async function renderTable() {
     const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
 
     paginatedEvents.forEach((event) => {
-
-        // Formateo de Fecha
-        let dateStr = "Sin fecha";
-        if (event.date && event.date.toDate) {
-            dateStr = event.date.toDate().toLocaleDateString();
-        }
-
         // Badges
-        const isVisible = event.visibility === 'visible';
-        const visibilityClass = isVisible ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-600 border-gray-200";
-        const visibilityLabel = isVisible ? "Público" : "Borrador";
-
-        let modalityClass = "bg-blue-50 text-blue-700 border-blue-200";
-        if (event.modality === 'Remoto') modalityClass = "bg-purple-50 text-purple-700 border-purple-200";
-        if (event.modality === 'Híbrido') modalityClass = "bg-orange-50 text-orange-700 border-orange-200";
-
         const row = `<tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
                 <td class="px-6 py-4 text-sm font-semibold text-gray-800 truncate">
                     ${event.title}
@@ -481,7 +466,7 @@ function validateEventData(data) {
             icon: 'warning',
             title: 'Campos incompletos',
             html: `Por favor, completa todos los campos obligatorios marcados con asterisco <b>(*)</b>, incluyendo imágenes. <br> <b> Consejo: </b> Revisa todas las pestañas.`,
-            confirmButtonText: "Entendido",
+            confirmButtonText: "Ok",
             buttonsStyling: false,
             customClass: { confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg" }
         });

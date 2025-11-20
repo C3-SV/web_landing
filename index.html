@@ -10,6 +10,7 @@
         rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="assets/images/logo-c3.jpeg" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/nav-auth.js"></script>
 </head>
 
 <body class="text-white overflow-x-hidden">
@@ -27,34 +28,51 @@
         </button>
 
         <!-- Desktop nav -->
-        <nav class="hidden md:flex h-full">
+        <nav class="hidden md:flex h-full items-center">
             <a href="index.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Inicio</a>
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Inicio</a>
             <a href="about.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Sobre
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Sobre
                 el C3</a>
             <a href="events.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Eventos</a>
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Eventos</a>
             <a href="contact.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Contáctanos</a>
-            <a href="login.html"
-                class="text-white text-lg font-extrabold px-6 h-full flex items-center rounded transition-colors duration-300 hover:bg-black hover:bg-opacity-30">Login</a>
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Contáctanos</a>
+
+            <!-- LOGIN (solo si NO hay sesión) -->
+            <a id="nav-login" href="login.html"
+                class="text-white text-lg font-extrabold px-6 h-full flex items-center hover:bg-black hover:bg-opacity-30">Login</a>
+
+            <!-- PERFIL (solo si hay sesión) -->
+            <a id="nav-profile" href="profile.html" class="hidden px-4">
+                <img id="nav-profile-img" class="h-10 w-10 rounded-full object-cover ring-2 ring-white/40" />
+            </a>
         </nav>
 
         <!-- Mobile nav -->
         <nav id="mobile-menu"
             class="hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex-col">
+
             <a href="index.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Inicio</a>
+                class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Inicio</a>
             <a href="about.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Sobre
+                class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Sobre
                 el C3</a>
             <a href="events.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Eventos</a>
+                class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Eventos</a>
             <a href="contact.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Contáctanos</a>
-            <a href="login.html"
-                class="text-white text-lg font-extrabold px-6 py-4 flex items-center transition-colors duration-300 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Login</a>
+                class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Contáctanos</a>
+
+            <!-- LOGIN MOBILE -->
+            <a id="nav-login-mobile" href="login.html"
+                class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30 border-t border-white/10">Login</a>
+
+            <!-- PERFIL MOBILE -->
+            <a id="nav-profile-mobile" href="profile.html"
+                class="hidden flex items-center gap-3 px-6 py-4 border-t border-white/10 hover:bg-black hover:bg-opacity-30">
+                <img id="nav-profile-img-mobile" class="h-10 w-10 rounded-full object-cover ring-2 ring-white/40" />
+                 <span class="text-white text-lg font-extrabold px-6 py-4 hover:bg-black hover:bg-opacity-30">Mi Perfil</span>
+            </a>
         </nav>
     </header>
 

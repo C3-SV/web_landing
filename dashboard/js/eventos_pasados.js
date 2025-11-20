@@ -286,12 +286,15 @@ function setupSearch() {
     });
 }
 
-//! 3. GESTION DEL MODAL  - abrir, cerrar, 
-// Abrir y resetear 
+//! 3. GESTION DEL MODAL  - abrir, cerrar,
+// Abrir y resetear
 function openModal() {
     const modal = document.getElementById('modal');
     const form = document.getElementById('modalForm');
     const title = document.getElementById('modalTitle');
+
+    // Resetear editingId para modo creación
+    editingId = null;
 
     modal.classList.remove('hidden');
     title.innerText = 'Agregar evento pasado';
@@ -300,7 +303,7 @@ function openModal() {
 
     clearImagePreviews();
 
-    // Ir a primera tab 
+    // Ir a primera tab
     const firstTabBtn = document.querySelector('.tabBtn[data-target="tab-general"]');
     if (firstTabBtn) firstTabBtn.click();
 }
@@ -558,93 +561,206 @@ async function guardarRazones(eventId, reasons) {
     await Promise.all(creates);
 }
 
-//! On submit para guardar 
+//! On submit para guardar
 document.getElementById("modalForm").addEventListener("submit", async (element) => {
     element.preventDefault();
 
-    if (!editingId) return;
-
-    const ref = doc(db, "events", editingId);
-
-    const bannerUrl = banner.getBannerUrl();
-
-    const updated = {
-        heroPrefix: document.getElementById("eventPrefix").value,
-        title: document.getElementById("eventTitle").value,
-        subtitle: document.getElementById("eventSubtitle").value,
-        description: document.getElementById("eventDescription").value,
-
-        date: new Date(document.getElementById("eventDate").value),
-        modality: document.getElementById("eventModality").value,
-        location: document.getElementById("eventLocation").value,
-        awardsText: document.getElementById("eventPrizes").value,
-        banner: bannerUrl || ""
-    }
-    await updateDoc(ref, updated);
-
-    //* Guardar razones 
-    const reasons = getReasonsFromForm();
     try {
-        await guardarRazones(editingId, reasons);
-    } catch (err) {
-        console.error("Error guardando razones", err);
-    }
+        // Mostrar loading
+        const submitBtn = document.getElementById("eventBtnGuardarCambios");
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Guardando...";
 
-    //* Guardar structure 
-    const structData = structure.getStructureFromDOM();
-    try {
-        await structure.saveStructure(editingId, structData);
-    }
-    catch (err) {
-        console.error("Error guardando estructura", err)
-    }
+        const bannerUrl = banner.getBannerUrl();
 
-    //* Guardar Stats 
-    try {
-        const statsData = stats.getStatsFromDOM();
-        await stats.saveStats(editingId, statsData);
-    } catch (err) {
-        console.error("Error guardando estadísticas", err);
-    }
+        // Datos del evento
+        const eventData = {
+            heroPrefix: document.getElementById("eventPrefix").value,
+            title: document.getElementById("eventTitle").value,
+            subtitle: document.getElementById("eventSubtitle").value,
+            description: document.getElementById("eventDescription").value,
+            date: new Date(document.getElementById("eventDate").value),
+            modality: document.getElementById("eventModality").value,
+            location: document.getElementById("eventLocation").value,
+            awardsText: document.getElementById("eventPrizes").value,
+            banner: bannerUrl || "",
+            status: "finished" // Eventos pasados siempre tienen status "finished"
+        };
 
-    //* Guardar Gallery 
-    try {
-        const galArray = gallery.getGalleryFromDOM();
-        await gallery.saveGallery(editingId, galArray);
-    } catch (err) {
-        console.error("Error guardando galeria:", err);
-    }
+        let eventId;
 
-    //* Guardar Awards
-    try {
-        const awardsArray = awards.getAwardsFromDOM();
-        await awards.saveAwards(editingId, awardsArray);
-    } catch (err) {
-        console.error("Error guardando premios:", err);
-    }
+        // CREAR o ACTUALIZAR
+        if (editingId) {
+            // Modo edición: actualizar evento existente
+            const ref = doc(db, "events", editingId);
+            await updateDoc(ref, eventData);
+            eventId = editingId;
+        } else {
+            // Modo creación: crear nuevo evento
+            const ref = collection(db, "events");
+            const docRef = await addDoc(ref, eventData);
+            eventId = docRef.id;
+        }
 
-    //* Guardar Links
-    try {
-        const linksArray = links.getLinksFromDOM();
-        await links.saveLinks(editingId, linksArray);
-    } catch (err) {
-        console.error("Error guardando links:", err);
-    }
+        //* Guardar razones
+        const reasons = getReasonsFromForm();
+        try {
+            await guardarRazones(eventId, reasons);
+        } catch (err) {
+            console.error("Error guardando razones", err);
+        }
 
-    const reloadRes = await loadEvents();
-    if (reloadRes.success) {
-        filteredEvents = [...events];
+        //* Guardar structure
+        const structData = structure.getStructureFromDOM();
+        try {
+            await structure.saveStructure(eventId, structData);
+        }
+        catch (err) {
+            console.error("Error guardando estructura", err)
+        }
+
+        //* Guardar Stats
+        try {
+            const statsData = stats.getStatsFromDOM();
+            await stats.saveStats(eventId, statsData);
+        } catch (err) {
+            console.error("Error guardando estadísticas", err);
+        }
+
+        //* Guardar Gallery
+        try {
+            const galArray = gallery.getGalleryFromDOM();
+            await gallery.saveGallery(eventId, galArray);
+        } catch (err) {
+            console.error("Error guardando galeria:", err);
+        }
+
+        //* Guardar Awards
+        try {
+            const awardsArray = awards.getAwardsFromDOM();
+            await awards.saveAwards(eventId, awardsArray);
+        } catch (err) {
+            console.error("Error guardando premios:", err);
+        }
+
+        //* Guardar Links
+        try {
+            const linksArray = links.getLinksFromDOM();
+            await links.saveLinks(eventId, linksArray);
+        } catch (err) {
+            console.error("Error guardando links:", err);
+        }
+
+        const reloadRes = await loadEvents();
+        if (reloadRes.success) {
+            filteredEvents = [...events];
+        }
+
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+        // Mostrar mensaje de éxito
+        const isUpdate = editingId !== null;
+        const successTitle = isUpdate ? 'Evento actualizado' : 'Evento creado';
+
+        // Resetear editingId ANTES de cerrar modal y recargar
+        editingId = null;
+
+        closeModal();
+        renderTable();
+
+        Swal.fire({
+            toast: true,
+            position: 'bottom-end',
+            icon: 'success',
+            title: successTitle,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    } catch (error) {
+        console.error("Error al guardar:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al guardar el evento: ' + error.message,
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
+
+        // Restaurar botón en caso de error
+        const submitBtn = document.getElementById("eventBtnGuardarCambios");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Guardar Cambios";
     }
-    closeModal();
-    renderTable();
 });
 
 
-// Eliminar evento 
-function deleteEvent(id) {
-    if (confirm('¿Borrar evento?')) {
-        events = events.filter(e => e.id !== id);
+// Eliminar evento
+async function deleteEvent(id) {
+    const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        html: "Se eliminará el evento y sus datos asociados.<br><b>No podrás revertir esta acción.</b>",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            confirmButton: "bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 mr-2",
+            cancelButton: "bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+        }
+    });
+
+    if (!result.isConfirmed) return;
+
+    Swal.fire({
+        title: 'Eliminando...',
+        text: 'Por favor espere',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    try {
+        const ref = doc(db, COLLECTION_NAME, id);
+        await deleteDoc(ref);
+
+        // Recargar eventos
+        const reloadRes = await loadEvents();
+        if (reloadRes.success) {
+            filteredEvents = [...events];
+        }
+
         renderTable();
+
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Evento eliminado',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo eliminar el evento: ' + error.message,
+            confirmButtonText: "Ok",
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+            }
+        });
     }
 }
 

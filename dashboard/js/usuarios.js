@@ -201,6 +201,7 @@ function openModal() {
  */
 function closeModal() {
     document.getElementById('modal').classList.add('hidden');
+    document.getElementById('email').disabled = false;
 }
 
 /**
@@ -404,6 +405,9 @@ async function getUser(id) {
     document.getElementById('lastName').value = user.lastName || '';
     document.getElementById('username').value = user.username || '';
     document.getElementById('email').value = user.email || '';
+
+    document.getElementById('email').disabled = true; 
+
     document.getElementById('role').value = user.role || 'user';
     document.getElementById('phone').value = user.phone || '';
     document.getElementById('birthdate').value = user.birthdate || '';
@@ -425,7 +429,6 @@ async function updateExistingUser(userData) {
             firstName: userData.firstName,
             lastName: userData.lastName,
             username: userData.username,
-            email: userData.email,
             role: userData.role,
             phone: userData.phone || "",
             birthdate: userData.birthdate || ""

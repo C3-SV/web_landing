@@ -666,8 +666,7 @@ async function addNewUpcomingEvent(eventData) {
             toast: true,
             position: 'top-end',
             icon: 'success',
-            title: '¡Éxito!',
-            text: 'El evento se ha creado correctamente.',
+            title: 'Evento creado',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true
@@ -697,7 +696,7 @@ async function getUpcomingEvent(id) {
 
     openModal();
 
-    document.getElementById('modalTitle').innerText = 'Editar Evento';
+    document.getElementById('modalTitle').innerText = 'Editar evento futuro';
     document.getElementById('eventId').value = event.id;
 
     // Pestaña Banner
@@ -792,8 +791,7 @@ async function getUpcomingEvent(id) {
         Swal.fire({
             toast: true,
             icon: 'warning',
-            title: 'Alerta',
-            text: 'No se pudieron cargar los detalles de las razones.',
+            title: 'No se pudieron cargar los detalles de las razones',
             confirmButtonText: "Ok",
             buttonsStyling: false,
             customClass: {
@@ -877,7 +875,7 @@ async function updateExistingEvent(eventData) {
 
         Swal.fire({
             toast: true, position: 'top-end', icon: 'success',
-            title: 'Actualizado', text: 'El evento se actualizó correctamente.',
+            title: 'Evento actualizado',
             showConfirmButton: false, timer: 3000, timerProgressBar: true
         });
 
@@ -945,8 +943,7 @@ async function deleteUpcomingEvent(id) {
             toast: true,
             position: 'top-end',
             icon: 'success',
-            title: 'Eliminado',
-            text: 'El evento ha sido eliminado correctamente.',
+            title: 'Evento eliminado',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true

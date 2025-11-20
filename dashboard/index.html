@@ -18,19 +18,17 @@
     </head>
 
     <body
-        class="bg-[#0f172a] min-h-screen flex flex-col bg-brand-bg text-slate-900 font-codec"
+        class="bg-[#0f172a] h-screen w-screen overflow-hidden flex flex-col bg-brand-bg text-slate-900 font-codec"
     >
-        <!-- Contenedor -->
         <div
-            class="flex justify-center px-4 sm:px-6 md:px-4 mt-48 mb-24 flex-1"
+            class="flex flex-1 items-center justify-center px-4 sm:px-6 w-full h-full"
         >
-            <div class="flex flex-col md:flex-row md:items-stretch gap-6">
-                <!-- Login -->
+            <div class="w-full max-w-md">
                 <section
-                    class="w-full max-h-[550px] max-w-md lg:max-w-lg bg-white rounded-2xl shadow-xl p-8 flex flex-col"
+                    class="w-full bg-white rounded-2xl shadow-2xl p-8 flex flex-col"
                 >
                     <h2
-                        class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-6 text-slate-800"
+                        class="text-3xl sm:text-4xl font-extrabold text-center mb-6 text-slate-800"
                     >
                         Iniciar sesión
                     </h2>
@@ -38,38 +36,44 @@
                     <img
                         src="../assets/images/logo-c3.jpeg"
                         alt="logo-c3"
-                        class="w-32 h-auto mx-auto mb-6 object-contain rounded-full"
+                        class="w-24 h-24 mx-auto mb-6 object-contain rounded-full shadow-sm"
                     />
 
-                    <!-- Usuario y Contraseña -->
                     <form id="loginForm">
-                        <label
-                            class="block text-sm sm:text-base md:text-lg font-semibold text-slate-700 mb-2"
-                            >Usuario o email *</label
-                        >
-                        <input
-                            type="text"
-                            id="userInput"
-                            required
-                            class="w-full px-4 py-2 rounded-lg border border-slate-300 mb-4 focus:outline-none focus:ring-2 focus:ring-[#004aad]"
-                        />
+                        <div class="mb-4">
+                            <label
+                                class="block text-sm font-semibold text-slate-700 mb-2"
+                            >
+                                Usuario o email
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="userInput"
+                                required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#004aad] transition-all"
+                                placeholder="Ingresa tu usuario"
+                            />
+                        </div>
 
-                        <label
-                            class="block text-sm sm:text-base md:text-lg font-semibold text-slate-700 mb-2"
-                            >Contraseña *</label
-                        >
-                        <input
-                            type="password"
-                            id="passInput"
-                            required
-                            class="w-full px-4 py-2 rounded-lg border border-slate-300 mb-2 focus:outline-none focus:ring-2 focus:ring-[#004aad]"
-                        />
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-semibold text-slate-700 mb-2"
+                            >
+                                Contraseña <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="password"
+                                id="passInput"
+                                required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#004aad] transition-all"
+                                placeholder="••••••••"
+                            />
+                        </div>
 
                         <button
                             type="submit"
-                            class="w-full mt-12 bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white font-extrabold py-2 px-4 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                            data-modal-target="crud-modal"
-                            data-modal-toggle="crud-modal"
+                            class="w-full bg-gradient-to-r from-[#408cd3] to-[#3f3dc8] text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-xl active:scale-95"
                         >
                             Iniciar sesión
                         </button>
@@ -77,6 +81,7 @@
                 </section>
             </div>
         </div>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="js/login.js" type="module"></script>
     </body>

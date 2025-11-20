@@ -1,8 +1,8 @@
 import { db } from "../../js/firebase_config.js";
 import { addDoc, collection, serverTimestamp, query, getDocs, getDoc, orderBy, updateDoc, doc, deleteDoc, where, Timestamp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
 
-
 import * as validations from "../../js/validations.js";
+import { getModalityBadge, getVisibilityBadge } from "./badge_styles.js";
 
 const COLLECTION_NAME = "events";
 let events = [];
@@ -58,7 +58,9 @@ async function renderTable() {
     const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
 
     paginatedEvents.forEach((event) => {
-        // Badges
+        const modalityBadge = getModalityBadge(event.modality || '');
+        const visibilityBadge = getVisibilityBadge(event.visibility);
+
         const row = `<tr class="hover:bg-gray-50 transition-colors border-b border-gray-100">
                 <td class="px-6 py-4 text-sm font-semibold text-gray-800 truncate">
                     ${event.title}
@@ -67,18 +69,18 @@ async function renderTable() {
                     ${event.date ? validations.formatDate(event.date) : 'Sin fecha'}
                 </td>
                 <td class="px-6 py-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                            ${event.modality}
-                        </span>
+                    <span class="${modalityBadge.classes}">
+                        ${modalityBadge.text}
+                    </span>
                 </td>
                 <td class="px-6 py-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#004aad] to-[#4f1e5d] text-white">
-                            ${event.visibility ? 'Visible' : 'No visible'}
-                        </span>
+                    <span class="${visibilityBadge.classes}">
+                        ${visibilityBadge.text}
+                    </span>
                 </td>
 <td class="px-6 py-4 whitespace-nowrap text-center">
         <div class="flex justify-center space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
-            
+
             <button class="btn-finish text-[#3F95E2] hover:text-blue-600 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Marcar como finalizado">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -88,7 +90,7 @@ async function renderTable() {
             <button class="btn-edit text-blue-600 hover:text-blue-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Editar">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
             </button>
-            
+
             <button class="btn-del text-red-600 hover:text-red-800 p-1 transition-transform hover:scale-110" data-id="${event.id}" title="Eliminar">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
             </button>

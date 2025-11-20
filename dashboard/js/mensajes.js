@@ -1,7 +1,9 @@
-import { 
-  collection, query, onSnapshot, doc, updateDoc, deleteDoc, getDoc 
+import {
+  collection, query, onSnapshot, doc, updateDoc, deleteDoc, getDoc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 import { db } from "../../js/firebase_config.js";
+import { getMessageStatusBadge } from "./badge_styles.js";
+
 const tableBody = document.getElementById("tableBody");
 
 // Paginación
@@ -53,6 +55,8 @@ function displayMessages() {
         })
       : "Sin fecha";
 
+    const statusBadge = getMessageStatusBadge(msg.leido);
+
     const row = document.createElement("tr");
     row.classList.add("hover:bg-gray-50");
 
@@ -61,7 +65,11 @@ function displayMessages() {
       <td class="px-6 py-4 text-sm text-gray-700">${msg.correo}</td>
       <td class="px-6 py-4 text-sm text-gray-700">${msg.mensaje.length > 20 ? msg.mensaje.substring(0, 20) + "..." : msg.mensaje}</td>
       <td class="px-6 py-4 text-sm text-gray-700">${fechaFormateada}</td>
-      <td class="px-6 py-4 text-sm text-gray-700">${msg.leido ? "Leído" : "Pendiente"}</td>
+      <td class="px-6 py-4">
+        <span class="${statusBadge.classes}">
+          ${statusBadge.text}
+        </span>
+      </td>
       <td class="px-6 py-4 text-center text-sm flex gap-3 justify-center">
         <button class="text-blue-600 hover:text-blue-800 transition-colors p-1 ver" data-id="${msg.id}">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

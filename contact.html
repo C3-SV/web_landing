@@ -133,7 +133,6 @@
     </div>
 </div>
 
-<!-- Footer -->
 <footer class="text-white relative h-[30vh] w-full bg-gradient-to-r from-[#004aad] to-[#4f1e5d] flex items-center justify-center px-4">
     <div class="absolute inset-0 bg-black opacity-60"></div>
     <p class="relative z-10 text-lg sm:text-xl md:text-2xl font-semibold text-center">
@@ -141,11 +140,13 @@
     </p>
 </footer>
 
-<!-- FIREBASE -->
+<!-- FIREBASE + SWEETALERT -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="js/contactanos.js"></script>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp }
-        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCLNj65uwgORStzqR7FulNIuDT7lqnaE5s",
@@ -158,36 +159,7 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const form = document.getElementById("contactForm");
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const nombre = document.getElementById("name").value;
-        const correo = document.getElementById("email").value;
-        const mensaje = document.getElementById("message").value;
-        const rol = document.querySelector("input[name='rol']:checked")?.value;
-
-        try {
-            await addDoc(collection(db, "mensajes"), {
-                nombre,
-                correo,
-                mensaje,
-                rol,
-                leido: false,
-                fecha: serverTimestamp()
-            });
-
-            alert("¡Tu mensaje fue enviado con éxito!");
-            form.reset();
-
-        } catch (error) {
-            alert("Hubo un error al enviar el mensaje.");
-            console.error(error);
-        }
-    });
+    window.db = getFirestore(app); // <-- para usar window.db en contactanos.js
 </script>
 
 </body>

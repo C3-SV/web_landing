@@ -1,22 +1,18 @@
-/*Este es el archivo que 
-Escucha el submit del formulario de Contáctanos.
+/* Escucha el submit del formulario de Contáctanos.
 Captura los datos del usuario (nombre, correo, mensaje).
 Los guarda en Firestore, específicamente en la colección "mensajes".
+Usa SweetAlert2 para notificaciones.
 */
 
-import { collection, addDoc, serverTimestamp } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contactForm");
-
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const messageInput = document.getElementById("message");
-
     const rolInputs = document.querySelectorAll("input[name='rol']");
 
-    // Crear mensajes de error debajo de cada campo
     const errors = {
         name: createErrorBox(nameInput),
         email: createErrorBox(emailInput),
@@ -26,11 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         clearErrors(errors);
-        const valid = validateForm();
 
-        if (!valid) return;
+        if (!validateForm()) return;
 
         const nombre = nameInput.value.trim();
         const correo = emailInput.value.trim();
@@ -38,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const rol = document.querySelector("input[name='rol']:checked").value;
 
         try {
-            await addDoc(collection(window.db, "mensajes"), {
+            await addDoc(collection(window.db, "messages"), {
                 nombre,
                 correo,
                 mensaje,
@@ -47,17 +41,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 fecha: serverTimestamp()
             });
 
-            alert("¡Tu mensaje fue enviado con éxito!");
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '¡Tu mensaje fue enviado con éxito!',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+
             form.reset();
 
         } catch (error) {
             console.error("Error al guardar mensaje:", error);
-            alert("Hubo un error, intenta de nuevo");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al enviar tu mensaje, intenta de nuevo.',
+                confirmButtonText: "Ok",
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: "bg-gradient-to-r from-[#004aad] to-[#3f3dc8] text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg"
+                }
+            });
         }
     });
 
     // -------------------
-    // FUNCIONES DE VALIDACIÓN
+    // VALIDACIÓN
     // -------------------
 
     function validateForm() {
@@ -109,4 +121,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
